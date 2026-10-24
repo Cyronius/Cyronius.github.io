@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyrus Attoun — Software, local AI, and useful experiments</title>
+<meta name="description" content="Desktop tools, local AI, open NPU work, and experiments by Cyrus Attoun. Explore based, Hoardini, BlabberStack, Windowsill, dibs, and more.">
+<meta name="theme-color" content="#244bdd">
+<meta property="og:title" content="Cyrus Attoun — Make the machine earn its keep.">
+<meta property="og:description" content="Useful software, local AI, and unreasonable curiosity. A selection of projects by Cyrus Attoun.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23244bdd'/%3E%3Cpath d='M28 12H16v16h12M12 20h12' fill='none' stroke='%23f4ff81' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/bricolage.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol></svg>
+<header class="poster">
+ <div class="wrap">
+  <nav class="top" aria-label="Main navigation">
+   <a class="name" href="#">Cyrus Attoun<span>Cyronius on GitHub</span></a>
+   <div class="nav-links"><a href="#work">The work</a><a href="https://github.com/Cyronius">GitHub <svg><use href="#arrow"/></svg></a><a href="https://www.linkedin.com/in/cyrus-attoun/">LinkedIn <svg><use href="#arrow"/></svg></a></div>
+  </nav>
+  <h1>Make the machine<br>earn its <span class="keep"><span>k</span><span>e</span><span>e</span><span>p</span></span>.</h1>
+  <div class="intro"><p>I’m Cyrus. I build tools that make computers more useful—and explore how much AI the hardware we already own can handle.</p><a class="poster-action" href="#work">Explore the work <svg><use href="#arrow"/></svg></a></div>
+  <div class="chapter-links"><a href="#based">based · Database workbench</a><a href="#blabberstack">BlabberStack · AI in your browser</a><a href="#zest">Zest · Put the NPU to work</a></div>
+ </div>
+</header>
+<main id="work">
+ <section class="tools wrap" id="tools" aria-labelledby="tools-title">
+  <div class="section-title"><h2 id="tools-title">Less friction.<br>More doing.</h2><p>The everyday tools should be the good ones. These are mine.</p></div>
+  <article class="based project" id="based">
+   <div class="project-head"><h3><a href="https://cyronius.github.io/based/">based <svg><use href="#arrow"/></svg></a></h3><p>A database workbench with an AI that can see—and work with—your actual workspace. SQL Server, Snowflake, and LanceDB in one native desktop app.</p></div>
+   <a class="product-image" href="https://cyronius.github.io/based/" aria-label="Explore based, the database workbench"><img src="assets/based-hero.png" width="2048" height="1152" alt="based showing a SQL query, customer results, and an AI agent using database tools alongside the editor" fetchpriority="high"></a>
+   <div class="project-foot"><span>Queries, grids, vector search, and an agent that participates.</span><a href="https://github.com/Cyronius/based">Source code <svg><use href="#arrow"/></svg></a></div>
+  </article>
+  <div class="desktop-pair">
+   <article class="windowsill project">
+    <div class="project-head"><h3>Windowsill <small class="coming">Coming soon</small></h3><p>Small tools. A better desktop. A growing suite of Windows utilities, including Glint and Skedaddle.</p></div>
+    <div class="suite-images"><img class="calendar" src="assets/skedaddle.png" width="1086" height="753" alt="Skedaddle’s week calendar with upcoming meetings" loading="lazy"><img class="monitor" src="assets/glint.png" width="412" height="356" alt="Glint’s compact window showing CPU, memory, GPU, NPU, and disk measurements" loading="lazy"></div>
+    <div class="suite-links"><a href="https://github.com/Cyronius/glint">Glint: keep an eye on the machine <svg><use href="#arrow"/></svg></a><a href="https://github.com/Cyronius/skedaddle">Skedaddle: don’t miss the meeting <svg><use href="#arrow"/></svg></a></div>
+   </article>
+   <article class="hoardini project">
+    <div class="project-head"><h3><a href="https://github.com/Cyronius/hoardini">Hoardini <svg><use href="#arrow"/></svg></a></h3><p>Your drive is full. What’s actually on it? Hoardini gathers the evidence, explains the big files, and helps you decide what to delete, shrink, move, or keep.</p></div>
+    <div class="hoardini-art"><img src="assets/hoardini.png" width="256" height="256" alt="Hoardini’s sumo mascot" loading="lazy"><p>Know what’s there.<br>Make room for what’s next.</p></div>
+    <a class="text-link" href="https://github.com/Cyronius/hoardini">Explore Hoardini <svg><use href="#arrow"/></svg></a>
+   </article>
+  </div>
+ </section>
+ <section class="local-ai" id="local-ai" aria-labelledby="ai-title">
+  <div class="wrap">
+   <div class="section-title"><h2 id="ai-title">The compute is<br>already yours.</h2><p>Local models. Open kernels. Experiments that ask more of an ordinary machine.</p></div>
+   <article class="blabberstack" id="blabberstack">
+    <div><h3><a href="https://github.com/Cyronius/blabberstack">BlabberStack <svg><use href="#arrow"/></svg></a></h3><p>Chat, image generation, and document search, running in your browser on your hardware. Download the models, then run locally. No account or inference server required.</p><a class="button" href="https://github.com/Cyronius/blabberstack">Meet BlabberStack <svg><use href="#arrow"/></svg></a></div>
+    <div class="browser-manifesto" aria-label="BlabberStack runs chat, images, and document search locally"><span>Chat.</span><span>Images.</span><span>Your docs.</span><strong>Your machine.</strong></div>
+   </article>
+   <div class="research-grid">
+    <article class="model-work"><h3><a href="https://cyronius.github.io/model-experiments/">Model experiments <svg><use href="#arrow"/></svg></a></h3><p>Smaller models. Cheaper experiments. Honest write-ups of the wins and the failures—from pruning Qwen models to a 4 MB title generator.</p><div class="link-row"><a href="https://cyronius.github.io/model-experiments/">Read the experiments <svg><use href="#arrow"/></svg></a><a href="https://cyronius.github.io/model-experiments/titler/">Try titler <svg><use href="#arrow"/></svg></a></div></article>
+    <div class="npu-projects">
+     <article id="zest"><h3><a href="https://cyronius.github.io/zest/">Zest <svg><use href="#arrow"/></svg></a></h3><p>Put the AMD Ryzen AI NPU to work on long prompts in Lemonade and llama.cpp, using existing GGUF models. An experimental preview; results depend on the model and hardware.</p></article>
+     <article><h3><a href="https://github.com/Cyronius/phlegm">phlegm <svg><use href="#arrow"/></svg></a></h3><p>Open kernels and runtime work for AMD’s XDNA2 NPU. Real model benchmarks run through the C++ engine; the CLI and server are still being integrated.</p></article>
+    </div>
+   </div>
+  </div>
+ </section>
+ <section class="builders wrap" aria-labelledby="builders-title">
+  <div class="section-title"><h2 id="builders-title">Build better.<br>Trip over less.</h2><p>Small interventions in the business of building software with agents.</p></div>
+  <div class="builder-row"><h3><a href="https://github.com/Cyronius/dibs">dibs <svg><use href="#arrow"/></svg></a></h3><p>Parallel agents, one machine. Call dibs on the GPU, NPU, network, or test database so sessions take turns instead of colliding.</p><code>dibs run gpu -- python train.py</code></div>
+  <div class="builder-row"><h3>smoosh <small class="coming">Coming soon</small></h3><p>Shorten the conversation. Keep the context. A Claude Code plugin that uses a smaller, faster model to summarize long sessions.</p><span class="quiet-note">Less waiting. Back to work.</span></div>
+ </section>
+ <section class="experiments" id="experiments" aria-labelledby="experiments-title">
+  <div class="wrap">
+   <div class="section-title"><h2 id="experiments-title">Curiosity gets<br>a repository.</h2><p>Some ideas become daily tools. Some are still asking interesting questions.</p></div>
+   <article class="sandwich"><h3><a href="https://github.com/Cyronius/sandwichts">SandwichTS <svg><use href="#arrow"/></svg></a></h3><p>What if an in-app copilot could execute a whole sequence of actions in one script? SandwichTS explores that with sandboxed code and explicit access to live client-side state.</p><a class="text-link" href="https://github.com/Cyronius/sandwichts">Open the experiment <svg><use href="#arrow"/></svg></a></article>
+   <div class="notebook">
+    <article><h3><a href="https://github.com/Cyronius/covenant-agent">Covenant Agent <svg><use href="#arrow"/></svg></a></h3><p>A tiny model that writes a tool-calling program instead of narrating every step. Compiler and sandbox built; the decoder and NPU runtime remain experimental.</p></article>
+    <article><h3><a href="https://github.com/Cyronius/wrangle">Wrangle <svg><use href="#arrow"/></svg></a></h3><p>A desktop Markdown workspace with live preview, WYSIWYG editing, math, and diagrams.</p></article>
+    <article><h3><a href="https://github.com/Cyronius/claude-database-tools">Claude database tools <svg><use href="#arrow"/></svg></a></h3><p>A SQL Server CLI and MCP server for Claude Code. A direct connection between the agent and the database.</p></article>
+   </div>
+  </div>
+ </section>
+</main>
+<footer class="wrap">
+ <h2>Good tools start<br>with a conversation.</h2>
+ <div class="footer-bottom"><p>Cyrus Attoun <span>Building under Cyronius.</span></p><div><a href="https://www.linkedin.com/in/cyrus-attoun/">Find me on LinkedIn <svg><use href="#arrow"/></svg></a><a href="https://github.com/Cyronius">Explore all public repos <svg><use href="#arrow"/></svg></a></div></div>
+</footer>
+</body>
+</html>

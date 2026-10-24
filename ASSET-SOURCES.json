@@ -1,0 +1,13 @@
+{
+  "font": {
+    "family": "Bricolage Grotesque",
+    "source": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap",
+    "license": "SIL Open Font License 1.1"
+  },
+  "images": {
+    "based-hero.png": "https://github.com/Cyronius/based/blob/main/docs/screenshots/hero.png",
+    "glint.png": "https://github.com/Cyronius/glint/blob/main/docs/screenshot.png",
+    "skedaddle.png": "https://github.com/Cyronius/skedaddle/blob/main/docs/images/calendar.png",
+    "hoardini.png": "https://github.com/Cyronius/hoardini/blob/main/app/icon-src/icon.png"
+  }
+}
