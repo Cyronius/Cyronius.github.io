@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T18:18:15.953295+00:00",
+  "title": "Design System: Cyrus Attoun",
+  "extensions": {
+    "colorMeta": {
+      "blue": {
+        "role": "primary",
+        "displayName": "Cobalt",
+        "tonalRamp": [
+          "oklch(15% 0.22529 265.95)",
+          "oklch(26% 0.22529 265.95)",
+          "oklch(38% 0.22529 265.95)",
+          "oklch(49% 0.22529 265.95)",
+          "oklch(61% 0.22529 265.95)",
+          "oklch(72% 0.22529 265.95)",
+          "oklch(84% 0.22529 265.95)",
+          "oklch(95% 0.22529 265.95)"
+        ]
+      },
+      "blue-dark": {
+        "role": "primary",
+        "displayName": "Deep cobalt",
+        "tonalRamp": [
+          "oklch(15% 0.18990 266.06)",
+          "oklch(26% 0.18990 266.06)",
+          "oklch(38% 0.18990 266.06)",
+          "oklch(49% 0.18990 266.06)",
+          "oklch(61% 0.18990 266.06)",
+          "oklch(72% 0.18990 266.06)",
+          "oklch(84% 0.18990 266.06)",
+          "oklch(95% 0.18990 266.06)"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Sharp yellow",
+        "tonalRamp": [
+          "oklch(15% 0.15031 113.32)",
+          "oklch(26% 0.15031 113.32)",
+          "oklch(38% 0.15031 113.32)",
+          "oklch(49% 0.15031 113.32)",
+          "oklch(61% 0.15031 113.32)",
+          "oklch(72% 0.15031 113.32)",
+          "oklch(84% 0.15031 113.32)",
+          "oklch(95% 0.15031 113.32)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26% 0.00000 89.88)",
+          "oklch(38% 0.00000 89.88)",
+          "oklch(49% 0.00000 89.88)",
+          "oklch(61% 0.00000 89.88)",
+          "oklch(72% 0.00000 89.88)",
+          "oklch(84% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Near-white paper",
+        "tonalRamp": [
+          "oklch(15% 0.00541 274.97)",
+          "oklch(26% 0.00541 274.97)",
+          "oklch(38% 0.00541 274.97)",
+          "oklch(49% 0.00541 274.97)",
+          "oklch(61% 0.00541 274.97)",
+          "oklch(72% 0.00541 274.97)",
+          "oklch(84% 0.00541 274.97)",
+          "oklch(95% 0.00541 274.97)"
+        ]
+      },
+      "pale": {
+        "role": "neutral",
+        "displayName": "Pale blue",
+        "tonalRamp": [
+          "oklch(15% 0.02617 274.11)",
+          "oklch(26% 0.02617 274.11)",
+          "oklch(38% 0.02617 274.11)",
+          "oklch(49% 0.02617 274.11)",
+          "oklch(61% 0.02617 274.11)",
+          "oklch(72% 0.02617 274.11)",
+          "oklch(84% 0.02617 274.11)",
+          "oklch(95% 0.02617 274.11)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Blue-black ink",
+        "tonalRamp": [
+          "oklch(15% 0.07707 270.10)",
+          "oklch(26% 0.07707 270.10)",
+          "oklch(38% 0.07707 270.10)",
+          "oklch(49% 0.07707 270.10)",
+          "oklch(61% 0.07707 270.10)",
+          "oklch(72% 0.07707 270.10)",
+          "oklch(84% 0.07707 270.10)",
+          "oklch(95% 0.07707 270.10)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Slate copy",
+        "tonalRamp": [
+          "oklch(15% 0.05549 268.83)",
+          "oklch(26% 0.05549 268.83)",
+          "oklch(38% 0.05549 268.83)",
+          "oklch(49% 0.05549 268.83)",
+          "oklch(61% 0.05549 268.83)",
+          "oklch(72% 0.05549 268.83)",
+          "oklch(84% 0.05549 268.83)",
+          "oklch(95% 0.05549 268.83)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Cool rule",
+        "tonalRamp": [
+          "oklch(15% 0.03037 269.09)",
+          "oklch(26% 0.03037 269.09)",
+          "oklch(38% 0.03037 269.09)",
+          "oklch(49% 0.03037 269.09)",
+          "oklch(61% 0.03037 269.09)",
+          "oklch(72% 0.03037 269.09)",
+          "oklch(84% 0.03037 269.09)",
+          "oklch(95% 0.03037 269.09)"
+        ]
+      },
+      "poster-line": {
+        "role": "neutral",
+        "displayName": "Poster rule",
+        "tonalRamp": [
+          "oklch(15% 0.15685 270.42)",
+          "oklch(26% 0.15685 270.42)",
+          "oklch(38% 0.15685 270.42)",
+          "oklch(49% 0.15685 270.42)",
+          "oklch(61% 0.15685 270.42)",
+          "oklch(72% 0.15685 270.42)",
+          "oklch(84% 0.15685 270.42)",
+          "oklch(95% 0.15685 270.42)"
+        ]
+      },
+      "poster-copy": {
+        "role": "neutral",
+        "displayName": "Poster copy",
+        "tonalRamp": [
+          "oklch(15% 0.02887 275.15)",
+          "oklch(26% 0.02887 275.15)",
+          "oklch(38% 0.02887 275.15)",
+          "oklch(49% 0.02887 275.15)",
+          "oklch(61% 0.02887 275.15)",
+          "oklch(72% 0.02887 275.15)",
+          "oklch(84% 0.02887 275.15)",
+          "oklch(95% 0.02887 275.15)"
+        ]
+      },
+      "identity-secondary": {
+        "role": "neutral",
+        "displayName": "Identity secondary",
+        "tonalRamp": [
+          "oklch(15% 0.03887 274.48)",
+          "oklch(26% 0.03887 274.48)",
+          "oklch(38% 0.03887 274.48)",
+          "oklch(49% 0.03887 274.48)",
+          "oklch(61% 0.03887 274.48)",
+          "oklch(72% 0.03887 274.48)",
+          "oklch(84% 0.03887 274.48)",
+          "oklch(95% 0.03887 274.48)"
+        ]
+      },
+      "manifesto-muted": {
+        "role": "neutral",
+        "displayName": "Manifesto muted",
+        "tonalRamp": [
+          "oklch(15% 0.08000 268.97)",
+          "oklch(26% 0.08000 268.97)",
+          "oklch(38% 0.08000 268.97)",
+          "oklch(49% 0.08000 268.97)",
+          "oklch(61% 0.08000 268.97)",
+          "oklch(72% 0.08000 268.97)",
+          "oklch(84% 0.08000 268.97)",
+          "oklch(95% 0.08000 268.97)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Poster display",
+        "purpose": "Hero statement."
+      },
+      "headline": {
+        "displayName": "Section headline",
+        "purpose": "Collection divisions."
+      },
+      "title": {
+        "displayName": "Project title",
+        "purpose": "Primary project names; contextual scale variants described in DESIGN.md."
+      },
+      "body": {
+        "displayName": "Reading copy",
+        "purpose": "Default prose."
+      },
+      "label": {
+        "displayName": "Navigation and actions",
+        "purpose": "Compact links."
+      },
+      "command": {
+        "displayName": "Command",
+        "purpose": "Executable developer example."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "letter-settle",
+        "value": "800ms cubic-bezier(.16,1,.3,1), stagger 60ms",
+        "purpose": "One-time hero lettering; reduced-motion gated."
+      },
+      {
+        "name": "button-background",
+        "value": "180ms ease-out",
+        "purpose": "Primary action hover; reduced-motion gated."
+      },
+      {
+        "name": "screenshot-scale",
+        "value": "400ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Featured image hover to scale(1.012); reduced-motion gated."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      },
+      {
+        "name": "small-mobile",
+        "value": "360px"
+      }
+    ],
+    "rampNote": "Tonal ramps are synthesized OKLCH preview metadata, not implemented palette scales."
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Linked project action on light fields.",
+      "html": "<a class=\"ds-button\" href=\"#project\">Meet BlabberStack</a>",
+      "css": ".ds-button{font-family:var(--font-family,Bricolage,Arial,sans-serif);display:inline-flex;align-items:center;gap:20px;background:var(--blue);color:var(--white);padding:12px 20px;border:1px solid var(--blue);border-radius:5px;text-decoration:none;font-size:15px;font-weight:550;line-height:1.65}.ds-button:hover{background:var(--blue-dark)}.ds-button:focus-visible{outline:3px solid currentColor;outline-offset:5px;border-radius:2px}@media(prefers-reduced-motion:no-preference){.ds-button{transition:background 180ms ease-out}}"
+    },
+    {
+      "name": "Coming soon",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Noninteractive availability label.",
+      "html": "<small class=\"ds-status\">Coming soon</small>",
+      "css": ".ds-status{font-family:var(--font-family,Bricolage,Arial,sans-serif);display:inline-block;font-size:11px;line-height:1.3;font-weight:500;white-space:nowrap;padding:5px 8px;border-radius:4px;background:var(--pale);color:var(--blue-dark)}"
+    },
+    {
+      "name": "Project destination strip",
+      "kind": "nav",
+      "description": "Named destinations on the cobalt poster.",
+      "html": "<nav class=\"ds-chapters\"><a href=\"#based\">based \u00b7 Database workbench</a><a href=\"#blabberstack\">BlabberStack \u00b7 AI in your browser</a><a href=\"#zest\">Zest \u00b7 Put the NPU to work</a></nav>",
+      "css": ".ds-chapters{font-family:var(--font-family,Bricolage,Arial,sans-serif);display:flex;flex-wrap:wrap;background:var(--blue);color:var(--white);border-top:1px solid #6984eb}.ds-chapters a{flex:1;padding:19px 28px 19px 0;text-decoration:none;color:inherit;font-size:15px;line-height:1.65}.ds-chapters a:hover{color:var(--yellow)}.ds-chapters a:focus-visible{outline:3px solid currentColor;outline-offset:5px;border-radius:2px}"
+    },
+    {
+      "name": "Command example",
+      "kind": "custom",
+      "refersTo": "command",
+      "description": "Developer-tool evidence in a quiet code surface.",
+      "html": "<code class=\"ds-command\">dibs run gpu -- python train.py</code>",
+      "css": ".ds-command{display:block;font-family:ui-monospace,monospace;font-size:12px;line-height:1.8;overflow-wrap:anywhere;background:var(--pale);padding:16px;border-radius:5px;color:var(--blue-dark)}"
+    },
+    {
+      "name": "Browser manifesto",
+      "kind": "custom",
+      "description": "Stacked typographic statement within the local-AI section.",
+      "html": "<div class=\"ds-manifesto\"><span>Chat.</span><span>Images.</span><span>Your docs.</span><strong>Your machine.</strong></div>",
+      "css": ".ds-manifesto{font-family:var(--font-family,Bricolage,Arial,sans-serif);font-size:clamp(2rem,4.1vw,3.6rem);font-weight:600;letter-spacing:-.035em;line-height:1.12}.ds-manifesto span,.ds-manifesto strong{display:block}.ds-manifesto span{color:#5a6b9c}.ds-manifesto strong{font-weight:650;color:var(--blue)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Independent Software Exhibition Poster",
+    "overview": "An independent software exhibition poster: confident cobalt fields, sharp yellow emphasis, oversized Bricolage lettering, and an openly spaced collection of real work. The page alternates saturated statements with near-white and pale-blue reading surfaces.\n\nThe built system is editorial and flat. Actual product screenshots and a project mascot supply visual evidence; typography, rules, and unequal columns organize the collection without enclosing every project in a card.",
+    "keyCharacteristics": [
+      "Saturated cobalt fields with selective yellow emphasis.",
+      "One self-hosted variable family for display and reading.",
+      "Open project layouts, real screenshots, and fine horizontal rules.",
+      "Brief, optional motion with native anchor navigation."
+    ],
+    "rules": [
+      {
+        "name": "The Yellow Emphasis Rule",
+        "body": "Reserve sharp yellow for the hero emphasis, selected links on cobalt, selection, and the skip link.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single Voice Rule",
+        "body": "Use Bricolage for both headlines and prose; use monospace only for the command example.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Collection Rule",
+        "body": "Organize projects with whitespace, background fields, and dividing rules rather than shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do retain real project imagery with its provenance.",
+      "Do keep project titles and calls to action as ordinary accessible links.",
+      "Do preserve the one-time letter-settle motion and reduced-motion support.",
+      "Do use unequal desktop columns where content warrants them and stack them for narrow screens."
+    ],
+    "donts": [
+      "Don't add shadows to the flat collection.",
+      "Don't turn every project into an identical bordered card.",
+      "Don't use the yellow emphasis as a general reading-text color on light surfaces."
+    ]
+  }
+}
