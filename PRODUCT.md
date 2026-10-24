@@ -24,7 +24,7 @@ Link public projects and LinkedIn https://www.linkedin.com/in/cyrus-attoun/. Win
 
 ## Brand Commitments
 
-Cyrus Attoun / Cyronius. The owner prefers bolder statements and accepts light animations. Code-first design confirmed.
+Cyrus Attoun / Cyronius. The owner prefers bolder statements and accepts light animations. Code-first design confirmed. The owner selected the Software Record Shop direction, specifically New Arrivals (variation A): a pink browsing rail and an irregular wall of software sleeves.
 
 ## Evidence on Hand
 

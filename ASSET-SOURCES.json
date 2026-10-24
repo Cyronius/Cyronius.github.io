@@ -9,5 +9,11 @@
     "glint.png": "https://github.com/Cyronius/glint/blob/main/docs/screenshot.png",
     "skedaddle.png": "https://github.com/Cyronius/skedaddle/blob/main/docs/images/calendar.png",
     "hoardini.png": "https://github.com/Cyronius/hoardini/blob/main/app/icon-src/icon.png"
+  },
+  "archivo_font": {
+    "family": "Archivo",
+    "source": "https://github.com/google/fonts/tree/main/ofl/archivo",
+    "file": "dist/assets/archivo.ttf",
+    "license": "SIL Open Font License 1.1; dist/assets/ARCHIVO-LICENSE.txt"
   }
 }
