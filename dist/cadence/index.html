@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence — Twenty bolder directions</title>
+<meta name="description" content="Twenty design directions for Cadence, each shown on the landing page and the timesheet, for review.">
+<link rel="icon" href="assets/cadence-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#efeeea;--surface:#fbfaf7;--ink:#17171a;--ink-2:#45454c;--ink-3:#5d5d66;--line:#d9d7d0;--line-2:#c4c2ba;
+    --blue:#3d5bff;--blue-ink:#2338c9;--green:#1f6b4d;--green-ink:#195a40;--focus:#17171a;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/1.5 Figtree,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--ink);color:var(--surface)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 32px}
+  header.top{padding:40px 0 8px}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 20px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+  .brand .mark{width:28px;height:28px;color:var(--blue)}
+  .intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:end;padding:56px 0 40px;border-bottom:1px solid var(--line-2)}
+  h1{margin:0;font:800 clamp(2.5rem,5.6vw,4.75rem)/.95 "Bricolage Grotesque",sans-serif;letter-spacing:-.035em;text-wrap:balance}
+  .intro p{margin:0 0 12px;max-width:60ch;color:var(--ink-2)}
+  .intro p:last-child{margin-bottom:0}
+  .controls{position:sticky;top:0;z-index:5;background:var(--canvas);border-bottom:1px solid var(--line)}
+  .controls .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:12px;padding-bottom:12px}
+  .filter{display:flex;gap:4px;flex-wrap:wrap}
+  .filter button,.pick,.bar button{font:600 14px/1 Figtree,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line-2);border-radius:999px;height:36px;padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+  .filter button:hover,.pick:hover{border-color:var(--ink)}
+  .filter button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .count{margin-left:auto;color:var(--ink-3);font-size:14px;font-variant-numeric:tabular-nums}
+  section.today{padding:40px 0 8px}
+  ol.rows{list-style:none;margin:0;padding:0 0 120px}
+  .row{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;padding:36px 0;border-bottom:1px solid var(--line)}
+  .row[hidden]{display:none}
+  .meta{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .num{margin:0;font:800 56px/0.9 "Bricolage Grotesque",sans-serif;letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
+  .row h2{margin:0;font:700 26px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
+  .thesis{margin:0;color:var(--ink-2);max-width:34ch}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
+  .tag{font:600 12px/1 Figtree,sans-serif;padding:6px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+  .tag-blue{color:var(--blue-ink);border-color:color-mix(in oklab,var(--blue) 35%,var(--line))}
+  .tag-green{color:var(--green-ink);border-color:color-mix(in oklab,var(--green) 35%,var(--line))}
+  .pick svg{width:16px;height:16px}
+  .pick[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .pick[aria-pressed="true"] svg{fill:currentColor}
+  .pick[aria-pressed="true"] span::after{content:"ed"}
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .shot{display:block;text-decoration:none;border-radius:10px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:border-color .2s,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)}
+  .shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
+  .shot-label{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;font:600 14px/1 Figtree,sans-serif;border-top:1px solid var(--line)}
+  .shot-label svg{width:16px;height:16px}
+  .shot:hover{border-color:var(--ink-3);transform:translateY(-2px);box-shadow:0 2px 4px rgb(23 23 26/.06),0 12px 28px rgb(23 23 26/.1)}
+  .today .row{border-bottom:0;padding-top:0}
+  .today .num{font-size:40px}
+  .bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:var(--ink);color:var(--surface);box-shadow:0 2px 6px rgb(0 0 0/.15),0 14px 34px rgb(0 0 0/.22);max-width:calc(100vw - 32px)}
+  .bar[hidden]{display:none}
+  .bar p{margin:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar button{color:var(--ink);background:var(--surface);border-color:var(--surface)}
+  .bar button.ghost{background:transparent;color:var(--surface);border-color:#55555c}
+  footer{padding:32px 0 56px;color:var(--ink-3);font-size:14px;border-top:1px solid var(--line-2)}
+  footer p{margin:0 0 6px;max-width:80ch}
+  @media (max-width:980px){
+    .intro{grid-template-columns:1fr;gap:20px;padding:40px 0 32px}
+    .row{grid-template-columns:1fr;gap:16px}
+    .meta{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:baseline}
+    .meta .num{grid-row:span 2}
+    .meta .thesis,.meta .tags,.meta .pick{grid-column:1/-1}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    .shots{grid-template-columns:1fr}
+    .count{margin-left:0;width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.shot{transition:none}.shot:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="./" aria-label="Cadence directions, top"><svg aria-hidden="true" class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+<span>Cadence</span></a></div></header>
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <h1>Twenty bolder directions</h1>
+      <div>
+        <p>Each direction is applied to two screens: the public landing page and the signed-in timesheet. Every one uses the same real copy, the published price, and one sample week, so you are comparing design and nothing else.</p>
+        <p>Ten build from the new blue logo and ten turn up today’s green. Open any thumbnail to see the full page; it works at phone width too. Shortlist the ones worth pursuing, then copy your picks and send them back.</p>
+      </div>
+    </div>
+    <section class="today" aria-labelledby="today-title">
+      <ol class="rows">
+        <li class="row">
+          <div class="meta">
+            <p class="num">Today</p>
+            <h2 id="today-title">Current design</h2>
+            <p class="thesis">What ships now, for comparison. Its timesheet was captured on the week of October 19 with test data.</p>
+          </div>
+          <div class="shots">
+          <a class="shot" href="current/landing.png">
+            <img src="thumbs/current-landing.webp" width="720" height="450" loading="lazy" alt="The current landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="current/time.png">
+            <img src="thumbs/current-time.webp" width="720" height="450" loading="lazy" alt="The current timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </div>
+  <div class="controls">
+    <div class="wrap">
+      <div class="filter" role="group" aria-label="Colour family">
+        <button type="button" data-filter="family" data-value="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="family" data-value="blue" aria-pressed="false">Logo blue</button>
+        <button type="button" data-filter="family" data-value="green" aria-pressed="false">Current green</button>
+      </div>
+      <div class="filter" role="group" aria-label="Theme">
+        <button type="button" data-filter="theme" data-value="all" aria-pressed="true">Light and dark</button>
+        <button type="button" data-filter="theme" data-value="light" aria-pressed="false">Light</button>
+        <button type="button" data-filter="theme" data-value="dark" aria-pressed="false">Dark</button>
+      </div>
+      <p class="count" aria-live="polite">20 directions</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ol class="rows" aria-label="Directions">
+      <li class="row" data-family="green" data-theme="light" id="v01">
+        <div class="meta">
+          <p class="num">01</p>
+          <h2>Turned Up</h2>
+          <p class="thesis">Today’s system at full conviction: the same tokens and faces, set at full scale and colour.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="01" data-name="Turned Up"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="01-turned-up/landing.html">
+            <img src="thumbs/01-landing.webp" width="720" height="450" loading="lazy" alt="Turned Up: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="01-turned-up/time.html">
+            <img src="thumbs/01-time.webp" width="720" height="450" loading="lazy" alt="Turned Up: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="dark" id="v02">
+        <div class="meta">
+          <p class="num">02</p>
+          <h2>Signal</h2>
+          <p class="thesis">The logo is the brand: navy-black, one electric blue, the mark at monumental size.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="02" data-name="Signal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="02-signal/landing.html">
+            <img src="thumbs/02-landing.webp" width="720" height="450" loading="lazy" alt="Signal: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="02-signal/time.html">
+            <img src="thumbs/02-time.webp" width="720" height="450" loading="lazy" alt="Signal: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="dark" id="v03">
+        <div class="meta">
+          <p class="num">03</p>
+          <h2>Evergreen</h2>
+          <p class="thesis">Forest-night canvas, mint at full saturation, giant mono figures.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="03" data-name="Evergreen"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="03-evergreen/landing.html">
+            <img src="thumbs/03-landing.webp" width="720" height="450" loading="lazy" alt="Evergreen: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="03-evergreen/time.html">
+            <img src="thumbs/03-time.webp" width="720" height="450" loading="lazy" alt="Evergreen: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v04">
+        <div class="meta">
+          <p class="num">04</p>
+          <h2>Blue Hour</h2>
+          <p class="thesis">Colour as surface: the top of every page is solid logo blue.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="04" data-name="Blue Hour"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="04-blue-hour/landing.html">
+            <img src="thumbs/04-landing.webp" width="720" height="450" loading="lazy" alt="Blue Hour: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="04-blue-hour/time.html">
+            <img src="thumbs/04-time.webp" width="720" height="450" loading="lazy" alt="Blue Hour: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v05">
+        <div class="meta">
+          <p class="num">05</p>
+          <h2>Ledger</h2>
+          <p class="thesis">The accountant’s ledger: cobalt ink, serif, ruled lines, double-ruled totals.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="05" data-name="Ledger"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="05-ledger/landing.html">
+            <img src="thumbs/05-landing.webp" width="720" height="450" loading="lazy" alt="Ledger: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="05-ledger/time.html">
+            <img src="thumbs/05-time.webp" width="720" height="450" loading="lazy" alt="Ledger: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="light" id="v06">
+        <div class="meta">
+          <p class="num">06</p>
+          <h2>Mint Block</h2>
+          <p class="thesis">A layout of flat colour blocks; each day’s tile fills deeper as hours are logged.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="06" data-name="Mint Block"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="06-mint-block/landing.html">
+            <img src="thumbs/06-landing.webp" width="720" height="450" loading="lazy" alt="Mint Block: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="06-mint-block/time.html">
+            <img src="thumbs/06-time.webp" width="720" height="450" loading="lazy" alt="Mint Block: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v07">
+        <div class="meta">
+          <p class="num">07</p>
+          <h2>Swiss</h2>
+          <p class="thesis">International typographic style: strict grid, giant flush-left numerals, one blue field.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="07" data-name="Swiss"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="07-swiss/landing.html">
+            <img src="thumbs/07-landing.webp" width="720" height="450" loading="lazy" alt="Swiss: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="07-swiss/time.html">
+            <img src="thumbs/07-time.webp" width="720" height="450" loading="lazy" alt="Swiss: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="dark" id="v08">
+        <div class="meta">
+          <p class="num">08</p>
+          <h2>Chronograph</h2>
+          <p class="thesis">A precision instrument: tick-mark scales, gauges, mono readouts.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="08" data-name="Chronograph"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="08-chronograph/landing.html">
+            <img src="thumbs/08-landing.webp" width="720" height="450" loading="lazy" alt="Chronograph: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="08-chronograph/time.html">
+            <img src="thumbs/08-time.webp" width="720" height="450" loading="lazy" alt="Chronograph: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v09">
+        <div class="meta">
+          <p class="num">09</p>
+          <h2>Tempo</h2>
+          <p class="thesis">Cadence as rhythm: the week drawn as a measure of bars.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="09" data-name="Tempo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="09-tempo/landing.html">
+            <img src="thumbs/09-landing.webp" width="720" height="450" loading="lazy" alt="Tempo: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="09-tempo/time.html">
+            <img src="thumbs/09-time.webp" width="720" height="450" loading="lazy" alt="Tempo: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="light" id="v10">
+        <div class="meta">
+          <p class="num">10</p>
+          <h2>Almanac</h2>
+          <p class="thesis">An editorial almanac page: serif italics, big calendar numerals.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="10" data-name="Almanac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="10-almanac/landing.html">
+            <img src="thumbs/10-landing.webp" width="720" height="450" loading="lazy" alt="Almanac: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="10-almanac/time.html">
+            <img src="thumbs/10-time.webp" width="720" height="450" loading="lazy" alt="Almanac: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="dark" id="v11">
+        <div class="meta">
+          <p class="num">11</p>
+          <h2>Dial</h2>
+          <p class="thesis">The mark’s clock face becomes the geometry: rings, arcs, 12-hour dials.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="11" data-name="Dial"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="11-dial/landing.html">
+            <img src="thumbs/11-landing.webp" width="720" height="450" loading="lazy" alt="Dial: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="11-dial/time.html">
+            <img src="thumbs/11-time.webp" width="720" height="450" loading="lazy" alt="Dial: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="light" id="v12">
+        <div class="meta">
+          <p class="num">12</p>
+          <h2>One Thing</h2>
+          <p class="thesis">Bold through restraint: monochrome everything except the one action.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="12" data-name="One Thing"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="12-one-thing/landing.html">
+            <img src="thumbs/12-landing.webp" width="720" height="450" loading="lazy" alt="One Thing: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="12-one-thing/time.html">
+            <img src="thumbs/12-time.webp" width="720" height="450" loading="lazy" alt="One Thing: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="dark" id="v13">
+        <div class="meta">
+          <p class="num">13</p>
+          <h2>Cyanotype</h2>
+          <p class="thesis">A blueprint: white linework on prussian blue, dimension-line callouts.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="13" data-name="Cyanotype"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="13-cyanotype/landing.html">
+            <img src="thumbs/13-landing.webp" width="720" height="450" loading="lazy" alt="Cyanotype: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="13-cyanotype/time.html">
+            <img src="thumbs/13-time.webp" width="720" height="450" loading="lazy" alt="Cyanotype: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="dark" id="v14">
+        <div class="meta">
+          <p class="num">14</p>
+          <h2>Scoreboard</h2>
+          <p class="thesis">A lit scoreboard: tall condensed numerals, green as the lamp colour.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="14" data-name="Scoreboard"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="14-scoreboard/landing.html">
+            <img src="thumbs/14-landing.webp" width="720" height="450" loading="lazy" alt="Scoreboard: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="14-scoreboard/time.html">
+            <img src="thumbs/14-time.webp" width="720" height="450" loading="lazy" alt="Scoreboard: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v15">
+        <div class="meta">
+          <p class="num">15</p>
+          <h2>Monolith</h2>
+          <p class="thesis">Architectural mass: zero radius, 2px black rules, condensed heavy type.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="15" data-name="Monolith"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="15-monolith/landing.html">
+            <img src="thumbs/15-landing.webp" width="720" height="450" loading="lazy" alt="Monolith: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="15-monolith/time.html">
+            <img src="thumbs/15-time.webp" width="720" height="450" loading="lazy" alt="Monolith: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="light" id="v16">
+        <div class="meta">
+          <p class="num">16</p>
+          <h2>Greenhouse</h2>
+          <p class="thesis">Soft, friendly boldness: big radii, chunky controls, warm green fields.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="16" data-name="Greenhouse"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="16-greenhouse/landing.html">
+            <img src="thumbs/16-landing.webp" width="720" height="450" loading="lazy" alt="Greenhouse: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="16-greenhouse/time.html">
+            <img src="thumbs/16-time.webp" width="720" height="450" loading="lazy" alt="Greenhouse: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v17">
+        <div class="meta">
+          <p class="num">17</p>
+          <h2>Poster</h2>
+          <p class="thesis">A typographic poster in a blue-and-amber duotone.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="17" data-name="Poster"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="17-poster/landing.html">
+            <img src="thumbs/17-landing.webp" width="720" height="450" loading="lazy" alt="Poster: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="17-poster/time.html">
+            <img src="thumbs/17-time.webp" width="720" height="450" loading="lazy" alt="Poster: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="light" id="v18">
+        <div class="meta">
+          <p class="num">18</p>
+          <h2>Spectrum</h2>
+          <p class="thesis">The six project colours lead: the week as stacked colour segments.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="18" data-name="Spectrum"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="18-spectrum/landing.html">
+            <img src="thumbs/18-landing.webp" width="720" height="450" loading="lazy" alt="Spectrum: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="18-spectrum/time.html">
+            <img src="thumbs/18-time.webp" width="720" height="450" loading="lazy" alt="Spectrum: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="blue" data-theme="light" id="v19">
+        <div class="meta">
+          <p class="num">19</p>
+          <h2>Wide</h2>
+          <p class="thesis">Expanded type and horizontal rhythm; everything runs wide.</p>
+          <p class="tags"><span class="tag tag-blue">Logo blue</span><span class="tag">Light</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="19" data-name="Wide"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="19-wide/landing.html">
+            <img src="thumbs/19-landing.webp" width="720" height="450" loading="lazy" alt="Wide: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="19-wide/time.html">
+            <img src="thumbs/19-time.webp" width="720" height="450" loading="lazy" alt="Wide: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+      <li class="row" data-family="green" data-theme="mixed" id="v20">
+        <div class="meta">
+          <p class="num">20</p>
+          <h2>Split</h2>
+          <p class="thesis">Two panes: a deep-green week column beside a white work area.</p>
+          <p class="tags"><span class="tag tag-green">Current green</span><span class="tag">Light and dark</span></p>
+          <button type="button" class="pick" aria-pressed="false" data-id="20" data-name="Split"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg><span>Shortlist</span></button>
+        </div>
+        <div class="shots">
+          <a class="shot" href="20-split/landing.html">
+            <img src="thumbs/20-landing.webp" width="720" height="450" loading="lazy" alt="Split: landing page">
+            <span class="shot-label">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="shot" href="20-split/time.html">
+            <img src="thumbs/20-time.webp" width="720" height="450" loading="lazy" alt="Split: timesheet">
+            <span class="shot-label">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</main>
+<div class="bar" hidden role="region" aria-label="Your shortlist">
+  <p class="bar-text"></p>
+  <button type="button" class="ghost" data-action="clear">Clear</button>
+  <button type="button" data-action="copy">Copy picks</button>
+</div>
+<div class="wrap"><footer>
+  <p>Design mockups for review, not shipped product. The copy, prices and timesheet structure come from Cadence’s landing page, pricing.json and UI doctrine. Sample data: Ada’s week of October 26, 2026, with a timer running.</p>
+  <p>Fonts are open-licence faces served by Google Fonts.</p>
+</footer></div>
+<script>
+(() => {
+  const KEY = 'cadence-directions:shortlist';
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+  const write = (ids) => { try { localStorage.setItem(KEY, JSON.stringify(ids)); } catch {} };
+  let picks = new Set(read());
+  const bar = document.querySelector('.bar');
+  const barText = bar.querySelector('.bar-text');
+  const buttons = [...document.querySelectorAll('.pick')];
+  const nameOf = (id) => buttons.find((b) => b.dataset.id === id)?.dataset.name ?? id;
+  const sync = () => {
+    for (const b of buttons) b.setAttribute('aria-pressed', String(picks.has(b.dataset.id)));
+    const ids = [...picks].sort();
+    bar.hidden = ids.length === 0;
+    barText.textContent = ids.length + ' shortlisted: ' + ids.join(', ');
+    write(ids);
+  };
+  for (const b of buttons) b.addEventListener('click', () => { picks.has(b.dataset.id) ? picks.delete(b.dataset.id) : picks.add(b.dataset.id); sync(); });
+  bar.addEventListener('click', async (e) => {
+    const action = e.target.closest('button')?.dataset.action;
+    if (action === 'clear') { picks = new Set(); sync(); }
+    if (action === 'copy') {
+      const ids = [...picks].sort();
+      const text = 'Cadence directions shortlist: ' + ids.map((id) => id + ' ' + nameOf(id)).join(', ') + '\n' + location.href.split('#')[0];
+      const btn = e.target.closest('button');
+      try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+      catch { window.prompt('Copy your shortlist', text); }
+      setTimeout(() => { btn.textContent = 'Copy picks'; }, 1600);
+    }
+  });
+  const state = { family: 'all', theme: 'all' };
+  const rows = [...document.querySelectorAll('ol[aria-label="Directions"] .row')];
+  const count = document.querySelector('.count');
+  for (const f of document.querySelectorAll('.filter button')) f.addEventListener('click', () => {
+    state[f.dataset.filter] = f.dataset.value;
+    for (const s of document.querySelectorAll('[data-filter="' + f.dataset.filter + '"]')) s.setAttribute('aria-pressed', String(s === f));
+    let shown = 0;
+    for (const r of rows) {
+      const ok = (state.family === 'all' || r.dataset.family === state.family) && (state.theme === 'all' || r.dataset.theme === state.theme || r.dataset.theme === 'mixed');
+      r.hidden = !ok; if (ok) shown += 1;
+    }
+    count.textContent = shown + (shown === 1 ? ' direction' : ' directions');
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

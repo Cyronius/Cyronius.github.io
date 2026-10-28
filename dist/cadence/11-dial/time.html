@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Cadence — 11 Dial — Timesheet</title>
+  <meta name="theme-color" content="#0a1022">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Outfit:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="sheet-body">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M6 20v-6"/><path d="M12 20V4"/><path d="M18 20V10"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <!-- A 12-hour face: track ring and hour points; the arc is drawn per day -->
+    <symbol id="face" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="none" stroke-width="7" style="stroke:var(--track)"/>
+      <g style="fill:var(--line-strong)">
+        <circle cx="50" cy="14.5" r="1.6"/><circle cx="67.75" cy="19.26" r="1"/><circle cx="80.74" cy="32.25" r="1"/>
+        <circle cx="85.5" cy="50" r="1.6"/><circle cx="80.74" cy="67.75" r="1"/><circle cx="67.75" cy="80.74" r="1"/>
+        <circle cx="50" cy="85.5" r="1.6"/><circle cx="32.25" cy="80.74" r="1"/><circle cx="19.26" cy="67.75" r="1"/>
+        <circle cx="14.5" cy="50" r="1.6"/><circle cx="19.26" cy="32.25" r="1"/><circle cx="32.25" cy="19.26" r="1"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <header class="app-bar">
+    <a class="home" href="landing.html" aria-label="Cadence home">
+      <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="dest">
+        <li><a href="time.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>Time</span></a></li>
+        <li><a href="#team"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg><span>Team</span></a></li>
+        <li><a href="#projects"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>Projects</span></a></li>
+        <li><a href="#reports"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg><span>Reports</span></a></li>
+        <li><a href="#manage"><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg><span>Manage</span></a></li>
+      </ul>
+    </nav>
+    <div class="bar-end">
+      <div class="timer" role="group" aria-label="Timer, running">
+        <span class="run" aria-hidden="true">
+          <svg viewBox="0 0 30 30">
+            <circle class="t" cx="15" cy="15" r="12" fill="none" stroke-width="3"/>
+            <circle class="a" cx="15" cy="15" r="12" fill="none" stroke-width="3" stroke-linecap="round" pathLength="60" stroke-dasharray="47.2 60" transform="rotate(-90 15 15)"/>
+            <circle class="dot" cx="15" cy="15" r="4.5"/>
+          </svg>
+        </span>
+        <span class="what">Website redesign · Design</span>
+        <span class="digits">0:47:12</span>
+        <button class="stop" type="button" aria-label="Stop timer"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg></button>
+      </div>
+      <button class="account" type="button" aria-label="Account menu" aria-haspopup="menu">
+        <span class="av">A</span><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <nav class="peer-tabs" aria-label="Time">
+    <div class="wrap">
+      <ul>
+        <li><a href="time.html" aria-current="page">Timesheet</a></li>
+        <li><a href="#unsubmitted">Unsubmitted</a></li>
+        <li><a href="#pending">Pending approval</a></li>
+        <li><a href="#approved">Approved</a></li>
+        <li><a href="#close">Close my week</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="wrap sheet-page">
+    <div class="head">
+      <div>
+        <p class="date">Wednesday, October 28</p>
+        <h1>Good afternoon, Ada</h1>
+        <p class="tip">Name the next physical action on a stuck task. Vague tasks stay stuck.</p>
+      </div>
+      <button class="pill pill-primary" type="button">
+        <span class="knob"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></span>
+        Track time
+      </button>
+    </div>
+
+    <div class="controls">
+      <div class="range">
+        <button class="circle-btn" type="button" aria-label="Previous week"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <button class="pill" type="button"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Oct 26 – Nov 1, 2026</button>
+        <button class="circle-btn" type="button" aria-label="Next week"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+      </div>
+      <button class="chip" type="button">This week</button>
+      <div class="density" role="group" aria-label="Density">
+        <button type="button" aria-pressed="false">Day</button>
+        <button type="button" aria-pressed="true">Week</button>
+      </div>
+    </div>
+
+    <ol class="strip" aria-label="Hours by day">
+      <li>
+        <span class="lbl"><b>Mon</b><span>Oct 26</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/><circle class="arc" cx="50" cy="50" r="44" fill="none" stroke-width="7" stroke-linecap="round" pathLength="12" stroke-dasharray="7.446 12" stroke-dashoffset="-0.152" transform="rotate(-90 50 50)"/></svg><span class="fig">7:45</span></span>
+      </li>
+      <li>
+        <span class="lbl"><b>Tue</b><span>Oct 27</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/><circle class="arc" cx="50" cy="50" r="44" fill="none" stroke-width="7" stroke-linecap="round" pathLength="12" stroke-dasharray="8.696 12" stroke-dashoffset="-0.152" transform="rotate(-90 50 50)"/></svg><span class="fig">9:00</span></span>
+      </li>
+      <li class="today" aria-current="date">
+        <span class="lbl"><b>Today</b><span>Oct 28</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/><circle class="arc" cx="50" cy="50" r="44" fill="none" stroke-width="7" stroke-linecap="round" pathLength="12" stroke-dasharray="5.196 12" stroke-dashoffset="-0.152" transform="rotate(-90 50 50)"/></svg><span class="fig">5:30</span></span>
+      </li>
+      <li>
+        <span class="lbl"><b>Thu</b><span>Oct 29</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/></svg><span class="fig empty">–</span></span>
+      </li>
+      <li>
+        <span class="lbl"><b>Fri</b><span>Oct 30</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/></svg><span class="fig empty">–</span></span>
+      </li>
+      <li>
+        <span class="lbl"><b>Sat</b><span>Oct 31</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/></svg><span class="fig empty">–</span></span>
+      </li>
+      <li>
+        <span class="lbl"><b>Sun</b><span>Nov 1</span></span>
+        <span class="dial"><svg aria-hidden="true" viewBox="0 0 100 100"><use href="#face"/></svg><span class="fig empty">–</span></span>
+      </li>
+      <li class="week">
+        <span class="lbl"><b>Week</b></span>
+        <span class="dial">
+          <svg aria-hidden="true" viewBox="0 0 100 100">
+            <g transform="rotate(-90 50 50)" fill="none" stroke-width="7" stroke-linecap="round">
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-0.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-1.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-2.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-3.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-4.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-5.1186"/>
+              <circle class="track" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.763 7" stroke-dashoffset="-6.1186"/>
+              <circle class="arc" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.430 7" stroke-dashoffset="-0.1186"/>
+              <circle class="arc" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.528 7" stroke-dashoffset="-1.1186"/>
+              <circle class="arc" cx="50" cy="50" r="44" pathLength="7" stroke-dasharray="0.254 7" stroke-dashoffset="-2.1186"/>
+            </g>
+          </svg>
+          <span class="fig">22:15</span>
+        </span>
+      </li>
+    </ol>
+
+    <div class="grid-wrap" tabindex="0" role="region" aria-label="Week grid">
+      <table class="sheet">
+        <colgroup>
+          <col class="c-proj"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-total"><col class="c-del">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Project and task</th>
+            <th scope="col">Mon 26</th>
+            <th scope="col">Tue 27</th>
+            <th scope="col" class="today"><b>Wed 28</b></th>
+            <th scope="col">Thu 29</th>
+            <th scope="col">Fri 30</th>
+            <th scope="col">Sat 31</th>
+            <th scope="col">Sun 1</th>
+            <th scope="col">Total</th>
+            <th scope="col"><span class="sr-only">Delete row</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="proj" style="--c:var(--p-red)"><i></i><b>Website redesign</b><span>Design · Acme Co</span></span></th>
+            <td><input class="cell" value="3:30" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Monday"></td>
+            <td><input class="cell" value="2:15" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Tuesday"></td>
+            <td class="today"><span class="running"><input class="cell" value="1:45" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Wednesday, timer running"></span></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Thursday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Friday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Saturday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Design, Sunday"></td>
+            <td class="row-total">7:30</td>
+            <td><button class="del" type="button" aria-label="Delete row Website redesign, Design"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="proj" style="--c:var(--p-red)"><i></i><b>Website redesign</b><span>Development · Acme Co</span></span></th>
+            <td><input class="cell" value="2:00" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Monday"></td>
+            <td><input class="cell" value="3:00" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Tuesday"></td>
+            <td class="today"><input class="cell" value="2:30" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Wednesday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Thursday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Friday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Saturday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Website redesign, Development, Sunday"></td>
+            <td class="row-total">7:30</td>
+            <td><button class="del" type="button" aria-label="Delete row Website redesign, Development"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="proj" style="--c:var(--p-teal)"><i></i><b>Annual audit</b><span>Fieldwork · Globex</span></span></th>
+            <td><input class="cell" value="1:30" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Monday"></td>
+            <td><input class="cell" value="2:00" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Tuesday"></td>
+            <td class="today"><input class="cell" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Wednesday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Thursday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Friday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Saturday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Annual audit, Fieldwork, Sunday"></td>
+            <td class="row-total">3:30</td>
+            <td><button class="del" type="button" aria-label="Delete row Annual audit, Fieldwork"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="proj" style="--c:var(--p-violet)"><i></i><b>Mobile app</b><span>QA · Initech</span></span></th>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Monday"></td>
+            <td><input class="cell" value="1:15" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Tuesday"></td>
+            <td class="today"><input class="cell" value="1:00" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Wednesday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Thursday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Friday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Saturday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Mobile app, QA, Sunday"></td>
+            <td class="row-total">2:15</td>
+            <td><button class="del" type="button" aria-label="Delete row Mobile app, QA"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="proj" style="--c:var(--p-amber)"><i></i><b>Internal</b><span>Planning · Cadence</span></span></th>
+            <td><input class="cell" value="0:45" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Monday"></td>
+            <td><input class="cell" value="0:30" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Tuesday"></td>
+            <td class="today"><input class="cell" value="0:15" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Wednesday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Thursday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Friday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Saturday"></td>
+            <td><input class="cell" placeholder="–" autocomplete="off" aria-label="Internal, Planning, Sunday"></td>
+            <td class="row-total">1:30</td>
+            <td><button class="del" type="button" aria-label="Delete row Internal, Planning"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="under">
+      <button class="ghost" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy rows from most recent timesheet</button>
+      <label class="check"><input type="checkbox">Include hours</label>
+    </div>
+
+    <section class="submit" aria-label="Submit week">
+      <span class="status">Open</span>
+      <p>This week is not submitted yet.</p>
+      <button class="pill" type="button"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>Submit this week for approval</button>
+    </section>
+  </main>
+
+  <script>
+    // Density toggle: one pressed segment at a time.
+    document.querySelectorAll('.density button').forEach((b, _, all) =>
+      b.addEventListener('click', () => all.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))));
+  </script>
+  <script src="../assets/review.js" data-variant="11" data-page="time" defer></script>
+</body>
+</html>

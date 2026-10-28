@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence — 17 Poster — Landing</title>
+<meta name="description" content="Track time, approve timesheets, keep rates honest and report on all of it.">
+<link rel="icon" href="../assets/cadence-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2.5"/></symbol>
+    <symbol id="mark" viewBox="8 8 84 84"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></g></symbol>
+  </defs>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <a class="wordmark" href="landing.html" aria-label="Cadence, home"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg><span>Cadence</span></a>
+  <nav class="site-links" aria-label="Site">
+    <a href="#pricing">Pricing</a>
+    <a href="time.html">Log in</a>
+    <a class="btn" href="#trial">Start a free trial</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="poster" aria-labelledby="headline">
+    <div class="stage">
+      <div class="disc" aria-hidden="true"></div>
+      <h1 class="headline" id="headline"><span>Time</span> <span>tracking,</span> <span>done</span> <span>well.</span></h1>
+      <div class="pitch">
+      <p class="lede">Track time, approve timesheets, keep rates honest and report on all of it. $7.00&nbsp;per person per month, free below 3&nbsp;people, and a 30-day trial without a&nbsp;card.</p>
+      <div class="actions" id="trial">
+        <a class="btn btn-primary" href="time.html">Start your 30-day trial<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="link-quiet" href="#pricing">See pricing</a>
+        </div>
+      </div>
+    </div>
+    <ul class="fineprint" aria-label="What Cadence does">
+      <li><h2>One timesheet, two densities</h2><p>Fill a day or a whole week on the same surface, from the keyboard. A timer sits in the bar on every screen.</p></li>
+      <li><h2>Approvals that show what changed</h2><p>People submit a week and can still fix it; approvers see exactly what changed since, then close the period.</p></li>
+      <li><h2>Rates that stay true</h2><p>Billable and cost rates by person, task and project, with history. A past entry keeps the price it was recorded at.</p></li>
+      <li><h2>Reports you can export</h2><p>Time, budgets, utilization and profitability, by any column you choose, as CSV whenever you want.</p></li>
+      <li><h2>Bring your history</h2><p>Import a Harvest account with your own token. You read a reconciliation of every month before anything is committed.</p></li>
+    </ul>
+  </section>
+
+  <section class="plate" aria-label="The Cadence timesheet">
+    <figure class="sheet" aria-label="Ada's timesheet for Oct 26 – Nov 1, 2026: 22:15 logged, with a timer running on Website redesign, Design">
+      <div class="sheet-bar" aria-hidden="true">
+        <svg class="mark"><use href="#mark"/></svg>
+        <div class="sheet-nav"><span class="on">Time</span><span>Team</span><span>Projects</span><span>Reports</span><span>Manage</span></div>
+        <div class="sheet-timer">Website redesign · Design <b>0:47:12</b><i><svg><use href="#i-stop"/></svg>Stop</i></div>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-strip" aria-hidden="true">
+          <div><small>Mon · Oct 26</small><strong>7:45</strong></div>
+          <div><small>Tue · Oct 27</small><strong>9:00</strong></div>
+          <div class="today"><small>Today · Oct 28</small><strong>5:30</strong></div>
+          <div class="empty"><small>Thu · Oct 29</small><strong>–</strong></div>
+          <div class="empty"><small>Fri · Oct 30</small><strong>–</strong></div>
+          <div class="empty"><small>Sat · Oct 31</small><strong>–</strong></div>
+          <div class="empty"><small>Sun · Nov 1</small><strong>–</strong></div>
+          <div class="total"><small>Week</small><strong>22:15</strong></div>
+        </div>
+        <table class="sheet-table">
+          <thead>
+            <tr><th scope="col">Project and task</th><th scope="col">Mon 26</th><th scope="col">Tue 27</th><th scope="col" class="is-today">Wed 28</th><th scope="col" class="wk">Thu 29</th><th scope="col" class="wk">Fri 30</th><th scope="col" class="wk">Sat 31</th><th scope="col" class="wk">Sun 1</th><th scope="col">Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><i class="sq" style="background:oklch(0.62 0.17 32)"></i>Website redesign<span>Design · Acme Co</span></th><td>3:30</td><td>2:15</td><td class="is-today run">1:45</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="sum">7:30</td></tr>
+            <tr><th scope="row"><i class="sq" style="background:oklch(0.62 0.17 32)"></i>Website redesign<span>Development · Acme Co</span></th><td>2:00</td><td>3:00</td><td class="is-today">2:30</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="sum">7:30</td></tr>
+            <tr><th scope="row"><i class="sq" style="background:oklch(0.6 0.1 204)"></i>Annual audit<span>Fieldwork · Globex</span></th><td>1:30</td><td>2:00</td><td class="is-today nil">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="sum">3:30</td></tr>
+            <tr><th scope="row"><i class="sq" style="background:oklch(0.58 0.19 295)"></i>Mobile app<span>QA · Initech</span></th><td class="nil">–</td><td>1:15</td><td class="is-today">1:00</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="sum">2:15</td></tr>
+            <tr><th scope="row"><i class="sq" style="background:oklch(0.78 0.15 70)"></i>Internal<span>Planning · Cadence</span></th><td>0:45</td><td>0:30</td><td class="is-today">0:15</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="nil wk">–</td><td class="sum">1:30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </figure>
+  </section>
+
+  <section class="terms" id="pricing" aria-labelledby="terms-title">
+    <h2 id="terms-title">One plan. Everything included.</h2>
+    <div class="price">
+      <p>$7.00 per person per month</p>
+      <p>$67.20 per person per year</p>
+    </div>
+    <ul class="terms-list">
+      <li>Free for teams of fewer than 3 people, for as long as you like.</li>
+      <li>A 30-day trial with everything; no card until you subscribe.</li>
+      <li>Your per-person price is locked for 3 years from the day you subscribe.</li>
+      <li>Cancel any time, yourself. Export everything at any time, cancelled or not.</li>
+      <li>Never metered on projects, clients, tasks, history.</li>
+      <li>You pay for active people only: invited, archived and client contacts are free.</li>
+    </ul>
+    <div class="terms-cta">
+      <a class="btn btn-primary" href="time.html">Start your 30-day trial<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <a class="wordmark" href="landing.html" aria-label="Cadence, home"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg><span>Cadence</span></a>
+  <nav aria-label="Footer"><a href="#terms">Terms</a><a href="#pricing">Pricing</a></nav>
+</footer>
+<script src="../assets/review.js" data-variant="17" data-page="landing" defer></script>
+</body>
+</html>

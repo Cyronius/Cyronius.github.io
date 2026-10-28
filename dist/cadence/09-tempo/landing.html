@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Cadence — 09 Tempo — Landing</title>
+  <meta name="description" content="Track time, approve timesheets, keep rates honest and report on all of it.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400..700&family=JetBrains+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-nav">
+    <div class="wrap nav-row">
+      <a class="wordmark" href="landing.html">
+        <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+        <span>Cadence</span>
+      </a>
+      <nav aria-label="Site">
+        <ul class="site-links">
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="time.html">Log in</a></li>
+          <li><a class="nav-trial" href="time.html">Start a free trial</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <h1 id="hero-title" class="display hero-title">Time tracking,<br> done well.</h1>
+        <div class="hero-side">
+          <p class="lede">Track time, approve timesheets, keep rates honest and report on all of it. $7.00 per person per month, free below 3 people, and a 30-day trial without a card.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-xl" href="time.html">Start your 30-day trial <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow" href="#pricing">See pricing</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- The sample week as a measure: each entry a stripe as wide as its duration. -->
+      <figure class="band" aria-label="A sample week, Oct 26 to Nov 1, 2026: Monday 7:45, Tuesday 9:00, Wednesday 5:30 with a timer running, Thursday to Sunday empty, week 22:15.">
+        <div class="wrap band-grid">
+          <div class="beat">
+            <div class="measure" aria-hidden="true">
+              <i class="stripe" style="--m:210;--i:0"></i>
+              <i class="stripe" style="--m:120;--i:1"></i>
+              <i class="stripe" style="--m:90;--i:2"></i>
+              <i class="stripe" style="--m:45;--i:3"></i>
+              <i class="rest" style="--m:135"></i>
+            </div>
+            <p class="beat-label"><span class="d"><b>Mon</b> 26</span><span class="t">7:45</span></p>
+          </div>
+          <div class="beat">
+            <div class="measure" aria-hidden="true">
+              <i class="stripe" style="--m:135;--i:4"></i>
+              <i class="stripe" style="--m:180;--i:5"></i>
+              <i class="stripe" style="--m:120;--i:6"></i>
+              <i class="stripe" style="--m:75;--i:7"></i>
+              <i class="stripe" style="--m:30;--i:8"></i>
+              <i class="rest" style="--m:60"></i>
+            </div>
+            <p class="beat-label"><span class="d"><b>Tue</b> 27</span><span class="t">9:00</span></p>
+          </div>
+          <div class="beat is-today">
+            <div class="measure" aria-hidden="true">
+              <i class="stripe" style="--m:150;--i:9"></i>
+              <i class="stripe" style="--m:60;--i:10"></i>
+              <i class="stripe" style="--m:15;--i:11"></i>
+              <i class="stripe is-running" style="--m:105;--i:12"></i>
+              <i class="now"><span class="playhead"></span><span class="now-chip"><span class="dot"></span><span class="label">Website redesign · Design</span><span class="mono">0:47:12</span></span></i>
+              <i class="rest" style="--m:270"></i>
+            </div>
+            <p class="beat-label"><span class="d"><b>Wed</b> 28</span><span class="t">5:30</span></p>
+          </div>
+          <div class="beat is-empty">
+            <div class="measure" aria-hidden="true"></div>
+            <p class="beat-label"><span class="d"><b>Thu</b> 29</span><span class="t">–</span></p>
+          </div>
+          <div class="beat is-empty">
+            <div class="measure" aria-hidden="true"></div>
+            <p class="beat-label"><span class="d"><b>Fri</b> 30</span><span class="t">–</span></p>
+          </div>
+          <div class="beat is-empty">
+            <div class="measure" aria-hidden="true"></div>
+            <p class="beat-label"><span class="d"><b>Sat</b> 31</span><span class="t">–</span></p>
+          </div>
+          <div class="beat is-empty">
+            <div class="measure" aria-hidden="true"></div>
+            <p class="beat-label"><span class="d"><b>Sun</b> 1</span><span class="t">–</span></p>
+          </div>
+          <div class="beat week-beat">
+            <div class="measure" aria-hidden="true"></div>
+            <p class="beat-label"><span class="d">Week</span><span class="t">22:15</span></p>
+          </div>
+        </div>
+      </figure>
+    </section>
+
+    <section class="score" aria-label="What Cadence does">
+      <div class="wrap">
+        <div class="lead">
+          <div>
+            <h2 class="display point-title">One timesheet, two densities</h2>
+            <p class="point-body">Fill a day or a whole week on the same surface, from the keyboard. A timer sits in the bar on every screen.</p>
+          </div>
+
+          <figure class="fragment" aria-label="The Cadence timesheet, week of Oct 26 to Nov 1, 2026">
+            <div class="fragment-bar">
+              <span class="seg-static"><span>Day</span><span class="on">Week</span></span>
+              <span class="timer-static"><span class="dot"></span><span class="label">Website redesign · Design</span><span class="mono">0:47:12</span></span>
+            </div>
+            <div class="fragment-scroll">
+              <table class="mini">
+                <thead>
+                  <tr>
+                    <th scope="col" class="c-proj">Project and task</th>
+                    <th scope="col">Mon 26</th>
+                    <th scope="col">Tue 27</th>
+                    <th scope="col" class="is-today">Wed 28</th>
+                    <th scope="col">Thu 29</th>
+                    <th scope="col">Fri 30</th>
+                    <th scope="col">Sat 31</th>
+                    <th scope="col">Sun 1</th>
+                    <th scope="col" class="c-total">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="c-proj"><span class="proj-sq" style="--hue:32"></span>Website redesign<small>Design · Acme Co</small></th>
+                    <td>3:30</td><td>2:15</td><td class="is-today"><span class="running-cell">1:45</span></td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">7:30</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-proj"><span class="proj-sq" style="--hue:32"></span>Website redesign<small>Development · Acme Co</small></th>
+                    <td>2:00</td><td>3:00</td><td class="is-today">2:30</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">7:30</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-proj"><span class="proj-sq" style="--hue:204"></span>Annual audit<small>Fieldwork · Globex</small></th>
+                    <td>1:30</td><td>2:00</td><td class="is-today empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">3:30</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-proj"><span class="proj-sq" style="--hue:295"></span>Mobile app<small>QA · Initech</small></th>
+                    <td class="empty">–</td><td>1:15</td><td class="is-today">1:00</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">2:15</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-proj"><span class="proj-sq" style="--hue:70"></span>Internal<small>Planning · Cadence</small></th>
+                    <td>0:45</td><td>0:30</td><td class="is-today">0:15</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">1:30</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="row" class="c-proj">Total</th>
+                    <td>7:45</td><td>9:00</td><td class="is-today">5:30</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="empty">–</td><td class="c-total">22:15</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </figure>
+        </div>
+
+        <ul class="setlist">
+          <li>
+            <h2 class="display point-title">Approvals that show what changed</h2>
+            <p class="point-body">People submit a week and can still fix it; approvers see exactly what changed since, then close the period.</p>
+          </li>
+          <li>
+            <h2 class="display point-title">Rates that stay true</h2>
+            <p class="point-body">Billable and cost rates by person, task and project, with history. A past entry keeps the price it was recorded at.</p>
+          </li>
+          <li>
+            <h2 class="display point-title">Reports you can export</h2>
+            <p class="point-body">Time, budgets, utilization and profitability, by any column you choose, as CSV whenever you want.</p>
+          </li>
+          <li>
+            <h2 class="display point-title">Bring your history</h2>
+            <p class="point-body">Import a Harvest account with your own token. You read a reconciliation of every month before anything is committed.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="pricing" class="plan" aria-labelledby="plan-title">
+      <div class="wrap plan-grid">
+        <h2 id="plan-title" class="display plan-title">One plan. Everything included.</h2>
+        <div>
+          <p class="display price">$7.00 per person per month</p>
+          <p class="price-alt">$67.20 per person per year</p>
+          <ul class="facts">
+            <li>Free for teams of fewer than 3 people, for as long as you like.</li>
+            <li>A 30-day trial with everything; no card until you subscribe.</li>
+            <li>Your per-person price is locked for 3 years from the day you subscribe.</li>
+            <li>You pay for active people only: invited, archived and client contacts are free.</li>
+            <li>Never metered on projects, clients, tasks, history.</li>
+            <li>Cancel any time, yourself. Export everything at any time, cancelled or not.</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-xl" href="time.html">Start your 30-day trial <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="rhythm-rule" aria-hidden="true">
+        <i style="--m:210"></i><i style="--m:120"></i><i style="--m:90"></i><i style="--m:45"></i><i class="gap" style="--m:40"></i>
+        <i style="--m:135"></i><i style="--m:180"></i><i style="--m:120"></i><i style="--m:75"></i><i style="--m:30"></i><i class="gap" style="--m:40"></i>
+        <i class="t" style="--m:150"></i><i class="t" style="--m:60"></i><i class="t" style="--m:15"></i><i class="r" style="--m:105"></i><i class="gap" style="--m:900"></i>
+      </div>
+      <div class="foot-row">
+        <a class="wordmark" href="landing.html">
+          <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+          <span>Cadence</span>
+        </a>
+        <nav aria-label="Footer">
+          <ul class="foot-links">
+            <li><a href="#">Terms</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/review.js" data-variant="09" data-page="landing" defer></script>
+</body>
+</html>

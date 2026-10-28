@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence — 19 Wide — Landing</title>
+<meta name="description" content="Track time, approve timesheets, keep rates honest and report on all of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
+</svg>
+
+<header class="site">
+  <a class="brand" href="landing.html">
+    <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+    <span class="brand-name">Cadence</span>
+  </a>
+  <nav aria-label="Site">
+    <a class="cap" href="#pricing">Pricing</a>
+    <a class="cap" href="time.html">Log in</a>
+    <a class="cap nav-trial" href="time.html">Start a free trial</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Time tracking, done well.</h1>
+    <div class="hero-row">
+      <p class="lede">Track time, approve timesheets, keep rates honest and report on all of it. $7.00 per person per month, free below 3 people, and a 30-day trial without a card.</p>
+      <div class="cta">
+        <a class="btn-wide" href="time.html">Start your 30-day trial<svg class="i end" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="link" href="#pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="evidence" aria-label="The Cadence timesheet, week of Oct 26 to Nov 1, 2026">
+    <figure class="sheet">
+      <div class="sheet-top">
+        <span class="sheet-range cap"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg>Oct 26 – Nov 1, 2026</span>
+        <div class="timer" aria-label="Timer running">
+          <span class="timer-dot" aria-hidden="true"></span>
+          <span class="timer-label">Website redesign · Design</span>
+          <span class="timer-time">0:47:12</span>
+        </div>
+      </div>
+      <ol class="band" aria-label="Day totals">
+        <li><span class="d cap"><span>Mon</span><span class="dd">Oct 26</span></span><span class="fig">7:45</span></li>
+        <li><span class="d cap"><span>Tue</span><span class="dd">Oct 27</span></span><span class="fig">9:00</span></li>
+        <li class="is-today"><span class="d cap"><span>Today</span><span class="dd">Oct 28</span></span><span class="fig">5:30</span></li>
+        <li class="is-empty"><span class="d cap"><span>Thu</span><span class="dd">Oct 29</span></span><span class="fig" aria-hidden="true">–</span><span class="vh">No time</span></li>
+        <li class="is-empty"><span class="d cap"><span>Fri</span><span class="dd">Oct 30</span></span><span class="fig" aria-hidden="true">–</span><span class="vh">No time</span></li>
+        <li class="is-empty"><span class="d cap"><span>Sat</span><span class="dd">Oct 31</span></span><span class="fig" aria-hidden="true">–</span><span class="vh">No time</span></li>
+        <li class="is-empty"><span class="d cap"><span>Sun</span><span class="dd">Nov 1</span></span><span class="fig" aria-hidden="true">–</span><span class="vh">No time</span></li>
+        <li class="is-week"><span class="d cap"><span>Week</span></span><span class="fig">22:15</span></li>
+      </ol>
+      <div class="grid-wrap">
+        <table class="grid grid--static">
+          <colgroup><col><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-total"></colgroup>
+          <thead>
+            <tr>
+              <th scope="col" class="cap">Project and task</th>
+              <th scope="col" class="cap">Mon 26</th><th scope="col" class="cap">Tue 27</th><th scope="col" class="cap is-today">Wed 28</th><th scope="col" class="cap">Thu 29</th><th scope="col" class="cap">Fri 30</th><th scope="col" class="cap">Sat 31</th><th scope="col" class="cap">Sun 1</th>
+              <th scope="col" class="cap c-total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="proj"><span class="sq" style="--p: var(--p-red)"></span><span class="pname">Website redesign</span><span class="psub">Design · Acme Co</span></span></th>
+              <td class="val">3:30</td><td class="val">2:15</td><td class="val is-today"><span class="run">1:45<span class="vh">, timer running</span></span></td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td>
+              <td class="c-total">7:30</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="proj"><span class="sq" style="--p: var(--p-red)"></span><span class="pname">Website redesign</span><span class="psub">Development · Acme Co</span></span></th>
+              <td class="val">2:00</td><td class="val">3:00</td><td class="val is-today">2:30</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td>
+              <td class="c-total">7:30</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="proj"><span class="sq" style="--p: var(--p-teal)"></span><span class="pname">Annual audit</span><span class="psub">Fieldwork · Globex</span></span></th>
+              <td class="val">1:30</td><td class="val">2:00</td><td class="nil is-today">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td>
+              <td class="c-total">3:30</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="proj"><span class="sq" style="--p: var(--p-violet)"></span><span class="pname">Mobile app</span><span class="psub">QA · Initech</span></span></th>
+              <td class="nil">–</td><td class="val">1:15</td><td class="val is-today">1:00</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td>
+              <td class="c-total">2:15</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="proj"><span class="sq" style="--p: var(--p-amber)"></span><span class="pname">Internal</span><span class="psub">Planning · Cadence</span></span></th>
+              <td class="val">0:45</td><td class="val">0:30</td><td class="val is-today">0:15</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td><td class="nil">–</td>
+              <td class="c-total">1:30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </figure>
+  </section>
+
+  <ul class="points" aria-label="What Cadence does">
+    <li class="point">
+      <h2>One timesheet, two densities</h2>
+      <p>Fill a day or a whole week on the same surface, from the keyboard. A timer sits in the bar on every screen.</p>
+    </li>
+    <li class="point">
+      <h2>Approvals that show what changed</h2>
+      <p>People submit a week and can still fix it; approvers see exactly what changed since, then close the period.</p>
+    </li>
+    <li class="point">
+      <h2>Rates that stay true</h2>
+      <p>Billable and cost rates by person, task and project, with history. A past entry keeps the price it was recorded at.</p>
+    </li>
+    <li class="point">
+      <h2>Reports you can export</h2>
+      <p>Time, budgets, utilization and profitability, by any column you choose, as CSV whenever you want.</p>
+    </li>
+    <li class="point">
+      <h2>Bring your history</h2>
+      <p>Import a Harvest account with your own token. You read a reconciliation of every month before anything is committed.</p>
+    </li>
+  </ul>
+
+  <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+    <h2 id="pricing-title">One plan. Everything included.</h2>
+    <div class="prices">
+      <p>$7.00 per person per month</p>
+      <p>$67.20 per person per year</p>
+    </div>
+    <ul class="facts">
+      <li>Free for teams of fewer than 3 people, for as long as you like.</li>
+      <li>A 30-day trial with everything; no card until you subscribe.</li>
+      <li>Your per-person price is locked for 3 years from the day you subscribe.</li>
+      <li>Cancel any time, yourself. Export everything at any time, cancelled or not.</li>
+      <li>Never metered on projects, clients, tasks, history.</li>
+      <li>You pay for active people only: invited, archived and client contacts are free.</li>
+    </ul>
+    <a class="btn-wide" href="time.html">Start your 30-day trial<svg class="i end" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="landing.html">
+    <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+    <span class="brand-name">Cadence</span>
+  </a>
+  <nav aria-label="Footer">
+    <a class="cap" href="#">Terms</a>
+    <a class="cap" href="#pricing">Pricing</a>
+  </nav>
+</footer>
+<script src="../assets/review.js" data-variant="19" data-page="landing" defer></script>
+</body>
+</html>
