@@ -1,0 +1,200 @@
+/* 16 Greenhouse · Distill — one green, flat cells, rules instead of panels, a plain feature list (2026-10-28). */
+
+:root {
+  --mint-50: var(--canvas);
+  --mint-100: var(--canvas);
+  --mint-200: var(--line);
+  --mint-300: var(--line);
+  --lime-50: var(--canvas);
+  --forest: var(--green);
+  --forest-ink: var(--green);
+  --amber-tint: transparent;
+  --amber-dot: var(--green);
+  --amber-ink: var(--ink);
+}
+html { scrollbar-color: var(--line) var(--canvas); }
+::selection { background: var(--green); color: var(--on-green); }
+::-webkit-scrollbar-thumb { background: var(--line); border-color: var(--canvas); }
+
+.btn-go {
+  min-height: 60px; padding: 0 28px; gap: 12px;
+  font-size: 1.25rem;
+  box-shadow: none;
+}
+.btn-go .i { width: 22px; height: 22px; stroke-width: 2.4; }
+.text-link {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 8px;
+  font-weight: 700; text-decoration: underline; text-decoration-color: var(--line);
+  text-decoration-thickness: 2px;
+}
+.text-link:hover { text-decoration-color: currentColor; }
+
+.timer { min-height: 0; padding: 0; gap: 10px; background: none; }
+.timer-digits { color: var(--ink); }
+.timer-stop { min-height: 44px; padding: 0 12px; background: none; }
+.timer-stop:hover { background: var(--well); }
+
+.tile { min-height: 0; padding: 14px 16px 16px; gap: 14px; background: none; border-radius: var(--r-md); }
+.tile.is-empty { background: none; }
+.tile.is-week { background: none; color: var(--ink); }
+.tile-total { font-weight: 800; }
+.tile.is-today { background: var(--green); }
+
+.week tbody th, .week tbody td { height: 64px; }
+.week .today { background: none; }
+.week thead th.today { color: var(--green); font-weight: 800; }
+.week tfoot td.today { color: var(--green); }
+.well, .well.empty, .well:placeholder-shown,
+.week .today .well, .week .today .well:placeholder-shown, .week .today .well.empty { background: none; }
+.well { height: 46px; border-radius: var(--r-sm); font-weight: 600; }
+input.well:hover { background: var(--well); }
+.proj-name { display: block; font-size: 1rem; }
+.proj-sub { padding-left: 0; }
+.row-total { font-family: var(--text); font-weight: 700; font-size: 1.125rem; }
+.week tfoot td { font-family: var(--text); font-size: 1.125rem; }
+.week tfoot th, .week tfoot td { border-top-width: 1px; }
+.grand-pill { min-width: 0; height: auto; padding: 0; background: none; font-size: 1.25rem; font-weight: 800; }
+
+/* ---------- Landing ---------- */
+.site-nav { gap: 2px; }
+.site-nav a { padding: 12px 14px; border-radius: var(--r-sm); font-weight: 600; text-decoration: none; }
+.site-nav a:hover { text-decoration: underline; text-decoration-color: var(--line); }
+.site-nav a:last-child { font-weight: 700; color: var(--green); }
+
+.hero { padding: clamp(40px, 6vw, 88px) 0 0; border-radius: 0; background: none; overflow: visible; }
+.hero-copy { padding: 0 8px; }
+.frag {
+  margin-top: clamp(56px, 7vw, 96px); padding: 28px 0 0;
+  border-radius: 0; background: none;
+  border-top: 1px solid var(--line);
+  animation: none;
+}
+.frag-top { margin: 0 0 8px; padding: 0 8px; gap: 24px; justify-content: space-between; }
+.frag-range { min-height: 0; padding: 0; background: none; font-weight: 700; }
+.frag .tile.is-empty { background: none; }
+.frag .week tbody th, .frag .week tbody td { height: 60px; }
+.frag-grid { margin-top: 8px; }
+
+.points { display: block; margin-top: clamp(72px, 9vw, 128px); }
+.pt {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 10px 48px; align-items: baseline;
+  padding: 28px 8px; border-radius: 0; background: none;
+  border-top: 1px solid var(--line);
+}
+.pt:last-child { border-bottom: 1px solid var(--line); }
+.pt h2 { font-size: clamp(1.375rem, 1.15rem + 0.6vw, 1.75rem); font-weight: 800; letter-spacing: -0.02em; }
+.pt p { max-width: 54ch; font-size: 1.125rem; }
+
+.pricing { margin-top: clamp(40px, 5vw, 64px); padding: clamp(48px, 6vw, 80px) 8px 0; border-radius: 0; background: none; gap: 40px 72px; }
+.pr-main h2 { font-size: clamp(2.25rem, 1.5rem + 2vw, 3.25rem); }
+.pr-facts { gap: 14px; }
+.pr-facts .tick {
+  display: block; width: 22px; height: 22px; margin-top: 2px;
+  border-radius: 0; background: none; color: var(--green); stroke-width: 2.6;
+}
+.site-foot { border-top-color: var(--line); }
+
+/* ---------- Timesheet ---------- */
+.bar {
+  width: min(1320px, calc(100% - 48px));
+  margin-top: 6px; padding: 8px 0;
+  border-radius: 0; background: none;
+  border-bottom: 1px solid var(--line);
+}
+.bar-mark { width: 48px; height: 48px; }
+.bar-mark:hover, .account:hover { background: var(--well); }
+.dest a { min-height: 48px; padding: 0 14px; }
+.dest a:hover { background: none; color: var(--green); }
+.dest a[aria-current="page"] { background: none; color: var(--green); }
+.avatar { background: var(--well); color: var(--ink); }
+
+.tabs { margin-top: 14px; gap: 2px; }
+.tabs a { min-height: 44px; padding: 0 14px; }
+.tabs a:hover { background: none; color: var(--ink); }
+.tabs a[aria-current="page"] {
+  background: none; color: var(--ink);
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 10px;
+  text-decoration-color: var(--green);
+}
+
+.head { margin-top: clamp(28px, 3.4vw, 48px); }
+.track { min-height: 64px; padding: 0 30px 0 24px; gap: 10px; font-size: 1.375rem; box-shadow: none; }
+.track .i { width: 24px; height: 24px; stroke-width: 2.6; }
+
+.toolbar { margin-top: 28px; }
+.round, .range { background: none; }
+.round:hover, .range:hover { background: var(--well); }
+.range { padding: 0 14px; }
+.chip { min-height: 44px; padding: 0 12px; background: none; color: var(--ink); }
+.chip:hover { background: var(--well); }
+.tray { padding: 0; gap: 2px; background: none; }
+.tray label { min-height: 44px; padding: 0 14px; color: var(--ink-muted); }
+.tray label:hover { background: var(--well); }
+.tray label:has(input:checked) {
+  background: none; color: var(--ink);
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px;
+  text-decoration-color: var(--green);
+}
+
+.app .strip { margin-top: 16px; }
+.app .tile { min-height: 116px; }
+
+.grid-surface { padding: 0; border-radius: 0; background: none; }
+.sheet-wrap { margin-top: 20px; }
+.week thead th { height: 44px; }
+.del-btn { width: 44px; height: 44px; }
+
+.below { margin-top: 12px; gap: 8px 20px; }
+.below .btn-line { min-height: 48px; padding: 0 14px 0 10px; background: none; box-shadow: none; }
+.below .btn-line:hover { background: var(--well); }
+.check:hover { background: var(--well); }
+
+.submit {
+  margin-top: 28px; padding: 20px 0 0;
+  border-radius: 0; background: none;
+  border-top: 1px solid var(--line);
+}
+.status { min-height: 0; padding: 0; background: none; }
+.submit-btn { box-shadow: inset 0 0 0 2px var(--ink); background: none; }
+
+@media (max-width: 1100px) {
+  .pt { grid-template-columns: 1fr; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a { padding: 0 12px; }
+  .bar .timer-label { max-width: 80px; }
+}
+@media (max-width: 760px) {
+  .bar { width: calc(100% - 24px); padding: 4px 0 6px; border-radius: 0; }
+  .bar-mark { width: 44px; height: 44px; }
+  .dest a { min-height: 56px; border-radius: var(--r-md); }
+  .bar .timer {
+    min-height: 60px; padding: 0 6px 0 18px;
+    background: var(--surface);
+    box-shadow: 0 10px 24px -12px oklch(0.27 0.035 160 / 0.4), 0 0 0 1px var(--line);
+  }
+  .track { width: 100%; justify-content: center; min-height: 60px; font-size: 1.25rem; padding: 0 24px; }
+  .density label { padding: 0 14px; }
+  .app .tile { min-height: 84px; padding: 10px 10px 12px; }
+  .grid-surface.sheet-wrap { padding: 0; border-radius: 0; }
+  .sheet tr > :first-child { background: var(--canvas); }
+  .sheet .proj-sub { padding-left: 0; }
+  .well { height: 44px; }
+  .week tbody th, .week tbody td { height: 60px; }
+  .submit { padding: 18px 0 0; }
+}
+@media (max-width: 640px) {
+  .site-nav { width: auto; margin-left: -14px; }
+  .hero { padding-top: 32px; }
+  .hero-copy { padding: 0 4px; }
+  .hero-actions { align-items: stretch; }
+  .text-link { justify-content: center; }
+  .frag { padding: 20px 0 0; }
+  .frag-top { flex-direction: column; align-items: flex-start; gap: 6px; padding: 0 4px; }
+  .frag-range { flex: none; }
+  .frag .timer { width: auto; }
+  .frag .tile { min-height: 76px; padding: 10px 8px 10px 10px; border-radius: var(--r-md); }
+  .pt { padding: 24px 4px; }
+  .pricing { padding: 56px 4px 0; }
+}

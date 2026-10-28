@@ -1,0 +1,60 @@
+/* 12 One Thing · Animate: the accent travels to whichever action is the one action now (2026-10-28). */
+
+.travel {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none; visibility: hidden;
+  background: var(--accent); clip-path: inset(50%);
+}
+.travel.on { visibility: visible; }
+.travel .ghost-lab { position: absolute; left: 0; top: 0; margin: 0; color: var(--accent-ink); will-change: transform, opacity; }
+
+.go, .site-nav .trial, .timer .stop {
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+.travelling .go, .travelling .site-nav .trial, .travelling .timer .stop { transition: none; }
+
+/* Landing: the header stays, so the trial link can take the accent once the hero bar has scrolled away */
+html { scroll-padding-top: 96px; }
+.site-head { position: sticky; top: 0; z-index: 30; background: var(--paper); box-shadow: 0 1px 0 var(--rule); }
+.site-head .site-nav { padding-block: 16px; }
+.site-nav ul { margin-right: -14px; }
+.site-nav ul li:last-child a { padding-right: 14px; }
+.site-nav .trial { border-radius: 12px; }
+.site-nav .trial.is-one { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.site-nav .trial.is-one:hover { text-decoration: none; background: color-mix(in oklab, var(--accent) 86%, var(--accent-shade)); }
+.site-nav .trial.is-one:focus-visible { outline-offset: 2px; }
+.hero { padding-top: 96px; }
+.hero .go:not(.is-one) { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.hero .go:not(.is-one):hover { background: var(--fill); }
+
+/* Timesheet: the timer's Stop holds the accent while it runs; Track time holds it once stopped */
+.head .go.track:not(.is-one) { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.head .go.track:not(.is-one):hover { background: var(--fill); }
+.timer .stop.is-one { background: var(--accent); color: var(--accent-ink); }
+.timer .stop.is-one:hover { background: color-mix(in oklab, var(--accent) 86%, var(--accent-shade)); }
+.timer .stop:focus-visible { outline-offset: 2px; }
+.timer .dot, .timer .digits { transition: opacity 200ms var(--ease-out), color 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+.timer[data-state="stopped"] .dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-2); animation: none; }
+.timer[data-state="stopped"] .digits { color: var(--ink-2); }
+.running::before { transition: opacity 200ms var(--ease-out); }
+.running.is-stopped::before { opacity: 0; }
+.timer.nudge .stop { animation: nudge 900ms var(--ease-out); }
+@keyframes nudge {
+  from { box-shadow: 0 0 0 0 var(--accent); }
+  to { box-shadow: 0 0 0 12px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer.nudge .stop { animation-name: nudge-still; }
+  @keyframes nudge-still {
+    from { box-shadow: 0 0 0 4px var(--accent); }
+    to { box-shadow: 0 0 0 4px transparent; }
+  }
+}
+
+@media (max-width: 760px) {
+  html { scroll-padding-top: 64px; }
+  .site-head { top: -56px; }
+  .site-head .site-nav { padding-block: 18px 8px; }
+  .site-nav ul { margin-right: 0; }
+  .hero { padding-top: 40px; }
+}

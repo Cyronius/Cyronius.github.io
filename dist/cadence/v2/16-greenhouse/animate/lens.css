@@ -1,0 +1,199 @@
+/* 16 Greenhouse · Animate — Day ↔ Week density morph on one sheet (2026-10-28). */
+
+/* Segmented toggles: a sliding thumb instead of a jumping fill */
+.tray.has-thumb { position: relative; }
+.tray.has-thumb::before {
+  content: ""; position: absolute; inset: 5px;
+  border-radius: var(--pill);
+  background: var(--surface);
+  clip-path: inset(0 var(--r, 0) 0 var(--l, 0) round 999px);
+}
+.tray.thumb-ready::before { transition: clip-path 360ms var(--ease-out); }
+.tray.has-thumb label { z-index: 1; }
+.tray.has-thumb label:has(input:checked) { background: none; }
+.tray.has-thumb label:hover { background: none; color: var(--ink); }
+
+/* Strip tiles pick a day; the Week tile returns to the week */
+.strip > li { display: grid; }
+.strip button.tile {
+  width: 100%; text-align: left;
+  transition: background-color 160ms ease-out, box-shadow 240ms var(--ease-out);
+}
+.strip button.tile:hover { box-shadow: inset 0 0 0 3px var(--mint-300); }
+.strip button.tile[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--canvas), 0 0 0 6px var(--forest); }
+.strip button.tile.is-week[aria-pressed="true"] { box-shadow: none; }
+.strip button.tile.is-week[aria-pressed="true"]:hover { box-shadow: inset 0 0 0 3px var(--mint-300); }
+
+/* The sheet: a card edge, a green band and two views that share their partners */
+.sheet-area { position: relative; isolation: isolate; margin-top: 20px; }
+.sheet-bg {
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1;
+  border-radius: 32px; background: var(--surface);
+}
+.morph-band {
+  position: absolute; top: 0; right: 0; left: 0; z-index: -1;
+  background: var(--mint-100); pointer-events: none;
+}
+.morph-band[hidden] { display: none; }
+.week-view { padding: 10px 14px 14px; }
+.week-view.sheet-wrap { margin-top: 0; }
+.day-view { position: relative; padding: 14px; }
+.leaving { position: absolute; top: 0; right: 0; left: 0; pointer-events: none; }
+.week-view.leaving .today { background-color: transparent; transition: none; }
+.morphing .day-panel { background-color: transparent; }
+.fly { position: relative; z-index: 1; will-change: transform; }
+
+.sheet-area .proj-k { display: block; }
+.sheet-area .foot-k { display: inline-block; }
+.sheet-area .well-live { display: block; }
+
+/* Parts without a partner fade in after the travelling cells */
+.week-view :is(thead th, .proj-k, .swatch, td > .well, .well-live, td > .mcell, .row-total, .del-btn, tfoot th, .foot-k, .grand-pill),
+.day-view :is(.day-head, .day-run, .day-empty, .day-foot-label, .proj-name, .proj-sub) {
+  transition: opacity 300ms ease-out 220ms, border-color 300ms ease-out 220ms, background-color 140ms ease-out, box-shadow 140ms ease-out, color 140ms ease-out;
+}
+.veil :is(thead th, .proj-k, .swatch, td > .well, .well-live, td > .mcell, .row-total, .del-btn, tfoot th, .foot-k, .grand-pill, .day-head, .day-run, .day-empty, .day-foot-label, .proj-name, .proj-sub):not(.fly, .fly *) {
+  opacity: 0; transition: none;
+}
+.week-view :is(th, td) { transition: border-color 300ms ease-out 220ms, background-color 300ms ease-out 220ms; }
+.week-view.veil :is(th, td) { border-top-color: transparent; transition: none; }
+.week-view.veil .today { background-color: transparent; }
+.day-row, .day-foot, .day-empty { transition: border-color 300ms ease-out 220ms; }
+.day-view.veil :is(.day-row, .day-foot, .day-empty) { border-top-color: transparent; transition: none; }
+
+/* Day density */
+.day-panel { padding: 4px 24px 2px; border-radius: 22px; background: var(--mint-100); }
+.day-panel.ghost { background: transparent; pointer-events: none; }
+.day-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; min-height: 66px; padding: 8px 0; }
+.day-title { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+.day-tag {
+  display: inline-flex; align-items: center;
+  min-height: 30px; padding: 0 12px;
+  border-radius: var(--pill);
+  background: var(--forest); color: var(--on-green);
+  font-weight: 700; font-size: 0.875rem;
+}
+.day-list { list-style: none; margin: 0; padding: 0; }
+.day-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto 132px;
+  align-items: center; gap: 8px 20px;
+  min-height: 80px;
+  border-top: 1px solid var(--line);
+}
+.day-run {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 40px; padding: 0 16px;
+  border-radius: var(--pill);
+  background: var(--amber-tint); color: var(--amber-ink);
+  font-family: var(--display); font-weight: 700; font-size: 1.125rem;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.day-row > .well, .day-row > .well-live { width: 132px; }
+.day-row .well { background: var(--surface); }
+.day-row .well:placeholder-shown { background: oklch(0.975 0.02 158); }
+.day-foot {
+  display: grid; grid-template-columns: minmax(0, 1fr) 132px;
+  align-items: center; gap: 20px;
+  min-height: 70px;
+  border-top: 2px solid var(--line);
+}
+.day-foot-label { font-weight: 700; font-size: 0.9375rem; }
+.day-foot-cell { text-align: center; }
+.day-foot .foot-k {
+  font-family: var(--display); font-weight: 800; font-size: 1.3125rem;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.day-empty { margin: 0; padding: 26px 0 28px; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 1.0625rem; }
+
+/* Timer state */
+.bar .timer { transition: background-color 220ms ease-out; }
+.timer-off .bar .timer { background: var(--mint-50); }
+.timer-off .timer-digits { color: var(--ink-muted); }
+.timer-off .run-dot { visibility: hidden; }
+.tab-hidden .run-dot { animation-play-state: paused; }
+
+/* ---------- Landing: the densities card holds a small sheet ---------- */
+.pt-1 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 28px 36px; align-items: center; min-height: 0; }
+.pt-1 h2 { font-size: clamp(2.25rem, 1.4rem + 1.6vw, 3.25rem); }
+.pt-copy { display: flex; flex-direction: column; gap: 14px; align-self: stretch; }
+.pt-copy .pt-tray { margin-top: auto; }
+.mini { display: flex; flex-direction: column; justify-content: center; margin: 0; }
+.mini .sheet-bg { border-radius: 26px; }
+.mini .week-view { padding: 10px 12px 8px; }
+.mini-week { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+.mini-week th, .mini-week td { padding: 3px; text-align: center; vertical-align: middle; }
+.mini-week thead th { height: 30px; font-size: 0.75rem; font-weight: 600; color: var(--ink-muted); }
+.mini-week thead th:first-child { width: 26px; }
+.mini-week tbody th { text-align: left; }
+.mini .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 4px; vertical-align: middle; }
+.mcell {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  height: 30px; border-radius: 10px;
+  background: var(--mint-50);
+  font-weight: 700; font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.mcell.empty { background: var(--well); color: var(--ink-muted); font-weight: 500; }
+.mcell .run-dot { width: 6px; height: 6px; }
+.mini-week .today { background: var(--mint-100); }
+.mini-week thead th.today { border-radius: 14px 14px 0 0; color: var(--forest-ink); font-weight: 800; }
+.mini-week tfoot td.today { border-radius: 0 0 14px 14px; }
+.mini-week .today .mcell { background: var(--surface); }
+.mini-week .today .mcell.empty { background: oklch(0.975 0.02 158); }
+.mini-week tfoot td { height: 34px; }
+.mini .foot-k { font-family: var(--display); font-weight: 800; font-size: 0.875rem; font-variant-numeric: tabular-nums lining-nums; }
+.mini .foot-k.empty { color: var(--ink-muted); font-weight: 600; }
+.mini .day-view { padding: 10px; }
+.mini .day-panel { padding: 0 14px; border-radius: 14px; }
+.mini .day-head { min-height: 46px; gap: 8px; padding: 6px 0; }
+.mini .day-title { font-size: 1.0625rem; }
+.mini .day-tag { min-height: 24px; padding: 0 9px; font-size: 0.75rem; }
+.mini .day-row { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; min-height: 50px; }
+.mini .proj-line { gap: 8px; }
+.mini .proj-name { font-size: 0.875rem; }
+.mini .proj-sub { padding-left: 20px; font-size: 0.75rem; }
+.mini .day-row .mcell { background: var(--surface); }
+.mini .day-foot { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; min-height: 42px; }
+.mini .day-foot-label { font-size: 0.8125rem; }
+
+@media (min-width: 1101px) {
+  .pt-1 { grid-column: 1 / 9; }
+  .pt-2 { grid-column: 9 / 13; }
+}
+@media (max-width: 760px) {
+  .week-view.sheet-wrap { padding: 6px 8px 10px; }
+  .sheet-bg { border-radius: 26px; }
+  .day-view { padding: 8px; }
+  .day-panel { padding: 2px 14px 0; border-radius: 20px; }
+  .day-title { font-size: 1.25rem; }
+  .day-row { grid-template-columns: minmax(0, 1fr) 92px; gap: 6px 12px; min-height: 76px; padding: 10px 0; }
+  .day-row .proj-name { font-size: 0.9375rem; }
+  .day-row .proj-sub { font-size: 0.8125rem; }
+  .day-run { grid-column: 1; grid-row: 2; justify-self: start; min-height: 32px; padding: 0 12px; font-size: 1rem; }
+  .day-row > .well, .day-row > .well-live { grid-column: 2; grid-row: 1 / span 2; width: 92px; }
+  .day-gap { display: none; }
+  .day-foot { grid-template-columns: minmax(0, 1fr) 92px; gap: 12px; }
+}
+@media (max-width: 640px) {
+  .pt-1 { grid-template-columns: 1fr; gap: 20px; }
+  .pt-copy .pt-tray { margin-top: 4px; }
+  .mini .week-view { padding: 8px 6px 6px; }
+  .mini-week th, .mini-week td { padding: 2px; }
+  .mini-week thead th { font-size: 0.6875rem; }
+  .mini-week thead th:first-child { width: 18px; }
+  .mcell { height: 28px; border-radius: 8px; font-size: 0.75rem; }
+  .mcell.live { gap: 2px; }
+  .mcell .run-dot { width: 5px; height: 5px; }
+  .mini .day-view { padding: 8px; }
+  .mini .day-panel { padding: 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tray.thumb-ready::before { transition: none; }
+  .strip button.tile { transition: background-color 160ms ease-out; }
+}
+
+/* v1's bar runs wider than the screen between phone and laptop widths */
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a { padding: 0 12px; }
+  .bar .timer-label { max-width: 72px; }
+}

@@ -1,0 +1,81 @@
+/* 18 Spectrum · Delight — point at a project and the week shows its hours alone (2026-10-28) */
+
+.seg, .stack i { transition: opacity 240ms var(--ease-out), filter 240ms var(--ease-out); }
+[data-active] .seg, [data-active] .stack i { opacity: 0.18; filter: saturate(0.3); }
+[data-active="c-red"] :is(.seg, .stack i).c-red,
+[data-active="c-teal"] :is(.seg, .stack i).c-teal,
+[data-active="c-violet"] :is(.seg, .stack i).c-violet,
+[data-active="c-amber"] :is(.seg, .stack i).c-amber { opacity: 1; filter: none; }
+.part::before, .r-sw { content: ""; flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+.price p { font-variant-numeric: tabular-nums; }
+
+/* Landing */
+.readout {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+  min-height: 2.75rem; padding: 0 var(--gutter) 14px;
+}
+.r-sw { display: none; align-self: center; }
+.readout[class*="c-"] .r-sw { display: block; }
+.r-name { font-weight: 700; }
+.r-name:empty { display: none; }
+.r-total { font: 800 1.75rem/1 var(--display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.r-of { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.seg { cursor: pointer; }
+.band-axis .part {
+  flex-basis: 100%; display: flex; align-items: center; gap: 7px;
+  font: 700 0.9375rem/1.3 var(--text); font-variant-numeric: tabular-nums;
+  visibility: hidden;
+}
+[data-active] .band-axis .part { visibility: visible; }
+
+.legend .key {
+  display: flex; align-items: center; gap: 12px;
+  margin: -8px; padding: 8px 14px 8px 8px;
+  border: 0; border-radius: 14px; background: none; text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms var(--ease-out), opacity 240ms var(--ease-out);
+}
+.legend .key:hover { background: var(--paper-2); }
+.legend .key[aria-pressed="true"] { background: var(--paper-2); box-shadow: inset 0 0 0 2px var(--ink); }
+[data-active] .legend li:not(.on) .key { opacity: 0.45; }
+
+@media (max-width: 760px) {
+  .readout { padding-bottom: 10px; }
+  .r-total { font-size: 1.5rem; }
+  .band-axis .part { flex-basis: auto; font-size: 0.875rem; gap: 5px; }
+  .band-axis .part::before { width: 8px; height: 8px; }
+  .legend li { display: block; }
+  .legend .key { display: grid; grid-template-columns: auto 1fr auto; width: calc(100% + 16px); }
+}
+
+/* Timesheet */
+.grid tbody th[scope="row"] { padding: 8px 10px 8px 12px; }
+.proj {
+  width: 100%; padding: 6px 10px 6px 6px;
+  border: 0; border-radius: 14px; background: none; text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms var(--ease-out);
+}
+.proj:hover { background: var(--paper-2); }
+.proj[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--ink); }
+.pn b { display: block; font-weight: 700; line-height: 1.3; }
+.pn span { display: block; font-size: 0.875rem; color: var(--ink-2); }
+.grid tbody tr.lit th[scope="row"] { background: var(--tint); }
+.grid tbody tr.lit .proj:hover { background: none; }
+.stack i { cursor: pointer; }
+
+.day .part {
+  display: flex; align-items: center; gap: 6px; min-height: 1.25rem;
+  font: 700 0.875rem/1.2 var(--text); font-variant-numeric: tabular-nums;
+  visibility: hidden;
+}
+.week[data-active] .day:not(.empty) .part { visibility: visible; }
+.day.total .part { flex-wrap: wrap; column-gap: 6px; }
+.day.total .part span { font-weight: 600; }
+
+@media (max-width: 760px) {
+  .day .part { justify-content: center; gap: 3px; min-height: 1rem; font-size: 0.6875rem; }
+  .day .part::before { width: 6px; height: 6px; border-radius: 2px; }
+  .day.total .part { grid-column: 1 / -1; justify-content: flex-start; gap: 6px; font-size: 0.875rem; }
+  .day.total .part::before { width: 9px; height: 9px; }
+}

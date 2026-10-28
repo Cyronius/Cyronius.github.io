@@ -1,0 +1,116 @@
+/* Distill: one blue, one surface. Blue marks the logo, today and the primary action; nothing else. */
+
+html { scrollbar-color: var(--edge) var(--canvas); }
+:root { --pad-x: 0px; }
+input { caret-color: var(--ink); }
+
+.btn-signal:hover { background: var(--blue); }
+.btn-signal .i { transition: translate 160ms var(--ease-out); }
+.btn-signal:hover .i { translate: 3px 0; }
+.text-link {
+  display: inline-flex; align-items: center; min-height: 64px; padding: 0 8px;
+  font-weight: 650; font-size: 1.1875rem; color: var(--ink);
+  text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 0.3em;
+}
+.text-link:hover { text-decoration-color: var(--ink); }
+
+/* ---------- Landing ---------- */
+
+.site-links .site-trial { border: 0; margin-left: 0; color: var(--ink); }
+.cta-row { align-items: center; gap: 20px; }
+
+.frag {
+  --del: 0px; --tot: 152px;
+  background: none; border: 0; border-radius: 0; padding: 0;
+  -webkit-mask-image: none; mask-image: none;
+}
+.rise { padding-bottom: 0; }
+
+.week-nav .range-label {
+  font: 700 1.1875rem/1 var(--display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
+}
+
+.features { max-width: 58rem; display: grid; gap: 0; }
+.features li {
+  display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 4px 40px;
+  padding-block: 14px;
+  font-size: 1.125rem; line-height: 1.5;
+}
+.features h2 { font: 700 1.125rem/1.5 var(--text); }
+.features p { color: var(--muted); max-width: 52ch; text-wrap: pretty; }
+
+.pricing-card { background: none; border: 0; border-radius: 0; padding: 0; }
+.facts li { border: 0; padding-block: 7px; }
+.site-foot { border-top: 0; }
+
+/* ---------- Week, shared by both pages: no boxes, figures only ---------- */
+
+.tile, .tile.is-empty { background: none; border: 0; }
+.tile.is-today { background: var(--blue); }
+.tile-week { background: none; }
+.tile.is-empty .tile-hours { font-weight: 600; }
+@container week (min-width: 640px) and (max-width: 1079.98px) {
+  .tile-week .tile-hours { font-size: 1.75rem; }
+}
+
+.panel { background: none; border: 0; border-radius: 0; }
+.grid-scroll { padding-inline: 0; }
+.grid thead th { border-bottom-color: var(--line); }
+.grid tbody tr + tr td, .grid tbody tr + tr th { border-top: 0; }
+.proj { grid-template-columns: minmax(0, 1fr); }
+.proj-sub { grid-column: 1; }
+
+.cell, .cell.is-empty {
+  border: 1px solid transparent; background: none;
+}
+.cell.is-empty { color: var(--faint); font-weight: 500; }
+input.cell:hover { border-color: transparent; background: var(--s1); }
+input.cell:focus { border-color: var(--ink); background: none; }
+.grid td.is-today .cell, .grid td.is-today .cell.is-empty { background: none; border-color: transparent; }
+.grid td.is-today input.cell:hover { background: rgb(7 11 26 / 0.22); }
+.grid td.is-today input.cell:focus { border-color: #fff; background: none; }
+.run-dot { background: #fff; }
+
+.grid tfoot th, .grid tfoot td { border-top-color: var(--line-2); }
+
+/* ---------- Timesheet chrome ---------- */
+
+.appbar { border-bottom-color: var(--line); }
+.dest a[aria-current="page"] { background: none; box-shadow: none; }
+.dest a:hover { background: none; }
+.timer { background: none; border: 0; padding-left: 0; }
+.timer-dot { background: var(--ink); }
+
+.chip { border: 0; padding-inline: 10px; text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 0.3em; }
+.chip:hover { background: none; text-decoration-color: var(--ink); }
+.seg { border: 0; padding: 0; gap: 4px; }
+.seg > * { min-width: 0; padding-inline: 10px; }
+.seg > .is-on { background: none; color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.45em; }
+
+.submit { background: none; border: 0; border-radius: 0; padding: 0; margin-top: 28px; }
+
+@media (max-width: 760px) {
+  .text-link { min-height: 52px; }
+  .hero .cta-row .text-link { flex: 1 1 100%; justify-content: center; }
+  .features li { grid-template-columns: minmax(0, 1fr); padding-block: 12px; }
+  .points { padding-top: 48px; }
+
+  .dest a { font-size: 0.875rem; min-height: 44px; }
+  .timer {
+    left: 0; right: 0; bottom: 0; border-radius: 0;
+    padding: 10px var(--gutter) max(10px, env(safe-area-inset-bottom));
+    background: var(--canvas); border-top: 1px solid var(--line-2); box-shadow: none;
+  }
+  .grid tbody th, .grid tfoot th, .grid thead th.h-proj { background: var(--canvas); }
+  .grid col.c-proj { width: 150px; }
+  .submit .btn { width: 100%; }
+}
+
+/* v1's app bar overflows between phone and desktop widths: drop the timer label, then the nav labels. */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .timer-label { display: none; }
+  .dest a { padding-inline: 10px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

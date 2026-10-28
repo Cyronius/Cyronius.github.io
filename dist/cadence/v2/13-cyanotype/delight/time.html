@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence — 13 Cyanotype · Delight — Timesheet</title>
+<meta name="description" content="Track time, approve timesheets, keep rates honest and report on all of it.">
+<meta name="theme-color" content="#0f2c74">
+<link rel="icon" href="../../../assets/cadence-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="lens.css">
+</head>
+<body class="app">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+  <symbol id="i-chev-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="1.5"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to timesheet</a>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="bar-mark" href="landing.html" aria-label="Cadence home">
+      <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <nav class="dest" aria-label="Primary">
+      <a href="time.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span>Time</span></a>
+      <a href="#team"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><span>Team</span></a>
+      <a href="#projects"><svg class="i" aria-hidden="true"><use href="#i-folder"/></svg><span>Projects</span></a>
+      <a href="#reports"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><span>Reports</span></a>
+      <a href="#manage"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg><span>Manage</span></a>
+    </nav>
+    <div class="timer" role="group" aria-label="Timer, running">
+      <span class="timer-dot" aria-hidden="true"></span>
+      <span class="timer-label">Website redesign · Design</span>
+      <time class="timer-digits" datetime="PT47M12S">0:47:12</time>
+      <button class="timer-stop" type="button"><svg class="i" aria-hidden="true"><use href="#i-stop"/></svg>Stop</button>
+    </div>
+    <button class="acct" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu for Ada">
+      <span class="avatar" aria-hidden="true">A</span>
+      <svg class="i" aria-hidden="true"><use href="#i-chev-down"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Time">
+  <div class="tabs-in">
+    <a href="time.html" aria-current="page">Timesheet</a>
+    <a href="#unsubmitted">Unsubmitted</a>
+    <a href="#pending">Pending approval</a>
+    <a href="#approved">Approved</a>
+    <a href="#close">Close my week</a>
+  </div>
+</nav>
+
+<main class="ts" id="main">
+<div class="sheet">
+  <div class="ts-head">
+    <div>
+      <p class="ts-date">Wednesday, October 28</p>
+      <h1>Good afternoon, Ada</h1>
+      <p class="ts-tip">Name the next physical action on a stuck task. Vague tasks stay stuck.</p>
+    </div>
+    <button class="btn btn-solid track" type="button"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>Track time</button>
+  </div>
+
+  <div class="ts-ctrl">
+    <div class="datenav" role="group" aria-label="Week shown">
+      <button class="btn btn-icon" type="button" aria-label="Previous week"><svg class="i" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
+      <button class="btn range" type="button" aria-label="Choose week, Oct 26 to Nov 1, 2026"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span class="num">Oct 26 – Nov 1, 2026</span></button>
+      <button class="btn btn-icon" type="button" aria-label="Next week"><svg class="i" aria-hidden="true"><use href="#i-chev-right"/></svg></button>
+    </div>
+    <span class="chip">This week</span>
+    <div class="density" role="radiogroup" aria-label="Density">
+      <button type="button" role="radio" aria-checked="false">Day</button>
+      <button type="button" role="radio" aria-checked="true">Week</button>
+    </div>
+  </div>
+
+  <section class="strip" aria-label="Hours by day">
+    <ol class="days">
+      <li class="day">
+        <span class="day-name">Mon</span><span class="day-date"><span class="m">Oct </span>26</span>
+        <span class="day-total" data-day="0">7:45</span>
+      </li>
+      <li class="day">
+        <span class="day-name">Tue</span><span class="day-date"><span class="m">Oct </span>27</span>
+        <span class="day-total" data-day="1">9:00</span>
+      </li>
+      <li class="day is-today" aria-current="date">
+        <span class="day-name">Today</span><span class="day-date"><span class="m">Oct </span>28</span>
+        <span class="day-total" data-day="2">5:30</span>
+      </li>
+      <li class="day is-empty">
+        <span class="day-name">Thu</span><span class="day-date"><span class="m">Oct </span>29</span>
+        <span class="empty" aria-label="No time">–</span>
+      </li>
+      <li class="day is-empty">
+        <span class="day-name">Fri</span><span class="day-date"><span class="m">Oct </span>30</span>
+        <span class="empty" aria-label="No time">–</span>
+      </li>
+      <li class="day is-empty">
+        <span class="day-name">Sat</span><span class="day-date"><span class="m">Oct </span>31</span>
+        <span class="empty" aria-label="No time">–</span>
+      </li>
+      <li class="day is-empty">
+        <span class="day-name">Sun</span><span class="day-date"><span class="m">Nov </span>1</span>
+        <span class="empty" aria-label="No time">–</span>
+      </li>
+    </ol>
+    <p class="dim week-dim"><i aria-hidden="true"></i><b><span class="wk-label">Week</span>22:15</b><i aria-hidden="true"></i></p>
+  </section>
+
+  <section class="grid-wrap" aria-label="Week entries" tabindex="0">
+    <table class="wk">
+      <colgroup>
+        <col class="c-proj">
+        <col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day">
+        <col class="c-tot"><col class="c-del">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Project and task</th>
+          <th scope="col">Mon 26</th>
+          <th scope="col">Tue 27</th>
+          <th scope="col" class="is-today"><span>Wed 28</span></th>
+          <th scope="col">Thu 29</th>
+          <th scope="col">Fri 30</th>
+          <th scope="col">Sat 31</th>
+          <th scope="col">Sun 1</th>
+          <th scope="col" class="c-tot">Total</th>
+          <th scope="col"><span class="vh">Remove row</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><span class="proj"><span class="sq" style="--c: var(--p-red)"></span><span><b>Website redesign</b><small>Design · Acme Co</small></span></span></th>
+          <td><span class="cell"><input value="3:30" aria-label="Website redesign, Design, Monday" autocomplete="off"></span></td>
+          <td><span class="cell"><input value="2:15" aria-label="Website redesign, Design, Tuesday" autocomplete="off"></span></td>
+          <td class="is-today"><span class="cell is-running"><input value="1:45" aria-label="Website redesign, Design, Wednesday, timer running" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Design, Thursday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Design, Friday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Design, Saturday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Design, Sunday" autocomplete="off"></span></td>
+          <td class="row-tot">7:30</td>
+          <td><button class="del" type="button" aria-label="Delete row Website redesign, Design"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="proj"><span class="sq" style="--c: var(--p-red)"></span><span><b>Website redesign</b><small>Development · Acme Co</small></span></span></th>
+          <td><span class="cell"><input value="2:00" aria-label="Website redesign, Development, Monday" autocomplete="off"></span></td>
+          <td><span class="cell"><input value="3:00" aria-label="Website redesign, Development, Tuesday" autocomplete="off"></span></td>
+          <td class="is-today"><span class="cell"><input value="2:30" aria-label="Website redesign, Development, Wednesday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Development, Thursday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Development, Friday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Development, Saturday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Website redesign, Development, Sunday" autocomplete="off"></span></td>
+          <td class="row-tot">7:30</td>
+          <td><button class="del" type="button" aria-label="Delete row Website redesign, Development"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="proj"><span class="sq" style="--c: var(--p-teal)"></span><span><b>Annual audit</b><small>Fieldwork · Globex</small></span></span></th>
+          <td><span class="cell"><input value="1:30" aria-label="Annual audit, Fieldwork, Monday" autocomplete="off"></span></td>
+          <td><span class="cell"><input value="2:00" aria-label="Annual audit, Fieldwork, Tuesday" autocomplete="off"></span></td>
+          <td class="is-today"><span class="cell"><input placeholder="–" aria-label="Annual audit, Fieldwork, Wednesday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Annual audit, Fieldwork, Thursday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Annual audit, Fieldwork, Friday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Annual audit, Fieldwork, Saturday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Annual audit, Fieldwork, Sunday" autocomplete="off"></span></td>
+          <td class="row-tot">3:30</td>
+          <td><button class="del" type="button" aria-label="Delete row Annual audit, Fieldwork"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="proj"><span class="sq" style="--c: var(--p-violet)"></span><span><b>Mobile app</b><small>QA · Initech</small></span></span></th>
+          <td><span class="cell"><input placeholder="–" aria-label="Mobile app, QA, Monday" autocomplete="off"></span></td>
+          <td><span class="cell"><input value="1:15" aria-label="Mobile app, QA, Tuesday" autocomplete="off"></span></td>
+          <td class="is-today"><span class="cell"><input value="1:00" aria-label="Mobile app, QA, Wednesday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Mobile app, QA, Thursday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Mobile app, QA, Friday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Mobile app, QA, Saturday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Mobile app, QA, Sunday" autocomplete="off"></span></td>
+          <td class="row-tot">2:15</td>
+          <td><button class="del" type="button" aria-label="Delete row Mobile app, QA"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="proj"><span class="sq" style="--c: var(--p-amber)"></span><span><b>Internal</b><small>Planning · Cadence</small></span></span></th>
+          <td><span class="cell"><input value="0:45" aria-label="Internal, Planning, Monday" autocomplete="off"></span></td>
+          <td><span class="cell"><input value="0:30" aria-label="Internal, Planning, Tuesday" autocomplete="off"></span></td>
+          <td class="is-today"><span class="cell"><input value="0:15" aria-label="Internal, Planning, Wednesday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Internal, Planning, Thursday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Internal, Planning, Friday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Internal, Planning, Saturday" autocomplete="off"></span></td>
+          <td><span class="cell"><input placeholder="–" aria-label="Internal, Planning, Sunday" autocomplete="off"></span></td>
+          <td class="row-tot">1:30</td>
+          <td><button class="del" type="button" aria-label="Delete row Internal, Planning"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Total</th>
+          <td>7:45</td>
+          <td>9:00</td>
+          <td class="is-today">5:30</td>
+          <td class="muted">–</td>
+          <td class="muted">–</td>
+          <td class="muted">–</td>
+          <td class="muted">–</td>
+          <td class="grand">22:15</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <div class="after-grid">
+    <button class="btn" type="button"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Copy rows from most recent timesheet</button>
+    <label class="check"><input type="checkbox">Include hours</label>
+  </div>
+
+  <div class="sheet-foot">
+    <section class="submit" aria-label="Submit week">
+      <span class="status">Open</span>
+      <p class="submit-note">This week is not submitted yet.</p>
+      <button class="btn submit-btn" type="button" aria-describedby="tb-status"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg><span>Submit this week for approval</span></button>
+    </section>
+    <section class="tblock" aria-label="Title block">
+      <p class="tb-title"><b>Timesheet, week density</b><span>Oct 26 – Nov 1, 2026</span></p>
+      <dl class="tb-fields">
+        <div><dt>Person</dt><dd>Ada</dd></div>
+        <div><dt>Hours</dt><dd>22:15</dd></div>
+        <div><dt>Status</dt><dd id="tb-status">Open</dd></div>
+      </dl>
+      <p class="stamp" hidden><span>Submitted · Ada · Oct 28</span></p>
+    </section>
+  </div>
+  <p class="vh" id="live" aria-live="polite"></p>
+</div>
+</main>
+
+<script src="lens.js" defer></script>
+<script src="../../assets/review.js" data-candidate="13" data-lens="delight" data-page="time" defer></script>
+</body>
+</html>

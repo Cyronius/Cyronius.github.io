@@ -1,0 +1,134 @@
+/* 12 One Thing · Bolder: heaviest ink, a wider solid today slab, the one action as a full-width bar (2026-10-28). */
+
+.lede, .points p, .facts li, .frag .lab, .frag thead th:first-child, .frag .proj span,
+.head .date, .head .tip, .proj span, .sheet thead th, .submit p, .range .when .icon { color: var(--ink); }
+.site-nav ul a { font-weight: 600; }
+
+/* Landing */
+.hero { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h1 h1" "lede quiet"; column-gap: 64px; padding-block: 80px 0; }
+.hero h1 { max-width: none; font-size: clamp(3.5rem, 0.4rem + 8.1vw, 8rem); line-height: 0.86; letter-spacing: -0.04em; text-wrap: balance; }
+.lede { margin-top: 44px; max-width: 38ch; font-size: 1.5rem; font-weight: 500; line-height: 1.38; }
+.hero .quiet { font-size: 1.25rem; text-decoration-thickness: 2.5px; }
+
+.go.band {
+  display: block; margin-top: 72px; border-radius: 0;
+  font-size: clamp(2rem, 0.4rem + 4.5vw, 5.25rem); line-height: 1; letter-spacing: -0.035em;
+}
+.go.band .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 224px; }
+.go.band .icon { width: 1.05em; height: 1.05em; stroke-width: 2.25; }
+.go.band:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: -12px; }
+
+.evidence { padding-top: 136px; }
+.frag col.d { width: 108px; }
+.frag col.n { width: 172px; }
+.frag thead th { border-bottom: 3px solid var(--ink); }
+.frag .lab b { font-weight: 800; }
+.frag .fig { font-size: 2.75rem; }
+.frag .now .fig, .frag .wk .fig { margin-top: 10px; font-size: 3.75rem; line-height: 0.8; }
+.frag thead .now { border-radius: 22px 22px 0 0; border-bottom-color: var(--ink); }
+.frag tbody td.now { border-bottom-color: var(--ink); font: 800 1.5rem var(--display); }
+.frag tbody tr:last-child .now { border-radius: 0 0 22px 22px; }
+.frag tbody td.tot { font-size: 1.5rem; }
+.frag .proj b { font-weight: 800; font-family: var(--display); font-size: 1.0625rem; letter-spacing: -0.01em; }
+
+.points ul { gap: 64px; max-width: 30em; font-size: clamp(1.75rem, 0.9rem + 2vw, 2.875rem); }
+.points p { font-weight: 500; }
+
+.plan h2 { max-width: 14ch; font-size: clamp(3.5rem, 1.2rem + 5.6vw, 7rem); line-height: 0.88; }
+.facts li { border-top: 1.5px solid var(--ink); font-weight: 500; }
+.facts li.big { border-top-width: 3px; font-size: clamp(2rem, 1rem + 2.2vw, 3.5rem); }
+.site-foot { border-top-width: 3px; }
+
+/* Timesheet */
+.peer-tabs a[aria-current="page"]::after, .dest a[aria-current="page"]::after { height: 3px; }
+.head { display: block; }
+.head h1 { margin-top: 12px; font-size: clamp(3rem, 0.4rem + 6.8vw, 7.25rem); line-height: 0.88; }
+.head .tip { font-weight: 500; font-size: 1.25rem; }
+.head .go {
+  display: flex; flex-direction: row-reverse; justify-content: space-between; width: 100%;
+  height: 128px; margin-top: 48px; padding: 0 52px 0 56px; border-radius: 24px;
+  font-size: clamp(2rem, 0.6rem + 3vw, 3.75rem); letter-spacing: -0.035em;
+}
+.head .go .icon { width: 1em; height: 1em; stroke-width: 2.5; }
+.head .go:hover .icon { transform: none; }
+
+.week {
+  --day: 100px; --now: 164px; --tot: 120px; --del: 56px;
+  grid-template-columns: minmax(0, 1fr) calc(var(--day) * 6 + var(--now) + var(--tot) + var(--del));
+  margin-top: 72px;
+}
+.strip { grid-template-columns: repeat(2, var(--day)) var(--now) repeat(4, var(--day)) calc(var(--tot) + var(--del)); }
+.sheet col.c-now { width: var(--now); }
+.strip li { border-bottom: 3px solid var(--ink); }
+.strip .lab b { font-weight: 800; }
+.strip .fig { font-size: 2.625rem; }
+.strip .now .fig, .strip .wk .fig { margin-top: 10px; font-size: 4rem; line-height: 0.8; }
+.strip .now { border-radius: 22px 22px 0 0; border-bottom-color: var(--ink); }
+.sheet thead th { font-weight: 800; }
+.sheet thead th.now, .sheet tbody td.now { border-bottom-color: var(--ink); }
+.sheet tbody tr:last-child .now { border-radius: 0 0 22px 22px; }
+.sheet .now .cell { max-width: 112px; border-bottom-color: transparent; font: 800 1.5rem var(--display); letter-spacing: -0.02em; }
+.sheet .now .cell:hover { border-bottom-color: var(--now-edge); }
+.sheet .now .running { max-width: 112px; }
+.proj b { font: 800 1.0625rem var(--display); letter-spacing: -0.01em; }
+.proj i { border-radius: 0; }
+.cell { border-bottom-width: 2px; }
+.row-total { font-size: 1.5rem; }
+
+.range > *, .density, .ghost, .check input { border-color: var(--ink); border-width: 1.5px; }
+.chip { background: var(--fill-2); font-weight: 600; }
+.submit { border-top-width: 3px; }
+.status, .submit .send { border-width: 2px; }
+.submit .send { font-weight: 800; font-family: var(--display); font-size: 1.0625rem; }
+
+@media (max-width: 1100px) {
+  .week { --day: 80px; --now: 124px; --tot: 92px; --del: 52px; }
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.6fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.5fr); }
+  .strip li { border-bottom: 0; }
+  .strip .now { border-radius: 22px; }
+  .sheet { min-width: 920px; }
+  .sheet thead .now { border-radius: 22px 22px 0 0; }
+}
+@media (max-width: 1240px) {
+  .frag col.d { width: 76px; }
+  .frag col.n { width: 132px; }
+  .frag .fig { font-size: 2rem; }
+  .frag .now .fig, .frag .wk .fig { font-size: 2.75rem; }
+}
+@media (max-width: 900px) {
+  .frag col.d { width: 88px; }
+  .frag col.n { width: 140px; }
+}
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; grid-template-areas: "h1" "lede" "quiet"; padding-top: 40px; }
+  .hero h1 { font-size: 4.25rem; }
+  .lede { margin-top: 28px; font-size: 1.25rem; }
+  .hero .quiet { margin-top: 12px; }
+  .go.band { margin-top: 40px; font-size: 1.875rem; }
+  .go.band .wrap { min-height: 136px; }
+  .evidence { padding-top: 88px; }
+  .frag col.d { width: 50px; }
+  .frag col.n { width: 82px; }
+  .frag col.t { width: 62px; }
+  .frag .fig { font-size: 1.25rem; }
+  .frag .now .fig { font-size: 1.875rem; margin-top: 6px; }
+  .frag .wk .fig { font-size: 1.5rem; margin-top: 6px; }
+  .frag tbody td.now { font-size: 1.25rem; }
+  .frag tbody td.tot { font-size: 1.125rem; }
+  .frag .proj b { font-size: 15px; }
+  .points ul { gap: 44px; font-size: 1.75rem; }
+  .plan h2 { font-size: 3.5rem; }
+  .facts li.big { font-size: 2rem; }
+
+  .head h1 { font-size: 3.25rem; }
+  .head .tip { font-size: 1.0625rem; }
+  .head .go { height: 92px; margin-top: 28px; padding: 0 26px 0 28px; border-radius: 20px; font-size: 2rem; }
+  .strip { grid-template-columns: 1fr 1fr 1.4fr 1fr; border-top: 3px solid var(--ink); }
+  .strip li { border-bottom: 1.5px solid var(--ink); }
+  .strip .now { border-radius: 0; }
+  .strip .fig { font-size: 1.75rem; }
+  .strip .now .fig { font-size: 2.5rem; margin-top: 4px; }
+  .strip .wk .fig { font-size: 2rem; margin-top: 4px; }
+  .sheet { min-width: 940px; }
+}

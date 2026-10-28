@@ -1,0 +1,162 @@
+/* Bolder: today's blue column becomes the spine of both pages. */
+
+html { scrollbar-color: var(--edge) var(--canvas); }
+input { caret-color: var(--ink); }
+:root { --nav-h: 88px; --fw: 380px; }
+
+/* ---------- Landing hero: one full-height blue field ---------- */
+
+.site-nav { z-index: 3; }
+.hero {
+  display: block; min-height: 0;
+  margin-top: calc(-1 * var(--nav-h));
+}
+.hero-body { display: grid; padding-block: 0; }
+.hero h1 { max-width: 7.5ch; }
+.hero .lede { margin-top: 0; }
+.hero .cta-row { margin-top: 28px; }
+
+.field {
+  position: relative; overflow: clip; isolation: isolate;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 32px;
+  background: var(--blue); color: #fff;
+}
+.field .hero-mark {
+  z-index: -1; height: auto; width: 116%;
+  top: calc(var(--nav-h) - 12px); left: -8%; right: auto; translate: none;
+  color: var(--canvas);
+}
+.field-day { display: flex; justify-content: space-between; gap: 12px; font-weight: 750; font-size: 1.1875rem; }
+.field-day span + span { font-weight: 600; }
+.field-hours {
+  margin-top: 6px;
+  font: 800 clamp(6rem, 3.6rem + 5vw, 8.5rem)/0.82 var(--display);
+  letter-spacing: -0.045em; font-variant-numeric: tabular-nums;
+}
+.btn-invert { background: #fff; color: var(--canvas); width: 100%; }
+.btn-invert:hover { background: var(--ink); }
+.btn-invert:focus-visible { outline-color: #fff; outline-offset: 4px; }
+
+@media (min-width: 1240px) {
+  .hero-body {
+    min-height: max(760px, 100svh);
+    grid-template-columns: minmax(0, calc(100% - 616px - var(--fw) / 2)) var(--fw) minmax(0, 1fr);
+  }
+  .hero-copy { grid-column: 1; grid-row: 1; align-self: end; padding: var(--nav-h) 32px 132px 0; }
+  .field { grid-column: 2; grid-row: 1; padding: 0 32px 40px; }
+  .hero-side { grid-column: 3; grid-row: 1; align-self: end; padding: 0 0 40px 48px; }
+  .hero-side .cta-row .btn { width: 100%; }
+  .hero h1 { font-size: clamp(4.5rem, 0.6rem + 5.4vw, 5.5rem); }
+
+  /* The field narrows into the demo's today column: one T-shaped spine. */
+  .rise .band { top: -29px; border-radius: 0; }
+}
+
+@media (min-width: 761px) and (max-width: 1239.98px) {
+  .hero { margin-top: 0; }
+  .hero-body {
+    min-height: 680px; padding-right: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+    grid-template-rows: 1fr auto;
+  }
+  .hero-copy { grid-column: 1; grid-row: 1; align-self: end; padding: 40px 40px 0 0; }
+  .hero-side { grid-column: 1; grid-row: 2; padding: 32px 40px 64px 0; }
+  .field { grid-column: 2; grid-row: 1 / -1; padding: 0 var(--gutter) 48px 36px; }
+  .field .hero-mark { top: 32px; }
+}
+
+/* ---------- Landing phones ---------- */
+@media (max-width: 760px) {
+  :root { --nav-h: 64px; }
+  .hero { margin-top: 0; padding-top: 0; }
+  .hero-body { padding-top: 20px; }
+  .hero-side { display: contents; }
+  .hero-copy { order: 1; }
+  .hero .lede { order: 2; margin-top: 22px; }
+  .field {
+    order: 3; margin: 36px calc(-1 * var(--gutter)) 0;
+    padding: 0 var(--gutter) 28px; min-height: 560px; gap: 24px;
+  }
+  .field .hero-mark { width: 330px; top: -36px; left: auto; right: -64px; }
+  .hero .cta-row { order: 4; margin: 16px 0 56px; }
+  .hero .cta-row .btn { flex: 1 1 100%; }
+}
+
+/* ---------- Timesheet: today runs from the bar to the bottom of the page ---------- */
+
+.sheet { position: relative; isolation: isolate; }
+.sheet > * { position: relative; z-index: 1; }
+.spine { display: none; }
+
+.sheet-head { display: grid; row-gap: 0; align-items: start; }
+.head-hello { display: contents; }
+.sheet-date { grid-row: 1; grid-column: 1 / -1; }
+.sheet-head h1 {
+  grid-row: 2; grid-column: 1; align-self: last baseline;
+  font-size: clamp(2.625rem, 1.2rem + 3.8vw, 4.25rem); line-height: 0.95; letter-spacing: -0.03em;
+}
+.sheet-tip { grid-row: 3; grid-column: 1; }
+.head-week { grid-row: 2; align-self: last baseline; }
+.head-week-label { display: block; font-weight: 700; color: var(--muted); }
+.head-week-total {
+  display: block; margin-top: 6px;
+  font: 800 clamp(2.625rem, 1.2rem + 3.8vw, 4.25rem)/0.95 var(--display);
+  letter-spacing: -0.035em; font-variant-numeric: tabular-nums;
+}
+.tile-week { display: none; }
+
+.submit { background: transparent; border: 0; border-top: 1px solid var(--line-2); border-radius: 0; padding: 22px 0 0; }
+
+@media (min-width: 1160px) {
+  .spine {
+    display: block; position: absolute; z-index: 0; top: 0; bottom: 0;
+    right: calc(var(--gutter) + var(--pad-x) + var(--del) + var(--tot) + 4 * var(--day));
+    width: var(--day); background: var(--blue);
+  }
+  .sheet { padding-top: 64px; }
+  .sheet-head {
+    grid-template-columns: minmax(0, calc(100% - 633px)) var(--day) minmax(0, 1fr);
+    gap: 0;
+  }
+  .sheet-date, .sheet-head h1, .sheet-tip { grid-column: 1; padding-right: 32px; }
+  .head-week { grid-column: 3; padding-left: 32px; }
+  .track-time { grid-row: 3; grid-column: 3; justify-self: start; align-self: start; margin: 22px 0 0 32px; }
+  .band { border-radius: 0; }
+  .strip { grid-template-columns: minmax(0, 1fr) repeat(7, var(--day)) calc(var(--tot) + var(--del)); }
+  .after-grid, .submit { padding-right: calc(var(--pad-x) + var(--del) + var(--tot) + 4 * var(--day) + 92px); }
+  .submit { margin-top: 32px; flex-wrap: nowrap; }
+  .submit .btn { position: absolute; right: 0; bottom: 0; }
+  .submit { padding-bottom: 0; min-height: 66px; }
+}
+
+@media (max-width: 1159.98px) {
+  .sheet-head { grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; }
+  .sheet-head h1 { grid-column: 1; }
+  .head-week { grid-column: 2; text-align: right; }
+  .sheet-tip { grid-column: 1 / -1; }
+  .track-time { grid-row: 4; grid-column: 1 / -1; justify-self: start; margin-top: 24px; }
+}
+
+@container week (min-width: 640px) and (max-width: 1079.98px) {
+  .strip { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .sheet-head h1 { grid-column: 1 / -1; }
+  .head-week-label { display: inline; margin-right: 6px; font-size: 0.9375rem; }
+  .head-week-total { display: inline; }
+  .track-time { justify-self: stretch; margin-top: 20px; }
+  /* Phones: today's tile takes a double column and its figure doubles. */
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 2fr) repeat(4, minmax(0, 1fr)); }
+  .tile.is-today { padding-top: 10px; }
+  .tile.is-today .tile-hours { font-size: 1.75rem; }
+}
+
+/* v1's app bar overflows between phone and desktop widths: drop the timer label, then the nav labels. */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .timer-label { display: none; }
+  .dest a { padding-inline: 10px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

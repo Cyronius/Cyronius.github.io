@@ -1,0 +1,124 @@
+/* 03 Evergreen · Distill (2026-10-28): forest, mint and one cream ink. Rules instead of panels, a linear feature list, one action per view. */
+
+:root {
+  --ink-2: oklch(0.95 0.012 85 / 0.74);
+  --ink-3: oklch(0.95 0.012 85 / 0.58);
+  --line: oklch(0.95 0.012 85 / 0.13);
+  --line-ctl: oklch(0.95 0.012 85 / 0.42);
+  --canvas-deep: var(--canvas);
+  --surface: var(--canvas);
+  --surface-2: oklch(0.95 0.012 85 / 0.07);
+  --amber: var(--mint);
+  --amber-wash: transparent;
+}
+
+/* Landing */
+.site-nav .nav-trial { border: 0; }
+.hero { padding-block: clamp(56px, 11vh, 120px) clamp(48px, 8vh, 88px); }
+
+.band { border-block: 0; }
+.band-in { padding-block: 0; }
+
+.days,
+.strip { grid-template-columns: repeat(7, 88px) 150px; gap: 0 20px; }
+.days > div,
+.strip > div,
+.days .is-empty,
+.strip .is-empty {
+  min-height: 0; gap: 16px;
+  padding: 12px 0 0;
+  border: 0; border-top: 1px solid var(--line); border-radius: 0;
+  background: none;
+}
+.days .is-today,
+.strip .is-today { border-top: 2px solid var(--mint); padding-top: 11px; background: none; }
+.days .is-week,
+.strip .is-week { border-top-color: var(--ink); background: none; }
+.days .is-today { animation: none; }
+.days .is-today :is(dt, dt span, dd) { animation: none; }
+
+.points { display: block; padding-block: clamp(72px, 11vh, 120px) clamp(56px, 9vh, 96px); }
+.mini { border: 0; border-radius: 0; background: none; box-shadow: none; }
+.mini th:first-child,
+.mini td:first-child { padding-left: 0; }
+.mini th:last-child,
+.mini td:last-child { padding-right: 0; }
+.mini thead th { border-bottom-color: var(--line-ctl); }
+.mini .t { background: none; }
+.mini tfoot td { border-top-color: var(--line-ctl); }
+.mini tfoot .t { color: var(--mint); }
+.mini .run::before { position: static; display: inline-block; margin: 0 7px 0 0; vertical-align: 0.1em; }
+
+.features { margin-top: clamp(64px, 10vh, 104px); }
+.features li {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 8px 32px;
+  padding-block: 22px 26px;
+  border-top: 1px solid var(--line);
+}
+.features li:last-child { border-bottom: 1px solid var(--line); }
+.features h3 {
+  font: 700 clamp(1.25rem, 1rem + 0.6vw, 1.5rem)/1.2 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.features p { color: var(--ink-2); font-size: 1.0625rem; max-width: 56ch; }
+
+.pricing { border-top: 0; }
+
+/* Timesheet */
+.appbar { background: none; }
+.primary a[aria-current="page"] { background: none; }
+.timer { padding: 0; border: 0; background: none; gap: 14px; }
+.timer-stop { border-color: var(--line-ctl); color: var(--ink); }
+.timer-stop:hover { background: var(--surface-2); color: var(--ink); }
+.timer-stop .i { color: var(--mint); }
+.timer-stop:focus-visible { outline-color: var(--mint); }
+@keyframes breathe { 50% { box-shadow: 0 0 0 5px oklch(0.81 0.145 161 / 0.18); } }
+
+.btn-track { box-shadow: none; }
+
+.sheet { border: 0; border-radius: 0; background: none; overflow: visible; }
+.grid thead th { border-bottom-color: var(--line-ctl); }
+.grid thead th:first-child { text-transform: none; letter-spacing: 0; font-size: 0.8125rem; }
+.grid thead th:first-child,
+.grid td.task { padding-left: 0; }
+.grid .today { background: none; }
+.grid tbody tr:hover td,
+.grid tbody tr:hover td.today { background-color: transparent; }
+.grid tfoot td.today { color: var(--mint); }
+.cell input { border-bottom-color: transparent; }
+.grid tbody tr:hover .cell input { border-bottom-color: var(--line); }
+.cell input:hover { background: var(--surface-2); border-bottom-color: var(--ink-3); }
+.grid .icon-btn { opacity: 0; transition: opacity 140ms ease, color 140ms ease, background-color 140ms ease; }
+.grid tr:hover .icon-btn,
+.grid tr:focus-within .icon-btn { opacity: 1; }
+@media (hover: none) { .grid .icon-btn { opacity: 1; } }
+
+.below .btn-ghost { color: var(--ink); }
+.submit { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 22px 0 0; margin-top: 20px; }
+
+@media (max-width: 1360px) {
+  .days,
+  .strip { grid-template-columns: repeat(7, minmax(0, 1fr)) minmax(0, 1.6fr); gap: 0 16px; }
+}
+@media (max-width: 820px) {
+  .days,
+  .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 12px; }
+  .days > div,
+  .strip > div { padding-top: 10px; gap: 10px; }
+  .days .is-today,
+  .strip .is-today { padding-top: 9px; }
+  .features li { grid-template-columns: 1fr; padding-block: 20px 22px; }
+}
+@media (max-width: 760px) {
+  .primary a { min-height: 44px; font-size: 0.8125rem; }
+  .timer { gap: 10px; }
+  .timer {
+    padding: 10px 12px 10px 16px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line-ctl);
+    background: var(--canvas);
+    box-shadow: none;
+  }
+  .grid thead th:first-child,
+  .grid td.task { background: var(--canvas); padding-left: 0; }
+}

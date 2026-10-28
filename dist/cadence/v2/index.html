@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence — Four experiments</title>
+<meta name="description" content="Eight Cadence design directions, each pushed four ways: bolder, distilled, animated and with one moment of delight.">
+<link rel="icon" href="../assets/cadence-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#efeeea;--surface:#fbfaf7;--ink:#17171a;--ink-2:#45454c;--ink-3:#5d5d66;--line:#d9d7d0;--line-2:#c4c2ba;
+    --blue:#3d5bff;--blue-ink:#2338c9;--focus:#17171a;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-padding-top:72px}
+  body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/1.5 Figtree,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  ::selection{background:var(--ink);color:var(--surface)}
+  a{color:inherit;text-underline-offset:3px}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 32px}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:40px;padding-bottom:8px}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 20px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+  .brand .mark{width:28px;height:28px;color:var(--blue)}
+  .back{font:600 14px/1 Figtree,sans-serif;color:var(--ink-2)}
+  .intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:end;padding:56px 0 40px}
+  h1{margin:0;font:800 clamp(2.5rem,5.6vw,4.75rem)/.95 "Bricolage Grotesque",sans-serif;letter-spacing:-.035em;text-wrap:balance}
+  .intro p{margin:0 0 12px;max-width:60ch;color:var(--ink-2)}
+  .intro p:last-child{margin-bottom:0}
+  .legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:20px 0 28px;border-top:1px solid var(--line-2)}
+  .legend .legend-name{margin:0 0 4px;color:var(--ink);font:700 18px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+  .legend p{margin:0;color:var(--ink-2);font-size:15px}
+  .controls{position:sticky;top:0;z-index:5;background:var(--canvas);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .controls .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:12px;padding-bottom:12px}
+  .filter{display:flex;gap:4px;flex-wrap:wrap}
+  .filter button,.bar button{font:600 14px/1 Figtree,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line-2);border-radius:999px;height:36px;padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+  .filter button:hover{border-color:var(--ink)}
+  .filter button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .count{margin:0 0 0 auto;color:var(--ink-3);font-size:14px}
+  ol.rows{list-style:none;margin:0;padding:0 0 120px}
+  .row{padding:40px 0 44px;border-bottom:1px solid var(--line)}
+  .meta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 20px;align-items:start;margin-bottom:20px}
+  .num{margin:0;font:800 56px/.9 "Bricolage Grotesque",sans-serif;letter-spacing:-.04em}
+  .row h2{margin:2px 0 4px;font:700 26px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
+  .thesis{margin:0;color:var(--ink-2);max-width:62ch}
+  .note{margin:6px 0 0;max-width:62ch;font-weight:600;color:var(--blue-ink)}
+  .v1{display:inline-flex;align-items:center;gap:6px;font:600 14px/1 Figtree,sans-serif;color:var(--ink-2);text-decoration:none;padding:10px 0}
+  .v1:hover{color:var(--ink);text-decoration:underline}
+  .v1 svg,.links svg{width:14px;height:14px}
+  .cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .cell{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .cell[hidden]{display:none}
+  .thumb{display:block;overflow:hidden;border-bottom:1px solid var(--line);background:var(--line)}
+  .thumb img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .thumb:hover img{transform:scale(1.03)}
+  .thumb-time{display:none}
+  .cell-text{display:flex;flex-direction:column;gap:6px;padding:14px 14px 10px;flex:1}
+  .cell h3{margin:0;font:700 18px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+  .what{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+  .try{margin:0;font-size:14px;line-height:1.45;color:var(--ink)}
+  .try span{font-weight:700;color:var(--blue-ink)}
+  .links{display:flex;align-items:center;gap:14px;margin:auto 0 0;padding-top:8px;font:600 14px/1 Figtree,sans-serif}
+  .links a{display:inline-flex;align-items:center;gap:4px;text-decoration:none;padding:8px 0}
+  .links a:hover{text-decoration:underline}
+  .pick{margin-left:auto;width:36px;height:36px;display:inline-grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);cursor:pointer}
+  .pick svg{width:16px;height:16px}
+  .pick:hover{border-color:var(--ink)}
+  .pick[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .pick[aria-pressed="true"] svg{fill:currentColor}
+  body[data-only] .cells{grid-template-columns:1fr}
+  body[data-only] .cell{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);flex-direction:row}
+  body[data-only] .cell[hidden]{display:none}
+  body[data-only] .cell-text{grid-column:1;grid-row:1;padding:20px}
+  body[data-only] .thumb{border-bottom:0;border-left:1px solid var(--line)}
+  body[data-only] .thumb-landing{grid-column:2;grid-row:1}
+  body[data-only] .thumb-time{display:block;grid-column:3;grid-row:1}
+  body[data-only] .legend > div:not([data-shown]){opacity:.35}
+  .bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:var(--ink);color:var(--surface);box-shadow:0 2px 6px rgb(0 0 0/.15),0 14px 34px rgb(0 0 0/.22);max-width:calc(100vw - 32px)}
+  .bar[hidden]{display:none}
+  .bar p{margin:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar button{color:var(--ink);background:var(--surface);border-color:var(--surface)}
+  .bar button.ghost{background:transparent;color:var(--surface);border-color:#55555c}
+  footer{padding:32px 0 56px;color:var(--ink-3);font-size:14px;border-top:1px solid var(--line-2)}
+  footer p{margin:0 0 6px;max-width:80ch}
+  @media (max-width:1100px){
+    .cells{grid-template-columns:repeat(2,minmax(0,1fr))}
+    body[data-only] .cell{grid-template-columns:1fr 1fr}
+    body[data-only] .cell-text{grid-column:1/-1;grid-row:2}
+    body[data-only] .thumb{border-left:0;border-bottom:1px solid var(--line)}
+    body[data-only] .thumb-time{border-left:1px solid var(--line)}
+  }
+  @media (max-width:980px){
+    .intro{grid-template-columns:1fr;gap:20px;padding:40px 0 32px}
+    .legend{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .meta{grid-template-columns:auto minmax(0,1fr)}
+    .v1{grid-column:2}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    .cells{grid-template-columns:1fr}
+    .num{font-size:40px}
+    .count{margin-left:0;width:100%}
+    body[data-only] .cell{grid-template-columns:1fr}
+    body[data-only] .thumb-time{grid-column:1;grid-row:2;border-left:0}
+    body[data-only] .thumb-landing{grid-column:1;grid-row:1}
+    body[data-only] .cell-text{grid-row:3}
+  }
+  @media (prefers-reduced-motion:reduce){.thumb img{transition:none}.thumb:hover img{transform:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./" aria-label="Cadence experiments, top"><svg aria-hidden="true" class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg><span>Cadence</span></a>
+  <a class="back" href="../">v1 · Twenty directions</a>
+</div></header>
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <h1>Eight directions, four experiments</h1>
+      <div>
+        <p>Each shortlisted direction is pushed four ways. Every experiment changes one thing, so you can see what it did. The copy, the published price and Ada’s sample week are the same on every page.</p>
+        <p>Last round’s notes are applied in all four experiments. Open a cell for the full page; the bar at the bottom switches experiment, direction and page. Animate and delight pages respond to you: the “Try” line says where. Shortlist what is worth taking further, then copy your picks and send them back.</p>
+      </div>
+    </div>
+    <div class="legend"><div><p class="legend-name">Bolder</p><p>Turn up the move it already owns.</p></div><div><p class="legend-name">Distill</p><p>Remove what does not earn its place.</p></div><div><p class="legend-name">Animate</p><p>One authored motion moment.</p></div><div><p class="legend-name">Delight</p><p>One moment that rewards use.</p></div></div>
+  </div>
+  <div class="controls">
+    <div class="wrap">
+      <div class="filter" role="group" aria-label="Experiment">
+        <button type="button" data-value="all" aria-pressed="true">All four</button><button type="button" data-value="bolder" aria-pressed="false">Bolder</button><button type="button" data-value="distill" aria-pressed="false">Distill</button><button type="button" data-value="animate" aria-pressed="false">Animate</button><button type="button" data-value="delight" aria-pressed="false">Delight</button>
+      </div>
+      <p class="count" aria-live="polite">32 variants</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ol class="rows" aria-label="Directions">
+      <li class="row" id="c02">
+        <div class="meta">
+          <p class="num">02</p>
+          <div class="meta-text">
+            <h2>Signal</h2>
+            <p class="thesis">Navy-black, one electric blue, the mark at monumental size.</p>
+            <p class="note">Sean’s favourite so far.</p>
+          </div>
+          <a class="v1" href="../02-signal/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="02-signal/bolder/landing.html" aria-label="Signal Bolder, landing page">
+            <img src="thumbs/02-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="02-signal/bolder/time.html" aria-label="Signal Bolder, timesheet">
+            <img src="thumbs/02-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">Today’s blue column becomes the spine: a full-height hero field that runs into the timesheet.</p>
+            
+            <p class="links">
+              <a href="02-signal/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="02-signal/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="02-bolder" data-name="Signal · Bolder" aria-label="Shortlist Signal Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="02-signal/distill/landing.html" aria-label="Signal Distill, landing page">
+            <img src="thumbs/02-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="02-signal/distill/time.html" aria-label="Signal Distill, timesheet">
+            <img src="thumbs/02-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">One blue, one surface: no panels, no cell boxes, features as one list.</p>
+            
+            <p class="links">
+              <a href="02-signal/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="02-signal/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="02-distill" data-name="Signal · Distill" aria-label="Shortlist Signal Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="02-signal/animate/landing.html" aria-label="Signal Animate, landing page">
+            <img src="thumbs/02-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="02-signal/animate/time.html" aria-label="Signal Animate, timesheet">
+            <img src="thumbs/02-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The mark draws itself to your local time, the week fills, and totals tick with the timer.</p>
+            <p class="try"><span>Try</span> Watch the landing load; on the timesheet, wait 8 seconds.</p>
+            <p class="links">
+              <a href="02-signal/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="02-signal/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="02-animate" data-name="Signal · Animate" aria-label="Shortlist Signal Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="02-signal/delight/landing.html" aria-label="Signal Delight, landing page">
+            <img src="thumbs/02-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="02-signal/delight/time.html" aria-label="Signal Delight, timesheet">
+            <img src="thumbs/02-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Keyboard mastery: a gliding blue cursor, 1.5 or 90m becomes 1:30, and ? opens shortcuts.</p>
+            <p class="try"><span>Try</span> Click a cell, use the arrows, type 1.5, press ?</p>
+            <p class="links">
+              <a href="02-signal/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="02-signal/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="02-delight" data-name="Signal · Delight" aria-label="Shortlist Signal Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c03">
+        <div class="meta">
+          <p class="num">03</p>
+          <div class="meta-text">
+            <h2>Evergreen</h2>
+            <p class="thesis">Forest-night canvas, mint at full saturation, mono figures.</p>
+            <p class="note">Smaller day blocks, sized like Signal’s.</p>
+          </div>
+          <a class="v1" href="../03-evergreen/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="03-evergreen/bolder/landing.html" aria-label="Evergreen Bolder, landing page">
+            <img src="thumbs/03-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="03-evergreen/bolder/time.html" aria-label="Evergreen Bolder, timesheet">
+            <img src="thumbs/03-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">Today turns solid mint with forest figures, one mint call to action, and the headline spans the page.</p>
+            
+            <p class="links">
+              <a href="03-evergreen/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="03-evergreen/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="03-bolder" data-name="Evergreen · Bolder" aria-label="Shortlist Evergreen Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="03-evergreen/distill/landing.html" aria-label="Evergreen Distill, landing page">
+            <img src="thumbs/03-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="03-evergreen/distill/time.html" aria-label="Evergreen Distill, timesheet">
+            <img src="thumbs/03-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">Forest, mint and one cream ink. Rules replace panels, features run as a list, one call to action.</p>
+            
+            <p class="links">
+              <a href="03-evergreen/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="03-evergreen/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="03-distill" data-name="Evergreen · Distill" aria-label="Shortlist Evergreen Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="03-evergreen/animate/landing.html" aria-label="Evergreen Animate, landing page">
+            <img src="thumbs/03-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="03-evergreen/animate/time.html" aria-label="Evergreen Animate, timesheet">
+            <img src="thumbs/03-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">Figures roll in like an odometer, column by column, and the timer’s seconds roll live.</p>
+            <p class="try"><span>Try</span> Watch the week roll in, then edit a cell.</p>
+            <p class="links">
+              <a href="03-evergreen/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="03-evergreen/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="03-animate" data-name="Evergreen · Animate" aria-label="Shortlist Evergreen Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="03-evergreen/delight/landing.html" aria-label="Evergreen Delight, landing page">
+            <img src="thumbs/03-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="03-evergreen/delight/time.html" aria-label="Evergreen Delight, timesheet">
+            <img src="thumbs/03-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Stopping the timer folds its pill into today’s cell; starting a row lifts one out.</p>
+            <p class="try"><span>Try</span> Stop the timer, then press start on any row.</p>
+            <p class="links">
+              <a href="03-evergreen/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="03-evergreen/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="03-delight" data-name="Evergreen · Delight" aria-label="Shortlist Evergreen Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c11">
+        <div class="meta">
+          <p class="num">11</p>
+          <div class="meta-text">
+            <h2>Dial</h2>
+            <p class="thesis">The mark’s clock face becomes the geometry: rings, arcs, dials.</p>
+            
+          </div>
+          <a class="v1" href="../11-dial/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="11-dial/bolder/landing.html" aria-label="Dial Bolder, landing page">
+            <img src="thumbs/11-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="11-dial/bolder/time.html" aria-label="Dial Bolder, timesheet">
+            <img src="thumbs/11-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">The week dial fills the first screen with the headline in its face; a large week ring anchors the timesheet.</p>
+            
+            <p class="links">
+              <a href="11-dial/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="11-dial/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="11-bolder" data-name="Dial · Bolder" aria-label="Shortlist Dial Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="11-dial/distill/landing.html" aria-label="Dial Distill, landing page">
+            <img src="thumbs/11-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="11-dial/distill/time.html" aria-label="Dial Distill, timesheet">
+            <img src="thumbs/11-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">One thin ring with the week total in its centre, a plain feature list and borderless cells.</p>
+            
+            <p class="links">
+              <a href="11-dial/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="11-dial/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="11-distill" data-name="Dial · Distill" aria-label="Shortlist Dial Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="11-dial/animate/landing.html" aria-label="Dial Animate, landing page">
+            <img src="thumbs/11-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="11-dial/animate/time.html" aria-label="Dial Animate, timesheet">
+            <img src="thumbs/11-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The hand sweeps the week and lays down each day’s arc. Then the timer ring ticks live.</p>
+            <p class="try"><span>Try</span> Watch the hand fill Monday to Wednesday, then edit a cell.</p>
+            <p class="links">
+              <a href="11-dial/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="11-dial/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="11-animate" data-name="Dial · Animate" aria-label="Shortlist Dial Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="11-dial/delight/landing.html" aria-label="Dial Delight, landing page">
+            <img src="thumbs/11-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="11-dial/delight/time.html" aria-label="Dial Delight, timesheet">
+            <img src="thumbs/11-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Turn the dial’s hand to a day and a readout lists that day’s projects and hours.</p>
+            <p class="try"><span>Try</span> Drag the hand, tap a day or use the arrow keys.</p>
+            <p class="links">
+              <a href="11-dial/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="11-dial/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="11-delight" data-name="Dial · Delight" aria-label="Shortlist Dial Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c12">
+        <div class="meta">
+          <p class="num">12</p>
+          <div class="meta-text">
+            <h2>One Thing</h2>
+            <p class="thesis">Monochrome everything except the one action.</p>
+            <p class="note">New colours and a dark mode. Try the swatches and the theme switch in the review bar.</p>
+          </div>
+          <a class="v1" href="../12-one-thing/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="12-one-thing/bolder/landing.html" aria-label="One Thing Bolder, landing page">
+            <img src="thumbs/12-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="12-one-thing/bolder/time.html" aria-label="One Thing Bolder, timesheet">
+            <img src="thumbs/12-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">Heaviest ink: a one-line headline, a full-bleed action bar and a wider solid today slab.</p>
+            
+            <p class="links">
+              <a href="12-one-thing/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="12-one-thing/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="12-bolder" data-name="One Thing · Bolder" aria-label="Shortlist One Thing Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="12-one-thing/distill/landing.html" aria-label="One Thing Distill, landing page">
+            <img src="thumbs/12-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="12-one-thing/distill/time.html" aria-label="One Thing Distill, timesheet">
+            <img src="thumbs/12-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">No rules or outlines, shorter copy, no project markers. Delete buttons appear on hover.</p>
+            
+            <p class="links">
+              <a href="12-one-thing/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="12-one-thing/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="12-distill" data-name="One Thing · Distill" aria-label="Shortlist One Thing Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="12-one-thing/animate/landing.html" aria-label="One Thing Animate, landing page">
+            <img src="thumbs/12-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="12-one-thing/animate/time.html" aria-label="One Thing Animate, timesheet">
+            <img src="thumbs/12-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The accent travels to whatever the one action is now: Stop, Track time or the header.</p>
+            <p class="try"><span>Try</span> Press Stop, then Track time.</p>
+            <p class="links">
+              <a href="12-one-thing/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="12-one-thing/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="12-animate" data-name="One Thing · Animate" aria-label="Shortlist One Thing Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="12-one-thing/delight/landing.html" aria-label="One Thing Delight, landing page">
+            <img src="thumbs/12-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="12-one-thing/delight/time.html" aria-label="One Thing Delight, timesheet">
+            <img src="thumbs/12-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Track time opens a composer in place and the page dims. Saved hours land in the cells.</p>
+            <p class="try"><span>Try</span> Track time, pick a task, type 1:30, press Enter.</p>
+            <p class="links">
+              <a href="12-one-thing/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="12-one-thing/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="12-delight" data-name="One Thing · Delight" aria-label="Shortlist One Thing Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c13">
+        <div class="meta">
+          <p class="num">13</p>
+          <div class="meta-text">
+            <h2>Cyanotype</h2>
+            <p class="thesis">A blueprint: white linework on prussian blue.</p>
+            <p class="note">Both liked it, but it was hard for everyday users. Now the data reads plainly and the blueprint is atmosphere.</p>
+          </div>
+          <a class="v1" href="../13-cyanotype/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="13-cyanotype/bolder/landing.html" aria-label="Cyanotype Bolder, landing page">
+            <img src="thumbs/13-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="13-cyanotype/bolder/time.html" aria-label="Cyanotype Bolder, timesheet">
+            <img src="thumbs/13-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">An annotated drawing of the app fills the first screen, each feature pointing at its part.</p>
+            
+            <p class="links">
+              <a href="13-cyanotype/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="13-cyanotype/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="13-bolder" data-name="Cyanotype · Bolder" aria-label="Shortlist Cyanotype Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="13-cyanotype/distill/landing.html" aria-label="Cyanotype Distill, landing page">
+            <img src="thumbs/13-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="13-cyanotype/distill/time.html" aria-label="Cyanotype Distill, timesheet">
+            <img src="thumbs/13-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">No boxes: a plain day row, a borderless table, one call to action, a plain price list.</p>
+            
+            <p class="links">
+              <a href="13-cyanotype/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="13-cyanotype/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="13-distill" data-name="Cyanotype · Distill" aria-label="Shortlist Cyanotype Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="13-cyanotype/animate/landing.html" aria-label="Cyanotype Animate, landing page">
+            <img src="thumbs/13-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="13-cyanotype/animate/time.html" aria-label="Cyanotype Animate, timesheet">
+            <img src="thumbs/13-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The blueprint drafts itself: frames trace in and the week line extends as the total counts up.</p>
+            <p class="try"><span>Try</span> Press Replay, edit a cell, or press Stop then Start.</p>
+            <p class="links">
+              <a href="13-cyanotype/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="13-cyanotype/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="13-animate" data-name="Cyanotype · Animate" aria-label="Shortlist Cyanotype Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="13-cyanotype/delight/landing.html" aria-label="Cyanotype Delight, landing page">
+            <img src="thumbs/13-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="13-cyanotype/delight/time.html" aria-label="Cyanotype Delight, timesheet">
+            <img src="thumbs/13-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Features and drawing parts light each other up. Submitting stamps the drawing’s title block.</p>
+            <p class="try"><span>Try</span> Hover a feature or a part; submit, then undo.</p>
+            <p class="links">
+              <a href="13-cyanotype/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="13-cyanotype/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="13-delight" data-name="Cyanotype · Delight" aria-label="Shortlist Cyanotype Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c16">
+        <div class="meta">
+          <p class="num">16</p>
+          <div class="meta-text">
+            <h2>Greenhouse</h2>
+            <p class="thesis">Soft, friendly boldness: big radii, chunky controls, warm green fields.</p>
+            
+          </div>
+          <a class="v1" href="../16-greenhouse/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="16-greenhouse/bolder/landing.html" aria-label="Greenhouse Bolder, landing page">
+            <img src="thumbs/16-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="16-greenhouse/bolder/time.html" aria-label="Greenhouse Bolder, timesheet">
+            <img src="thumbs/16-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">Forest hero and greeting fields, 900-weight type, bigger tiles and chunkier controls.</p>
+            
+            <p class="links">
+              <a href="16-greenhouse/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="16-greenhouse/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="16-bolder" data-name="Greenhouse · Bolder" aria-label="Shortlist Greenhouse Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="16-greenhouse/distill/landing.html" aria-label="Greenhouse Distill, landing page">
+            <img src="thumbs/16-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="16-greenhouse/distill/time.html" aria-label="Greenhouse Distill, timesheet">
+            <img src="thumbs/16-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">One green, flat cells, no panels and a plain feature list.</p>
+            
+            <p class="links">
+              <a href="16-greenhouse/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="16-greenhouse/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="16-distill" data-name="Greenhouse · Distill" aria-label="Shortlist Greenhouse Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="16-greenhouse/animate/landing.html" aria-label="Greenhouse Animate, landing page">
+            <img src="thumbs/16-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="16-greenhouse/animate/time.html" aria-label="Greenhouse Animate, timesheet">
+            <img src="thumbs/16-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">Day and Week morph into each other: today’s column becomes the day list. v1 never showed the Day view.</p>
+            <p class="try"><span>Try</span> Switch Day and Week, or click a day tile.</p>
+            <p class="links">
+              <a href="16-greenhouse/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="16-greenhouse/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="16-animate" data-name="Greenhouse · Animate" aria-label="Shortlist Greenhouse Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="16-greenhouse/delight/landing.html" aria-label="Greenhouse Delight, landing page">
+            <img src="thumbs/16-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="16-greenhouse/delight/time.html" aria-label="Greenhouse Delight, timesheet">
+            <img src="thumbs/16-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Copy rows fills next week from this week’s timesheet, then offers Undo.</p>
+            <p class="try"><span>Try</span> Go to next week, then copy rows. Try Include hours.</p>
+            <p class="links">
+              <a href="16-greenhouse/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="16-greenhouse/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="16-delight" data-name="Greenhouse · Delight" aria-label="Shortlist Greenhouse Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c17">
+        <div class="meta">
+          <p class="num">17</p>
+          <div class="meta-text">
+            <h2>Poster</h2>
+            <p class="thesis">A typographic poster in a blue-and-amber duotone.</p>
+            <p class="note">Cyrus’s favourite; Sean liked it too.</p>
+          </div>
+          <a class="v1" href="../17-poster/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="17-poster/bolder/landing.html" aria-label="Poster Bolder, landing page">
+            <img src="thumbs/17-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="17-poster/bolder/time.html" aria-label="Poster Bolder, timesheet">
+            <img src="thumbs/17-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">A viewport-wide staircase headline and a bigger sun sinking into a blue band. The greeting is set as poster type.</p>
+            
+            <p class="links">
+              <a href="17-poster/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="17-poster/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="17-bolder" data-name="Poster · Bolder" aria-label="Shortlist Poster Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="17-poster/distill/landing.html" aria-label="Poster Distill, landing page">
+            <img src="thumbs/17-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="17-poster/distill/time.html" aria-label="Poster Distill, timesheet">
+            <img src="thumbs/17-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">Colour gets meaning: amber marks only running time, blue only actions. The disc leaves the timesheet.</p>
+            
+            <p class="links">
+              <a href="17-poster/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="17-poster/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="17-distill" data-name="Poster · Distill" aria-label="Shortlist Poster Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="17-poster/animate/landing.html" aria-label="Poster Animate, landing page">
+            <img src="thumbs/17-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="17-poster/animate/time.html" aria-label="Poster Animate, timesheet">
+            <img src="thumbs/17-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The headline steps down its staircase word by word, then the sun rises. The timer runs live.</p>
+            <p class="try"><span>Try</span> Press Replay; on the timesheet, press Stop, then Start.</p>
+            <p class="links">
+              <a href="17-poster/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="17-poster/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="17-animate" data-name="Poster · Animate" aria-label="Shortlist Poster Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="17-poster/delight/landing.html" aria-label="Poster Delight, landing page">
+            <img src="thumbs/17-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="17-poster/delight/time.html" aria-label="Poster Delight, timesheet">
+            <img src="thumbs/17-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">The disc is the sun: its height and warmth follow your local time, and the greeting agrees.</p>
+            <p class="try"><span>Try</span> Drag “Preview time of day” from dawn to midnight.</p>
+            <p class="links">
+              <a href="17-poster/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="17-poster/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="17-delight" data-name="Poster · Delight" aria-label="Shortlist Poster Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+      <li class="row" id="c18">
+        <div class="meta">
+          <p class="num">18</p>
+          <div class="meta-text">
+            <h2>Spectrum</h2>
+            <p class="thesis">The six project colours lead: the week as stacked colour segments.</p>
+            
+          </div>
+          <a class="v1" href="../18-spectrum/landing.html">v1 original <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="cells">
+        <article class="cell" data-lens="bolder">
+          <a class="thumb thumb-landing" href="18-spectrum/bolder/landing.html" aria-label="Spectrum Bolder, landing page">
+            <img src="thumbs/18-bolder-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="18-spectrum/bolder/time.html" aria-label="Spectrum Bolder, timesheet">
+            <img src="thumbs/18-bolder-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Bolder</h3>
+            <p class="what">The hero becomes full-bleed day columns sized by hours; timesheet rows become full colour bands.</p>
+            
+            <p class="links">
+              <a href="18-spectrum/bolder/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="18-spectrum/bolder/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="18-bolder" data-name="Spectrum · Bolder" aria-label="Shortlist Spectrum Bolder"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="distill">
+          <a class="thumb thumb-landing" href="18-spectrum/distill/landing.html" aria-label="Spectrum Distill, landing page">
+            <img src="thumbs/18-distill-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="18-spectrum/distill/time.html" aria-label="Spectrum Distill, timesheet">
+            <img src="thumbs/18-distill-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Distill</h3>
+            <p class="what">Pastel bands, tiles, boxes and green are gone. Colour stays only on data: segments and project markers.</p>
+            
+            <p class="links">
+              <a href="18-spectrum/distill/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="18-spectrum/distill/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="18-distill" data-name="Spectrum · Distill" aria-label="Shortlist Spectrum Distill"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="animate">
+          <a class="thumb thumb-landing" href="18-spectrum/animate/landing.html" aria-label="Spectrum Animate, landing page">
+            <img src="thumbs/18-animate-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="18-spectrum/animate/time.html" aria-label="Spectrum Animate, timesheet">
+            <img src="thumbs/18-animate-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Animate</h3>
+            <p class="what">The week stacks in day by day as totals tally. Editing a cell resizes its segment live.</p>
+            <p class="try"><span>Try</span> Reload, then type 3 into Annual audit’s Wednesday cell.</p>
+            <p class="links">
+              <a href="18-spectrum/animate/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="18-spectrum/animate/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="18-animate" data-name="Spectrum · Animate" aria-label="Shortlist Spectrum Animate"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        <article class="cell" data-lens="delight">
+          <a class="thumb thumb-landing" href="18-spectrum/delight/landing.html" aria-label="Spectrum Delight, landing page">
+            <img src="thumbs/18-delight-landing.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <a class="thumb thumb-time" href="18-spectrum/delight/time.html" aria-label="Spectrum Delight, timesheet">
+            <img src="thumbs/18-delight-time.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+          </a>
+          <div class="cell-text">
+            <h3>Delight</h3>
+            <p class="what">Point at a project to light its hours across the week, with its share of the total.</p>
+            <p class="try"><span>Try</span> Hover or tap a project; tap again to release.</p>
+            <p class="links">
+              <a href="18-spectrum/delight/landing.html">Landing <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="18-spectrum/delight/time.html">Timesheet <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <button type="button" class="pick" aria-pressed="false" data-id="18-delight" data-name="Spectrum · Delight" aria-label="Shortlist Spectrum Delight"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
+            </p>
+          </div>
+        </article>
+        </div>
+      </li>
+    </ol>
+  </div>
+</main>
+<div class="bar" hidden role="region" aria-label="Your shortlist">
+  <p class="bar-text"></p>
+  <button type="button" class="ghost" data-action="clear">Clear</button>
+  <button type="button" data-action="copy">Copy picks</button>
+</div>
+<div class="wrap"><footer>
+  <p>Design mockups for review, not shipped product. The copy, prices and timesheet structure come from Cadence’s landing page, pricing.json and UI doctrine. Sample data: Ada’s week of October 26, 2026, with a timer running.</p>
+  <p>Fonts are open-licence faces served by Google Fonts.</p>
+</footer></div>
+<script>
+(() => {
+  const KEY = 'cadence-v2:shortlist';
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+  const write = (ids) => { try { localStorage.setItem(KEY, JSON.stringify(ids)); } catch {} };
+  let picks = new Set(read());
+  const bar = document.querySelector('.bar');
+  const barText = bar.querySelector('.bar-text');
+  const buttons = [...document.querySelectorAll('.pick')];
+  const nameOf = (id) => buttons.find((b) => b.dataset.id === id)?.dataset.name ?? id;
+  const sync = () => {
+    for (const b of buttons) b.setAttribute('aria-pressed', String(picks.has(b.dataset.id)));
+    const ids = [...picks].sort();
+    bar.hidden = ids.length === 0;
+    barText.textContent = ids.length + ' shortlisted: ' + ids.map((id) => id.split('-')[0] + ' ' + nameOf(id).split(' · ')[1]).join(', ');
+    write(ids);
+  };
+  for (const b of buttons) b.addEventListener('click', () => { picks.has(b.dataset.id) ? picks.delete(b.dataset.id) : picks.add(b.dataset.id); sync(); });
+  bar.addEventListener('click', async (e) => {
+    const btn = e.target.closest('button');
+    if (btn?.dataset.action === 'clear') { picks = new Set(); sync(); }
+    if (btn?.dataset.action === 'copy') {
+      const ids = [...picks].sort();
+      const text = 'Cadence v2 shortlist: ' + ids.map((id) => id.split('-')[0] + ' ' + nameOf(id)).join(', ') + '\n' + location.href.split('#')[0];
+      try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+      catch { window.prompt('Copy your shortlist', text); }
+      setTimeout(() => { btn.textContent = 'Copy picks'; }, 1600);
+    }
+  });
+  sync();
+
+  const filterButtons = [...document.querySelectorAll('.filter button')];
+  const cells = [...document.querySelectorAll('.cell')];
+  const legend = [...document.querySelectorAll('.legend > div')];
+  const count = document.querySelector('.count');
+  const lenses = ['bolder', 'distill', 'animate', 'delight'];
+  const apply = (value) => {
+    for (const b of filterButtons) b.setAttribute('aria-pressed', String(b.dataset.value === value));
+    for (const c of cells) c.hidden = value !== 'all' && c.dataset.lens !== value;
+    legend.forEach((d, i) => d.toggleAttribute('data-shown', value === 'all' || lenses[i] === value));
+    if (value === 'all') delete document.body.dataset.only; else document.body.dataset.only = value;
+    count.textContent = value === 'all' ? '32 variants' : '8 variants';
+    try { sessionStorage.setItem('cadence-v2:lens', value); } catch {}
+  };
+  for (const b of filterButtons) b.addEventListener('click', () => apply(b.dataset.value));
+  let saved = 'all';
+  try { saved = sessionStorage.getItem('cadence-v2:lens') || 'all'; } catch {}
+  apply(lenses.includes(saved) ? saved : 'all');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* 11 Dial · Animate: the hand lays the week down; the timer's lap feeds the sheet. */
+
+body { font-variant-numeric: tabular-nums; }
+input { caret-color: var(--blue-ink); }
+
+.week-dial .seg-fill { animation: none; }
+
+.tick { animation: tick 1100ms var(--ease-out); }
+@keyframes tick { from { color: var(--blue-ink); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .live .dial .arc { transition: stroke-dasharray 700ms var(--ease-out), opacity 240ms var(--ease-out); }
+  .timer .run .a { transition: stroke-dasharray 450ms var(--ease-out); }
+}

@@ -1,0 +1,125 @@
+/* 03 Evergreen · Delight (2026-10-28): timer continuity. Stop folds the timer's pill into today's cell; start lifts a pill from a row's cell into the bar. */
+
+:root { --pill: oklch(0.821 0.126 75 / 0.17); }
+
+@media (min-width: 761px) {
+  .appbar { position: sticky; top: 0; z-index: 10; }
+}
+
+/* The bar */
+.timer { view-transition-name: evg-bar; gap: 10px; }
+.timer-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 6px 12px 6px 11px;
+  border-radius: 999px;
+  background: var(--pill);
+}
+.timer.is-stopped { border-color: var(--line-ctl); background: transparent; padding-left: 5px; }
+.timer.is-stopped .timer-label { color: var(--ink-2); padding-right: 14px; }
+.timer.is-stopped :is(.timer-pill, .timer-stop) { display: none; }
+.timer-start {
+  order: -1;
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 34px; padding: 0 15px 0 12px;
+  border: 1px solid var(--mint-edge); border-radius: 999px;
+  background: transparent; color: var(--mint);
+  font-weight: 600; font-size: 0.875rem;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.timer-start[hidden] { display: none; }
+.timer-start:hover { background: var(--mint); color: var(--on-mint); }
+.timer-start .i,
+.cell-go .i { width: 13px; height: 13px; fill: currentColor; stroke: none; }
+
+/* Today's cells carry a start control; the running one shows the dot instead */
+.grid td.today .cell { width: 112px; padding-left: 34px; }
+.cell .dot,
+.mcell .dot { display: none; }
+.cell.running .dot { display: block; left: 12px; }
+.cell-go {
+  position: absolute; left: 0; top: 50%; margin-top: -15px;
+  display: grid; place-items: center;
+  width: 30px; height: 30px; padding: 0 0 0 2px;
+  border: 1px solid var(--line-ctl); border-radius: 50%;
+  background: transparent; color: var(--ink-2);
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+.grid tbody tr:hover .cell-go,
+.mini tbody tr:hover .cell-go { color: var(--mint); border-color: var(--mint-edge); }
+.cell-go:hover,
+.grid tbody tr:hover .cell-go:hover,
+.mini tbody tr:hover .cell-go:hover { background: var(--mint); border-color: var(--mint); color: var(--on-mint); }
+:is(.cell, .mcell).running .cell-go { display: none; }
+.cell-go:focus-visible { border-radius: 50%; outline-offset: 2px; }
+
+/* Landing: the fragment's head is the bar */
+.mini-head { flex-wrap: wrap; }
+.mini-head .timer { margin-left: auto; padding-block: 4px; }
+.mini-head .timer-label { font-size: 0.875rem; }
+.mini-head .timer-digits { font-size: 1rem; }
+.mini .t { padding-inline: 8px 12px; }
+.mcell { display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.mcell .cell-go { position: static; margin: 0; width: 28px; height: 28px; }
+.mcell.running .dot { display: block; width: 8px; height: 8px; margin: 0 10px; }
+.mcell .v { min-width: 4ch; }
+.mcell.running .v { color: var(--amber); font-weight: 700; }
+.try { margin-top: 14px; color: var(--ink-3); font-size: 0.875rem; }
+
+/* A cell about to lift reads as a pill for the length of the move */
+:is(.cell, .mcell).lifting :is(input, .v) {
+  background: var(--pill); color: var(--amber); font-weight: 700;
+  border-radius: 999px; border-bottom-color: transparent;
+}
+.mcell.lifting .v { padding: 3px 8px; }
+
+/* Where the time landed: a colour, so it survives reduced motion */
+.landed { animation: landed 1100ms var(--ease-out); }
+@keyframes landed { from { background-color: oklch(0.821 0.126 75 / 0.32); } }
+
+::view-transition-group(evg-pill) {
+  animation-duration: 640ms;
+  animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+::view-transition-image-pair(evg-pill) { animation: evg-lift 640ms cubic-bezier(0.45, 0, 0.25, 1) both; }
+::view-transition-old(evg-pill),
+::view-transition-new(evg-pill) { height: 100%; object-fit: contain; }
+::view-transition-old(evg-pill) { animation: evg-out 640ms linear both; }
+::view-transition-new(evg-pill) { animation: evg-in 640ms linear both; }
+::view-transition-group(evg-bar) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-old(evg-bar),
+::view-transition-new(evg-bar) { height: 100%; object-fit: none; }
+::view-transition-old(evg-bar) { animation: evg-fade 160ms ease-out both reverse; }
+::view-transition-new(evg-bar) { animation: evg-fade 280ms ease-out 100ms both; }
+@keyframes evg-fade { from { opacity: 0; } }
+@keyframes evg-lift {
+  45% { transform: scale(1.14); filter: drop-shadow(0 12px 14px oklch(0.05 0.02 160 / 0.75)); }
+}
+@keyframes evg-out { 0%, 55% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes evg-in { 0%, 45% { opacity: 0; } 100% { opacity: 1; } }
+
+@media (max-width: 760px) {
+  .landing .timer {
+    position: static; flex: 1 1 100%; order: 3;
+    padding: 4px 4px 4px 14px;
+    border: 1px solid oklch(0.821 0.126 75 / 0.45); border-radius: 999px;
+    background: var(--amber-wash); box-shadow: none;
+  }
+  .landing .timer.is-stopped { border-color: var(--line-ctl); background: transparent; padding-left: 4px; }
+  .landing .timer-stop { min-height: 34px; }
+  .app .timer.is-stopped { border-top-color: var(--line-ctl); background: var(--canvas-deep); padding-left: 12px; }
+  .app .timer-start { min-height: 40px; }
+}
+@media (max-width: 640px) {
+  .mini-head .seg-static { display: none; }
+  .mini tbody th,
+  .mini thead th:first-child,
+  .mini tfoot td:first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--surface);
+    box-shadow: 1px 0 0 var(--line);
+  }
+  .mini tbody th { white-space: normal; min-width: 172px; max-width: 172px; }
+}

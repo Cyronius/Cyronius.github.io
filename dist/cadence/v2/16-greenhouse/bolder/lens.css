@@ -1,0 +1,281 @@
+/* 16 Greenhouse · Bolder — deeper green field, heavier type, bigger tiles, chunkier controls (2026-10-28). */
+
+:root { --ctl: 60px; }
+
+.btn { min-height: var(--ctl); padding: 0 28px; font-size: 1.0625rem; font-weight: 800; }
+.btn-line { box-shadow: inset 0 0 0 3px var(--ink); }
+.btn-go {
+  min-height: 84px; padding: 0 42px 0 14px; gap: 16px;
+  font-size: 1.625rem; font-weight: 800;
+}
+.btn-go .disc { width: 56px; height: 56px; }
+.btn-go .disc .i { width: 28px; height: 28px; stroke-width: 2.8; }
+
+.tray { padding: 6px; gap: 6px; }
+.tray label, .tray span { min-height: 52px; padding: 0 28px; font-size: 1.0625rem; font-weight: 700; }
+
+.timer { min-height: 64px; padding: 0 8px 0 24px; gap: 14px; }
+.timer .run-dot { width: 14px; height: 14px; }
+.timer-label { font-size: 1rem; font-weight: 700; }
+.timer-digits { font-size: 1.625rem; font-weight: 800; }
+.timer-stop { min-height: 50px; padding: 0 22px 0 16px; font-size: 1rem; }
+
+/* Bigger rounded day tiles; figures sized to the strip so they never clip */
+.strip {
+  container-type: inline-size;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) minmax(0, 2fr);
+  gap: 10px;
+}
+.tile { min-height: 188px; padding: 22px 20px 22px; border-radius: var(--r-xl); }
+.tile-head { flex-wrap: wrap; column-gap: 8px; font-size: 1.0625rem; }
+.tile-date { white-space: nowrap; }
+.tile-day { font-weight: 800; }
+.tile-total { font-size: clamp(2rem, 3.9cqi, 3.5rem); font-weight: 900; letter-spacing: -0.035em; }
+.tile.is-week .tile-total { font-size: clamp(2.5rem, 6.4cqi, 5rem); }
+.tile.is-empty .tile-total { font-weight: 800; }
+
+.well { height: 64px; border-radius: 22px; font-size: 1.375rem; font-weight: 800; }
+.week thead th { height: 58px; font-size: 0.9375rem; font-weight: 700; }
+.week thead th.today { font-weight: 900; border-radius: 26px 26px 0 0; }
+.week tfoot td.today { border-radius: 0 0 26px 26px; }
+.week tbody th, .week tbody td { height: 92px; }
+.proj-name { font-size: 1.1875rem; font-weight: 800; }
+.proj-sub { font-size: 0.9375rem; padding-left: 28px; }
+.swatch { width: 16px; height: 16px; border-radius: 6px; }
+.row-total { font-size: 1.5rem; font-weight: 800; }
+
+/* ---------- Landing ---------- */
+.site-head { padding: 24px 8px; }
+.brand-word { font-size: 2.125rem; font-weight: 900; letter-spacing: -0.03em; }
+.site-nav .btn { min-height: 56px; padding: 0 24px; }
+
+.hero {
+  padding: clamp(48px, 6vw, 96px) clamp(20px, 4.4vw, 64px) 0;
+  background: var(--forest);
+  color: var(--on-green);
+}
+.hero :focus-visible { outline-color: var(--mint-200); }
+.hero-copy { grid-template-columns: 1fr; gap: clamp(28px, 3vw, 44px); }
+.hero h1 {
+  font-weight: 900;
+  font-size: clamp(3rem, 1.2rem + 5.8vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--on-green);
+}
+.hero h1 .nowrap { color: var(--mint-200); }
+.hero-side {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 28px 56px; padding: 0;
+}
+.lede { margin: 0; max-width: 46ch; font-size: clamp(1.125rem, 0.95rem + 0.5vw, 1.375rem); color: var(--on-forest-muted); }
+.hero .btn-go {
+  background: var(--mint-200); color: var(--forest-ink);
+  box-shadow: 0 18px 36px -16px oklch(0.2 0.05 160 / 0.8), 0 2px 6px oklch(0.2 0.05 160 / 0.3);
+}
+.hero .btn-go:hover { background: var(--mint-300); }
+.hero .btn-go .disc { background: var(--green); color: var(--on-green); }
+.hero .btn-white {
+  min-height: 84px; padding: 0 36px;
+  background: transparent; color: var(--on-green);
+  box-shadow: inset 0 0 0 3px var(--mint-300);
+  font-size: 1.1875rem;
+}
+.hero .btn-white:hover { background: var(--forest-ink); }
+
+.frag { color: var(--ink); margin-top: clamp(48px, 5vw, 72px); padding: 24px 24px 6px; border-radius: var(--r-xl) var(--r-xl) 0 0; }
+.frag-top { gap: 14px; margin-bottom: 18px; }
+.frag-range { min-height: 64px; padding: 0 26px; font-size: 1.0625rem; font-weight: 800; }
+.frag .strip { margin-bottom: 10px; }
+.frag .week tbody th, .frag .week tbody td { height: 88px; }
+
+.fields {
+  width: var(--wrap);
+  margin: clamp(56px, 8vw, 112px) auto 0;
+  display: grid; gap: 16px;
+}
+.field { border-radius: var(--r-xl); padding: clamp(32px, 5.6vw, 88px); }
+.field-lead {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 32px 64px; align-items: end;
+  background: var(--mint-200);
+}
+.field-lead h2 {
+  margin: 0; max-width: 10ch;
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(2.75rem, 1rem + 4.6vw, 5.5rem);
+  line-height: 0.92; letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.field-side p { margin: 0 0 32px; max-width: 34ch; font-size: clamp(1.125rem, 1rem + 0.45vw, 1.4375rem); line-height: 1.45; text-wrap: pretty; }
+.field-rest {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(44px, 5vw, 76px) clamp(32px, 5vw, 88px);
+  background: var(--lime-50);
+}
+.field-rest .pt { padding: 0; border-radius: 0; gap: 16px; }
+.field-rest .pt h2 { font-weight: 900; font-size: clamp(2rem, 1.3rem + 1.6vw, 3rem); line-height: 0.98; letter-spacing: -0.035em; max-width: 13ch; }
+.field-rest .pt p { font-size: 1.1875rem; }
+.pt-states { padding-top: 6px; gap: 10px; }
+.pt-states span { min-height: 48px; padding: 0 20px; font-size: 1rem; font-weight: 700; }
+
+.pricing { gap: 48px 88px; padding: clamp(32px, 5.6vw, 88px); }
+.pr-main h2 { font-weight: 900; font-size: clamp(2.75rem, 1.4rem + 3.2vw, 4.75rem); letter-spacing: -0.04em; margin-bottom: 36px; }
+.pr-price { font-size: clamp(1.5rem, 1.2rem + 0.7vw, 1.875rem); font-weight: 800; }
+.pr-amount {
+  display: block; margin-bottom: 4px;
+  font-weight: 900; font-size: clamp(4rem, 2rem + 5vw, 6rem);
+  line-height: 0.95; letter-spacing: -0.045em;
+  color: var(--forest-ink);
+}
+.pr-annual { font-size: 1.25rem; margin-bottom: 40px; }
+.pr-facts { gap: 22px; }
+.pr-facts li { gap: 16px; font-size: 1.1875rem; }
+.tick { width: 38px; height: 38px; margin-top: -4px; background: var(--mint-200); }
+.tick .i { width: 20px; height: 20px; stroke-width: 3; }
+
+.site-foot { padding-top: 32px; }
+.brand-foot .brand-word { font-size: 1.625rem; }
+.foot-nav a { padding: 14px 20px; font-weight: 700; }
+
+/* ---------- Timesheet ---------- */
+.bar { padding: 10px; border-radius: 42px; }
+.bar-mark { width: 62px; height: 62px; }
+.bar-mark .mark { width: 40px; height: 40px; }
+.dest a { min-height: 62px; padding: 0 22px; font-size: 1rem; }
+.dest .i { width: 22px; height: 22px; }
+.account { min-height: 62px; }
+.avatar { width: 56px; height: 56px; font-size: 1.5rem; }
+.tabs { gap: 8px; }
+.tabs a { min-height: 54px; padding: 0 24px; font-size: 1rem; font-weight: 700; }
+
+.head {
+  padding: clamp(28px, 4vw, 60px);
+  border-radius: var(--r-xl);
+  background: var(--forest);
+  color: var(--on-green);
+}
+.head :focus-visible { outline-color: var(--mint-200); }
+.date { color: var(--on-forest-muted); font-size: 1.0625rem; }
+.greet h1 { font-weight: 900; font-size: clamp(2.75rem, 1rem + 4.4vw, 5.5rem); letter-spacing: -0.04em; line-height: 0.94; }
+.tip { color: var(--on-forest-muted); font-size: 1.1875rem; }
+.track {
+  min-height: 92px; padding: 0 44px 0 16px; margin: 0;
+  font-size: 1.75rem;
+  background: var(--mint-200); color: var(--forest-ink);
+  box-shadow: 0 18px 36px -16px oklch(0.2 0.05 160 / 0.8), 0 2px 6px oklch(0.2 0.05 160 / 0.3);
+}
+.track:hover { background: var(--mint-300); }
+.track .disc { width: 62px; height: 62px; background: var(--green); color: var(--on-green); }
+.track .disc .i { width: 30px; height: 30px; }
+
+.toolbar { margin-top: 28px; gap: 12px; }
+.round { width: 64px; height: 64px; }
+.round .i { width: 24px; height: 24px; }
+.range { min-height: 64px; padding: 0 28px; font-size: 1.1875rem; font-weight: 800; }
+.chip { min-height: 54px; padding: 0 24px; font-size: 1rem; font-weight: 800; }
+.app .strip { margin-top: 22px; }
+.app .tile { min-height: 188px; }
+
+.grid-surface { border-radius: var(--r-xl); padding: 14px 18px 18px; }
+.sheet-wrap { margin-top: 22px; }
+.del-btn { width: 52px; height: 52px; }
+.del-btn .i { width: 22px; height: 22px; }
+.week tfoot th, .week tfoot td { height: 86px; }
+.week tfoot th { font-size: 1.0625rem; font-weight: 800; }
+.week tfoot td { font-size: 1.625rem; font-weight: 900; }
+.grand-pill { height: 60px; min-width: 112px; padding: 0 18px; font-size: 1.875rem; }
+
+.below { margin-top: 22px; }
+.below .btn-line { min-height: 64px; padding: 0 28px 0 22px; }
+.check { min-height: 56px; font-size: 1.0625rem; font-weight: 700; }
+.check input { width: 32px; height: 32px; border-radius: 11px; box-shadow: inset 0 0 0 3px var(--ink-muted); }
+.check input::after { width: 13px; height: 7px; border-width: 3px; }
+.submit { margin-top: 28px; padding: 18px 18px 18px 24px; border-radius: var(--r-xl); background: var(--mint-100); }
+.status { min-height: 46px; padding: 0 20px; font-size: 1rem; font-weight: 800; }
+.submit p { font-size: 1.1875rem; font-weight: 600; }
+.submit-btn { min-height: 64px; }
+
+@media (max-width: 1360px) {
+  .dest a { padding: 0 16px; }
+  .bar .timer-label { max-width: 120px; }
+}
+@media (min-width: 761px) and (max-width: 1080px) {
+  .dest a { padding: 0 14px; }
+  .bar-mark { width: 56px; height: 56px; }
+  .timer { gap: 10px; padding-left: 18px; }
+  .timer-digits { font-size: 1.375rem; }
+  .bar .timer-label { max-width: 64px; }
+  .avatar { width: 48px; height: 48px; }
+}
+@media (max-width: 1100px) {
+  .field-lead { grid-template-columns: 1fr; }
+  .field-rest { grid-template-columns: 1fr; }
+  .frag .tile-total { font-size: clamp(2rem, 7.6cqi, 3.5rem); }
+  .frag .tile.is-week .tile-total { font-size: clamp(1.75rem, 7.2cqi, 3.5rem); }
+}
+@media (max-width: 1080px) {
+  .app .tile-total { font-size: clamp(2rem, 7.6cqi, 3.5rem); }
+  .app .tile.is-week .tile-total { font-size: clamp(1.75rem, 7.2cqi, 3.5rem); }
+}
+
+@media (max-width: 760px) {
+  .head { padding: 26px 20px 20px; border-radius: 32px; gap: 22px; }
+  .greet h1 { font-size: clamp(2.25rem, 10.6vw, 3rem); }
+  .tip { font-size: 1.0625rem; }
+  .track { width: 100%; min-height: 74px; font-size: 1.5rem; }
+  .track .disc { width: 52px; height: 52px; }
+  .round { width: 56px; height: 56px; }
+  .range { min-height: 56px; font-size: 1rem; }
+  .chip { min-height: 48px; }
+  .density label { min-height: 46px; padding: 0 22px; }
+  .bar .timer { min-height: 66px; }
+  .dest a { min-height: 64px; font-size: 0.8125rem; padding: 0 2px; }
+  .dest .i { width: 22px; height: 22px; }
+  .bar-mark { width: 52px; height: 52px; }
+  .avatar { width: 46px; height: 46px; font-size: 1.25rem; }
+  .tabs a { min-height: 48px; padding: 0 18px; font-size: 0.9375rem; }
+  .app .strip { gap: 8px; }
+  .app .tile { min-height: 112px; padding: 14px 12px; border-radius: 28px; gap: 10px; }
+  .app .tile-total { font-size: clamp(1.625rem, 9cqi, 2.25rem); }
+  .app .tile.is-week .tile-total { font-size: clamp(1.5rem, 7.2cqi, 2rem); }
+  .grid-surface.sheet-wrap { padding: 8px 10px 12px; border-radius: 30px; }
+  .sheet { width: 840px; }
+  .sheet .col-project { width: 200px; }
+  .sheet .col-day { width: 72px; }
+  .sheet .col-total { width: 74px; }
+  .well { height: 56px; font-size: 1.125rem; border-radius: 18px; }
+  .week tbody th, .week tbody td { height: 82px; }
+  .sheet .proj-name { font-size: 1rem; }
+  .row-total { font-size: 1.25rem; }
+  .week tfoot td { font-size: 1.375rem; }
+  .grand-pill { height: 52px; font-size: 1.5rem; min-width: 92px; }
+  .submit { border-radius: 30px; padding: 18px; }
+}
+
+@media (max-width: 640px) {
+  .site-head { padding: 16px 4px 12px; }
+  .brand-word { font-size: 1.875rem; }
+  .site-nav .btn { min-height: 50px; padding: 0 14px; font-size: 1rem; }
+  .hero { padding: 40px 18px 0; border-radius: 32px; }
+  .hero h1 { font-size: clamp(2.75rem, 13.4vw, 4rem); }
+  .hero-side { gap: 24px; }
+  .hero .btn-white { min-height: 64px; }
+  .btn-go { min-height: 76px; font-size: 1.375rem; padding-right: 28px; }
+  .btn-go .disc { width: 50px; height: 50px; }
+  .frag { padding: 16px 12px 14px; border-radius: 30px 30px 0 0; }
+  .frag-range { min-height: 52px; font-size: 1rem; }
+  .frag .timer { min-height: 60px; }
+  .frag .strip { gap: 8px; }
+  .frag .tile { min-height: 112px; padding: 14px 12px; border-radius: 28px; gap: 10px; }
+  .frag .tile-head { font-size: 0.875rem; }
+  .frag .tile-total { font-size: clamp(1.625rem, 9cqi, 2.25rem); }
+  .frag .tile.is-week .tile-total { font-size: clamp(1.5rem, 7.2cqi, 2rem); }
+  .field { padding: 32px 24px; border-radius: 32px; }
+  .field-lead h2 { font-size: clamp(2.5rem, 12vw, 3.25rem); }
+  .field-side p { margin-bottom: 24px; }
+  .field-rest { gap: 40px; }
+  .pricing { padding: 32px 24px; }
+  .pr-amount { font-size: clamp(3.5rem, 18vw, 4.5rem); }
+  .pr-facts li { font-size: 1.0625rem; }
+}

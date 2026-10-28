@@ -1,0 +1,87 @@
+/* 17 Poster · Distill: amber means time is running, blue means action, ink carries the rest (2026-10-28). */
+
+::selection { background: var(--ink); color: var(--paper); }
+.mark { color: var(--ink); }
+.btn-primary { box-shadow: none; }
+
+.headline, .terms h2 { color: var(--ink); }
+.fineprint li { border-left: 0; }
+.fineprint li:first-child { padding-left: 0; }
+.terms-list { column-rule: none; }
+
+.plate { background: none; padding: clamp(40px, 6vw, 88px) var(--gutter) 0; }
+.sheet { box-shadow: none; border: 1px solid var(--rule); border-radius: 14px; }
+.sheet-strip { gap: 0 16px; }
+.sheet-strip > div, .sheet-strip .empty, .sheet-strip .today, .sheet-strip .total {
+  padding: 8px 0 0; border-radius: 0; background: none; box-shadow: none;
+  border-top: 1px solid var(--rule);
+}
+.sheet-strip .today { border-top: 3px solid var(--ink); padding-top: 6px; }
+.sheet-strip .today small, .sheet-strip .total strong { color: var(--ink); }
+.sheet-table .is-today { background: var(--paper-2); }
+.sheet-table thead .is-today { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .fineprint li { border-bottom: 0; padding: 14px 0; }
+  .plate { padding: 32px 0 0 var(--gutter); }
+  .sheet { border-right: 0; border-radius: 14px 0 0 14px; }
+}
+
+.primary a[aria-current="page"] { background: var(--paper-2); }
+.primary a[aria-current="page"] .ico { color: var(--ink); }
+.tabs a[aria-current="page"]::after { background: var(--ink); }
+
+.masthead { padding-bottom: 36px; }
+
+.strip { gap: 0 16px; }
+.day, .day.empty, .day.today, .day.total {
+  min-height: 0; padding: 12px 0 0; gap: 16px;
+  border-radius: 0; background: none; box-shadow: none;
+  border-top: 1px solid var(--rule);
+}
+.day.today { border-top: 3px solid var(--ink); padding-top: 10px; }
+.day.today .day-head b, .day.total .day-head b { color: var(--ink); }
+.day.total .day-total { color: var(--ink); }
+
+.grid-wrap { border: 0; border-radius: 0; }
+.grid thead th:first-child, .grid tbody th[scope="row"], .grid tfoot th { padding-left: 0; }
+.grid thead .is-today { color: var(--ink); }
+.grid thead .is-today::after { content: none; }
+.grid td.is-today { background: var(--paper-2); }
+.cell:placeholder-shown, td.is-today .cell:placeholder-shown { background: var(--paper-2); border-color: transparent; border-style: solid; }
+td.is-today .cell, td.is-today .cell:placeholder-shown { background: var(--paper); }
+.cell:hover { border-color: var(--ink-2); }
+.icon-btn { border-color: transparent; background: none; }
+.icon-btn:hover { border-color: transparent; background: var(--paper-2); }
+.grid tfoot .grand { color: var(--ink); }
+
+.btn-quiet { border-color: transparent; padding: 0 12px; margin-left: -12px; }
+.btn-quiet:hover { border-color: transparent; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.22em; }
+.check input:checked { background: var(--ink); border-color: var(--ink); }
+
+.submit {
+  margin-top: 40px; padding: 20px 0 0;
+  border-radius: 0; background: none; border-top: 1px solid var(--rule);
+}
+
+/* Tablet strip: base tiles are too narrow for side-by-side labels here. */
+@media (min-width: 761px) and (max-width: 1080px) {
+  .day-head { flex-direction: column; align-items: flex-start; gap: 0; line-height: 1.3; }
+  .day-total { font-size: 1.5rem; }
+  .day.total .day-total { font-size: 1.875rem; }
+}
+@media (max-width: 760px) {
+  .strip { gap: 0 4px; }
+  .day, .day.empty, .day.today { padding: 8px 0 0; gap: 6px; }
+  .day.today { padding-top: 6px; }
+  .day.total { padding: 12px 0 0; margin-top: 10px; }
+  .grid-wrap { border-radius: 0; }
+  .grid tbody th[scope="row"] { padding-left: 0; }
+  .btn-quiet { width: auto; margin-left: -12px; }
+  .submit { margin: 28px var(--gutter) 32px; }
+}
+
+/* Tablet poster: the base pulls the pitch up into the staircase, which collides below ~1060px. */
+@media (min-width: 761px) and (max-width: 1060px) {
+  .pitch { grid-column: 1 / span 8; margin-top: 36px; }
+}

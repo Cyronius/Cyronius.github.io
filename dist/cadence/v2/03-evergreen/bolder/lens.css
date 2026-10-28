@@ -1,0 +1,83 @@
+/* 03 Evergreen · Bolder (2026-10-28): mint at full strength. Today is a solid mint tile and column, one mint action, the headline spans the page. */
+
+:root { --on-mint-soft: oklch(0.2 0.045 160 / 0.7); --on-mint-rule: oklch(0.2 0.045 160 / 0.2); }
+
+/* Landing hero: one line across the page, lede and the single mint action beneath */
+.hero {
+  grid-template-columns: 1fr;
+  gap: 44px;
+  padding-block: clamp(56px, 10vh, 120px) clamp(48px, 7vh, 80px);
+}
+.hero h1 {
+  font-size: min(9.1vw, 8.25rem);
+  line-height: 0.9;
+  white-space: nowrap;
+}
+.hero-side {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px 64px;
+  padding-bottom: 0;
+}
+.hero .lede { font-size: 1.3125rem; max-width: 48ch; color: var(--ink); }
+.hero .btn-xl {
+  min-height: 68px; padding: 0 32px;
+  font-size: 1.1875rem; border-radius: 16px;
+  box-shadow: 0 14px 32px -14px oklch(0.81 0.145 161 / 0.6);
+}
+.hero .btn-xl .i { width: 22px; height: 22px; stroke-width: 2.4; }
+
+/* Today, solid mint, forest figures */
+.days .is-today,
+.strip .is-today { background: var(--mint); border-color: var(--mint); }
+.days .is-today :is(dt, dt span, dd),
+.strip .is-today :is(dt, dt span, dd) { color: var(--on-mint); }
+.days .is-today dt span,
+.strip .is-today dt span { font-weight: 600; }
+
+.mini .t { background: var(--mint); }
+.mini thead .t,
+.mini td.t,
+.mini tfoot .t { color: var(--on-mint); font-weight: 700; }
+.mini .nil.t { color: var(--on-mint-soft); }
+.mini tbody tr + tr > .t,
+.mini tfoot .t { border-top-color: var(--on-mint-rule); }
+.mini .run::before { content: none; }
+.run-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 8px 5px 7px; border-radius: 7px;
+  background: var(--on-mint); color: var(--amber);
+}
+.run-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+
+/* Timesheet: today's column runs mint from header to totals */
+.grid .today { background: var(--mint); }
+.grid thead th.today { color: var(--on-mint); font-weight: 700; }
+.grid tbody td.today { border-bottom-color: var(--on-mint-rule); }
+.grid tbody tr:hover td.today { background-color: var(--mint-hi); }
+.grid tfoot td.today { color: var(--on-mint); }
+.grid .today .cell input {
+  color: var(--on-mint); font-weight: 700;
+  border-bottom-color: var(--on-mint-soft);
+  caret-color: var(--on-mint);
+}
+.grid .today .cell input::placeholder { color: var(--on-mint-soft); }
+.grid .today .cell input:hover { background: var(--on-mint-rule); border-bottom-color: var(--on-mint); }
+.grid .today .cell input:focus-visible { outline-color: var(--on-mint); background: var(--on-mint-rule); }
+.grid .today .cell.running input {
+  background: var(--on-mint); color: var(--amber);
+  border-bottom-color: transparent; border-radius: 6px;
+  padding-left: 14px;
+}
+.grid .today .cell.running input:focus-visible { outline-color: var(--on-mint); outline-offset: 2px; }
+.grid .today .cell.running .dot { left: 7px; z-index: 1; }
+
+@media (max-width: 1100px) {
+  .hero-side { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .hero { gap: 28px; padding-block: 36px 40px; }
+  .hero h1 { font-size: 15.5vw; white-space: normal; line-height: 0.92; }
+  .hero .lede { font-size: 1.125rem; }
+  .hero .btn-xl { min-height: 62px; }
+}

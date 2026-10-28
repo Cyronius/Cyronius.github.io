@@ -1,0 +1,35 @@
+/* 18 Spectrum · Animate — the week stacks in day by day; an edited cell resizes its segment live (2026-10-28) */
+
+/* Landing: each day's baseline draws, then its entries rise onto it, Mon → Tue → Wed */
+.band { animation: none; }
+.band-axis li { position: relative; border-top: 0; padding-top: 14px; }
+.band-axis li::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: var(--ink); transform-origin: 0 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .band .seg {
+    transform-origin: 50% 100%;
+    animation: rise 640ms var(--ease-out) both;
+    animation-delay: calc(360ms + var(--d) * 440ms + var(--i) * 80ms);
+  }
+  .band .seg > * { transition: opacity 280ms ease-out calc(820ms + var(--d) * 440ms + var(--i) * 80ms); }
+  .band.pending .seg > * { opacity: 0; transition: none; }
+  .band-axis li::before { animation: draw 560ms var(--ease-out) both; animation-delay: calc(200ms + var(--d) * 440ms); }
+  .band-axis li > * { animation: appear 240ms ease-out both; animation-delay: calc(300ms + var(--d) * 440ms); }
+}
+@keyframes rise { from { transform: scaleY(0); } }
+@keyframes appear { from { opacity: 0; } }
+@keyframes draw { from { transform: scaleX(0); } }
+.price p { font-variant-numeric: tabular-nums; }
+
+/* Timesheet: the strip stacks in the same way, then follows every edit */
+.stack i { transform-origin: 0 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .strip:not(.settled) .stack i {
+    animation: rise 520ms var(--ease-out) both;
+    animation-delay: calc(240ms + var(--d) * 300ms + var(--i) * 70ms);
+  }
+}
+.day-total, .row-total, .grid tfoot td { transition: color 700ms var(--ease-out); }
+.strip .bump, .grid .bump { color: oklch(0.5 0.15 var(--fh)); transition-duration: 60ms; }

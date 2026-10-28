@@ -1,0 +1,172 @@
+/* Bolder: the annotated drawing is the hero. On the timesheet, the week and today are drawn at full strength. */
+
+/* ---------- Landing: one annotated plate fills the first viewport ---------- */
+
+.plate {
+  --dfs: 13px;
+  --gap: 44px;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 12px var(--gutter) 0;
+}
+.plate h1 {
+  font-size: clamp(2.75rem, 1.4rem + 4.4vw, 4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.plate .lede { margin-top: 20px; }
+
+.co h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.co p { margin-top: 6px; color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; }
+
+@media (min-width: 1280px) {
+  .plate {
+    --dfs: clamp(12px, calc((100svh - 222px) / 54), 15px);
+    display: grid;
+    grid-template-columns: [l] minmax(0, 236px) [d] minmax(0, 1fr) [r] minmax(0, 236px);
+    grid-template-rows: [head] auto [bar] auto [hd] auto [ctrl] auto [strip] auto [grid] auto [sub] auto [cap] auto [after] auto;
+    column-gap: var(--gap);
+  }
+  .plate h1 { grid-row: head; grid-column: l / r; justify-self: start; align-self: center; white-space: nowrap; font-size: clamp(3.25rem, 4.3vw, 4rem); }
+  .plate .cta { grid-row: head; grid-column: d / -1; justify-self: end; align-self: center; margin: 0; }
+  .plate .lede {
+    grid-row: after;
+    grid-column: d;
+    margin-top: 56px;
+    max-width: 48ch;
+    font-size: 1.375rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .plate .cta, .plate h1 { margin-bottom: 26px; }
+
+  .plate .dwg { font-size: var(--dfs); }
+  .plate .dwg, .plate .dwg-art { display: contents; }
+  .plate .dw {
+    grid-column: d;
+    border-inline: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .plate .dw-bar { grid-row: bar; border-top: 1px solid var(--line); border-radius: 2px 2px 0 0; }
+  .plate .dw-head { grid-row: hd; }
+  .plate .dw-ctrl { grid-row: ctrl; }
+  .plate .dw-strip { grid-row: strip; }
+  .plate .dw-grid { grid-row: grid; }
+  .plate .dw-sub { grid-row: sub; border-bottom: 1px solid var(--line); border-radius: 0 0 2px 2px; }
+  .plate .dw-cap { grid-row: cap; grid-column: d; }
+
+  /* Callouts sit level with the part they name; the leader runs across the gap and ends on it */
+  .co { position: relative; z-index: 1; align-self: start; }
+  .co.l { grid-column: l; }
+  .co.r { grid-column: r; }
+  .co-hist { grid-row: ctrl / span 2; margin-top: calc(1.8 * var(--dfs) - 14px); --reach: calc(1.6 * var(--dfs)); }
+  .co-dens { grid-row: ctrl / span 2; margin-top: calc(1.8 * var(--dfs) - 14px); --reach: calc(1.6 * var(--dfs)); }
+  .co-rates { grid-row: grid; margin-top: calc(4.43 * var(--dfs) - 14px); --reach: calc(1.25 * var(--dfs)); }
+  .co-rep { grid-row: grid; margin-top: calc(1.31 * var(--dfs) - 14px); --reach: calc(3.3 * var(--dfs)); }
+  .co-appr { grid-row: sub / span 3; margin-top: calc(2.4 * var(--dfs) - 14px); --reach: calc(1.6 * var(--dfs)); }
+
+  .co.l h2 { display: flex; align-items: flex-start; gap: 14px; }
+  .co.l h2::after { content: ""; flex: 1 1 16px; min-width: 16px; height: 1px; margin-top: 14px; background: var(--line); }
+  .co::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    height: 1px;
+    background: var(--line);
+  }
+  .co.l::before { left: 100%; width: calc(var(--gap) + var(--reach)); }
+  .co.r::before { right: calc(100% + 12px); width: calc(var(--gap) - 12px + var(--reach)); }
+  .co::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--line);
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+  .co.l::after { left: calc(100% + var(--gap) + var(--reach) - 5.5px); }
+  .co.r::after { right: calc(100% + var(--gap) + var(--reach) - 5.5px); }
+}
+
+@media (min-width: 1280px) and (max-width: 1399px) {
+  .plate { --gap: 36px; grid-template-columns: [l] minmax(0, 212px) [d] minmax(0, 1fr) [r] minmax(0, 212px); }
+  .co h2 { font-size: 1.125rem; }
+  .co p { font-size: 0.875rem; }
+}
+
+/* Narrower: the drawing first, then the callouts as a plain list that keeps the leader's pin */
+@media (max-width: 1279px) {
+  .plate {
+    max-width: calc(880px + 2 * var(--gutter));
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 40px;
+  }
+  .plate h1, .plate .lede, .plate .cta, .plate .dwg { grid-column: 1 / -1; }
+  .plate .dwg { margin-top: 48px; }
+  .co { position: relative; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line-3); }
+  .co::before {
+    content: "";
+    position: absolute;
+    left: 0; top: -5px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+}
+@media (max-width: 720px) {
+  .plate { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
+  .plate .dwg { margin-top: 40px; }
+  .co { margin-top: 28px; }
+  .co h2 { font-size: 1.1875rem; }
+  .co p { font-size: 1rem; }
+}
+
+/* ---------- Timesheet: today and the week, drawn at full strength ---------- */
+
+.ts-head h1 { font-size: clamp(2.5rem, 1.2rem + 3.6vw, 4.25rem); letter-spacing: -0.035em; }
+
+.strip { margin-top: 32px; }
+.day { min-height: 140px; border-color: var(--line); }
+.day.is-empty { border-color: var(--line-2); }
+.day-total, .day.is-empty .empty { font-size: 2.875rem; letter-spacing: -0.02em; }
+.day.is-today { border-width: 3px; padding: 12px 14px 14px; background: var(--wash-strong); }
+.day.is-today .day-name, .day.is-today .day-date { color: var(--ink); }
+
+.week-dim { margin-top: 22px; --dim-h: 88px; border-inline-width: 2px; }
+.week-dim > i { height: 2px; }
+.week-dim > i::before { width: 16px; height: 12px; }
+.week-dim > b { gap: 18px; padding: 0 14px; font-size: 5rem; letter-spacing: -0.035em; }
+.week-dim .wk-label { font-size: 1.375rem; font-weight: 600; color: var(--ink); }
+
+.grid-wrap { border-width: 2px; }
+.wk thead th { border-bottom-color: var(--line); }
+.wk tbody tr + tr th, .wk tbody tr + tr td { border-top-color: var(--line-2); }
+.wk tfoot th, .wk tfoot td { border-top-width: 2px; }
+.wk .is-today { box-shadow: inset 2px 0 0 var(--line), inset -2px 0 0 var(--line); background: var(--wash-strong); }
+.wk thead th.is-today span { border: 0; padding: 0; }
+.wk thead th.is-today { font-size: 0.9375rem; }
+.wk tfoot td { font-size: 1.125rem; }
+.wk tfoot .grand { font-size: 1.75rem; letter-spacing: -0.02em; }
+.wk .row-tot { font-size: 1.0625rem; }
+
+@media (max-width: 760px) {
+  .day { min-height: 0; }
+  .day.is-today { border-width: 2px; padding: 8px 1px 9px; }
+  .day-total, .day.is-empty .empty { font-size: 1.125rem; letter-spacing: 0; }
+  .week-dim { --dim-h: 56px; }
+  .week-dim > b { font-size: 3rem; gap: 10px; padding: 0 8px; }
+  .week-dim .wk-label { font-size: 1.0625rem; }
+  .grid-wrap { border-inline: 0; }
+}

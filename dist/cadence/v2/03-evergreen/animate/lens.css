@@ -1,0 +1,29 @@
+/* 03 Evergreen · Animate (2026-10-28): mono figures roll in like an odometer, column by column; the timer's seconds roll the same way. Reels come from lens.js. */
+
+.days dd,
+.strip dd,
+.timer-digits,
+.readout .num,
+.odo-host { line-height: 1.1; }
+
+.odo { display: inline-flex; vertical-align: top; }
+.odo > span { display: block; height: 1.1em; overflow: hidden; }
+.reel { display: block; white-space: pre; line-height: 1.1em; }
+.odo > span:has(.reel) {
+  -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+}
+.odo { -webkit-user-select: none; user-select: none; }
+
+.odo-over {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  font: 500 1rem/1.1 var(--f-num);
+  font-variant-numeric: tabular-nums;
+}
+.cell.is-rolling input { color: transparent; }
+
+/* Reduced motion keeps the change as a colour, not travel */
+.flash { animation: flash 900ms ease-out; }
+@keyframes flash { from { color: var(--mint); } }

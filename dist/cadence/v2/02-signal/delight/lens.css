@@ -1,0 +1,135 @@
+/* Delight: the week grid rewards the keyboard. One blue focus glides between cells. */
+
+html { scrollbar-color: var(--edge) var(--canvas); }
+input { caret-color: var(--ink); }
+.grid td.is-today input.cell { caret-color: #fff; }
+
+kbd {
+  display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 7px;
+  border: 1px solid var(--edge); border-bottom-width: 2px; border-radius: 7px;
+  background: var(--s2); color: var(--ink);
+  font: 500 0.8125rem/1 var(--mono); font-variant-numeric: tabular-nums; vertical-align: 0.1em;
+}
+kbd + kbd { margin-left: 4px; }
+kbd .i { width: 14px; height: 14px; stroke-width: 2.4; }
+.k-left { rotate: 180deg; }
+.k-up { rotate: -90deg; }
+.k-down { rotate: 90deg; }
+
+/* ---- The glide ---- */
+.grid-scroll { position: relative; scroll-padding: 8px 8px 8px 8px; }
+.glide {
+  position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none;
+  border: 2px solid var(--blue); border-radius: calc(var(--r-cell) + 3px);
+  margin: -4px 0 0 -4px; box-sizing: content-box; padding: 2px;
+  background: rgb(61 91 255 / 0.1);
+  opacity: 0;
+  transition: transform 190ms var(--ease-out), opacity 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+.glide.is-on { opacity: 1; }
+.glide.is-on.is-idle { opacity: 0.6; }
+.glide.on-today { border-color: #fff; background: rgb(255 255 255 / 0.08); }
+.glide.is-error { border-color: var(--p-red); animation: nope 900ms var(--ease-out); }
+@keyframes nope { from, 60% { border-color: var(--p-red); } to { border-color: var(--blue); } }
+.glide.on-today.is-error { animation-name: nope-today; }
+@keyframes nope-today { from, 60% { border-color: var(--p-red); } to { border-color: #fff; } }
+
+.has-glide input.cell:focus,
+.has-glide td.is-today input.cell:focus { border-color: transparent; }
+.has-glide input.cell:focus:not(:focus-visible) { outline: none; }
+
+.morph {
+  position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; pointer-events: none;
+  font: 600 1rem/1 var(--text); font-variant-numeric: tabular-nums; color: var(--ink);
+}
+.morph > span { grid-area: 1 / 1; }
+.grid td.is-today .morph { color: #fff; }
+input.cell.is-morphing { color: transparent; }
+
+.is-changed { animation: settle 700ms var(--ease-out); }
+@keyframes settle { from { color: var(--blue); } }
+.grid td.is-today.is-changed, .tile.is-today .is-changed { animation-name: settle-today; }
+@keyframes settle-today { from { color: var(--canvas); } }
+
+.grid-hint { min-height: 1.5em; margin-top: 10px; color: var(--p-red); font-weight: 600; }
+.grid-hint:empty { margin-top: 0; min-height: 0; }
+
+.keys-btn { gap: 10px; }
+.keys-btn kbd { min-width: 24px; height: 24px; }
+
+/* ---- Shortcut sheet ---- */
+.keys {
+  width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto;
+  padding: 22px 24px 24px; margin: auto;
+  border: 1px solid var(--line-2); border-radius: var(--r-panel);
+  background: var(--s2); color: var(--ink);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.4), 0 28px 60px -16px rgb(0 0 0 / 0.75);
+}
+.keys::backdrop { background: transparent; }
+@media (min-width: 761px) {
+  .keys { position: fixed; inset: auto 24px 24px auto; margin: 0; }
+}
+.keys-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.keys h2 { font: 800 1.375rem/1.1 var(--display); letter-spacing: -0.015em; }
+.keys-close { margin-right: -10px; }
+.keys-list { margin: 0; display: grid; }
+.keys-list > div {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 16px;
+  padding-block: 11px; border-top: 1px solid var(--line-2);
+}
+.keys-list dt { display: flex; flex-wrap: wrap; gap: 4px; }
+.keys-list dt kbd + kbd { margin-left: 0; }
+.keys-list dd { margin: 0; color: var(--muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .keys { transition: opacity 200ms var(--ease-out), translate 260ms var(--ease-out), overlay 260ms allow-discrete, display 260ms allow-discrete; }
+  @starting-style { .keys:popover-open { opacity: 0; translate: 0 10px; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glide { transition: opacity 160ms linear, border-color 160ms linear; }
+}
+
+/* ---- Landing: the demo is live ---- */
+.try {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px;
+  margin-bottom: 16px; color: var(--muted); font-size: 1.0625rem;
+}
+.try strong { color: var(--ink); font-weight: 700; margin-right: 4px; }
+.try-touch { display: none; }
+@media (hover: none) and (pointer: coarse) {
+  .try-keys { display: none; }
+  .try-touch { display: block; }
+}
+.try .keys-btn { margin-right: -12px; }
+
+.frag {
+  --del: 0px; --tot: 152px;
+  border-bottom: 1px solid var(--line-2); border-radius: 24px; padding-bottom: 28px;
+  -webkit-mask-image: none; mask-image: none;
+}
+.frag.week * { pointer-events: auto; }
+.frag.week .glide, .frag.week .morph, .frag.week .run-dot, .frag.week .band { pointer-events: none; }
+.rise { padding-bottom: clamp(24px, 4vw, 56px); }
+.rise .grid-hint { margin-inline: 4px; }
+
+@media (max-width: 760px) {
+  /* The sticky project column starts at the scroller's edge so scrolled cells never peek out beside it. */
+  .grid-scroll { padding-left: 0; scroll-padding-left: 198px; }
+  .grid col.c-proj { width: 190px; }
+  .grid tbody th, .grid tfoot th, .grid thead th.h-proj { padding-left: 14px; }
+  .grid tbody th { z-index: 4; }
+  .frag { padding-bottom: 16px; border-radius: 18px; }
+  .try { font-size: 1rem; }
+}
+
+/* v1's app bar overflows between phone and desktop widths: drop the timer label, then the nav labels. */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .timer-label { display: none; }
+  .dest a { padding-inline: 10px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@container week (min-width: 640px) and (max-width: 1079.98px) {
+  .tile-week .tile-hours { font-size: 1.75rem; }
+}

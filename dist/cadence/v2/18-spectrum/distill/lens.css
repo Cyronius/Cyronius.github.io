@@ -1,0 +1,90 @@
+/* 18 Spectrum · Distill — colour only where there is data: project markers and segments (2026-10-28) */
+
+body { caret-color: var(--ink); }
+::selection { background: oklch(0.88 0.012 256); color: var(--ink); }
+.btn-go { background: var(--ink); box-shadow: none; padding: 0 28px; }
+.btn-go:hover { background: oklch(0.34 0.014 256); }
+.sw { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+
+/* Landing */
+.legend { gap: 12px 36px; }
+.legend li { gap: 10px; }
+.legend b { font-weight: 600; }
+.legend em { margin-left: 2px; font: 500 1rem/1 var(--text); font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+.points { margin-top: clamp(88px, 11vw, 144px); padding: 0 var(--gutter); }
+.point { padding: 0 0 52px; background: none; }
+.point h2 { color: var(--ink); font-size: clamp(1.375rem, 2vw, 1.75rem); letter-spacing: -0.02em; }
+.point h2::before { content: none; }
+
+.pricing { padding-top: clamp(56px, 7vw, 96px); }
+.price p { font-variant-numeric: tabular-nums; }
+.facts { border-top: 0; row-gap: 4px; }
+.facts li { padding: 10px 0; border-bottom: 0; }
+.site-foot { border-top: 0; }
+
+@media (max-width: 760px) {
+  .site-links a:not(.btn) { padding: 10px 12px; }
+  .site-links a:last-child { margin-left: auto; }
+  .legend { gap: 12px; }
+  .point { padding: 0 0 36px; }
+  .point p { margin-top: 8px; }
+}
+
+/* Timesheet */
+.appbar { border-bottom-color: var(--line); }
+.primary .lbl { display: inline; }
+.primary a[aria-current="page"] { background: none; color: var(--ink); font-weight: 700; }
+.timer { padding: 0; background: none; box-shadow: none; }
+.timer-dot { background: var(--p-red); }
+.timer-dot::after { content: none; }
+.timer-digits { color: var(--ink); }
+.timer-stop { border-color: var(--line-2); }
+
+.datenav { margin-left: -12px; border: 0; border-radius: 10px; }
+.datenav .range { border: 0; padding: 0 8px; }
+.density { padding: 0; border: 0; }
+
+.strip { gap: 16px; margin-top: 28px; }
+.day { padding: 12px 0 0; border-radius: 0; background: none; box-shadow: none; border-top: 1px solid var(--line-2); }
+.day.today { box-shadow: none; border-top: 3px solid var(--ink); padding-top: 10px; }
+.day.today .day-head b { margin: 0; padding: 0; border-radius: 0; background: none; color: var(--ink); font-size: 0.875rem; }
+.day.empty, .day.total { background: none; }
+.day.empty .stack { border-top: 0; }
+
+.grid-wrap { margin-top: 36px; border: 0; border-radius: 0; }
+.grid thead th:first-child, .grid tfoot th { padding-left: 0; }
+.grid tbody th[scope="row"] { padding-left: 0; }
+.grid thead .is-today span { min-height: 0; padding: 0; background: none; color: var(--ink); }
+.grid td.is-today { box-shadow: none; }
+.proj { gap: 12px; }
+.cell,
+.cell:placeholder-shown,
+.grid tbody .cell:not(:placeholder-shown),
+.grid tbody .cell-run .cell { border: 1px solid transparent; background: transparent; box-shadow: none; }
+.cell:hover,
+.grid tbody .cell:not(:placeholder-shown):hover { border-color: var(--line-2); border-style: solid; }
+.grid tbody .cell-run .cell { color: var(--ink); }
+.cell-run::before { background: var(--c); }
+.icon-btn { border: 0; background: none; }
+.grid tfoot th, .grid tfoot td { border-top-width: 1px; }
+
+.btn-quiet { padding: 0; border: 0; background: none; text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.22em; }
+.btn-quiet:hover { text-decoration-color: var(--ink); }
+.submit { margin-top: 32px; padding: 20px 0 0; border-radius: 0; background: none; border-top: 1px solid var(--line); }
+
+@media (max-width: 760px) {
+  .primary a { min-height: 44px; padding: 0 8px; font-size: 0.875rem; }
+  .timer {
+    left: 0; right: 0; bottom: 0; min-height: 64px; border-radius: 0;
+    padding: 8px var(--gutter) max(8px, env(safe-area-inset-bottom));
+    background: var(--paper); box-shadow: 0 -1px 0 var(--line);
+  }
+  .datenav { margin: 0 -12px; }
+  .strip { gap: 6px; margin-top: 20px; }
+  .day { padding: 8px 0 0; }
+  .day.today { padding-top: 6px; }
+  .day.today .day-head b { font-size: 0.6875rem; }
+  .day.total { padding: 12px 0 0; margin-top: 10px; }
+  .btn-quiet { justify-content: flex-start; }
+}

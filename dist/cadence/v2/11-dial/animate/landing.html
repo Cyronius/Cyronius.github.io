@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Cadence — 11 Dial · Animate — Landing</title>
+  <meta name="description" content="Track time, approve timesheets, keep rates honest and report on all of it.">
+  <meta name="theme-color" content="#0a1022">
+  <link rel="icon" href="../../../assets/cadence-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="lens.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  </svg>
+
+  <header class="wrap">
+    <nav class="site-nav" aria-label="Site">
+      <a class="brand" href="landing.html">
+        <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+        Cadence
+      </a>
+      <ul>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="time.html">Log in</a></li>
+        <li><a class="pill" href="#trial">Start a free trial</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero" aria-labelledby="h1">
+      <div>
+        <h1 id="h1">Time tracking, done well.</h1>
+        <p class="lede">Track time, approve timesheets, keep rates honest and report on all of it. $7.00 per person per month, free below 3 people, and a 30-day trial without a card.</p>
+        <div class="actions" id="trial">
+          <a class="pill pill-primary" href="time.html">
+            <span class="knob"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            Start your 30-day trial
+          </a>
+          <a class="pill" href="#pricing">See pricing</a>
+        </div>
+      </div>
+
+      <figure class="week-dial">
+        <svg viewBox="84 84 552 552" role="img" aria-labelledby="dial-title">
+          <title id="dial-title">A week as a dial: Monday 7:45, Tuesday 9:00, today 5:30, Thursday to Sunday empty. Week 22:15.</title>
+          <g transform="rotate(-90 360 360)" fill="none" stroke-width="44" stroke-linecap="round">
+            <g class="tracks">
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-0.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-1.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-2.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-3.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-4.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-5.128"/>
+              <circle class="seg-track" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.744 7" stroke-dashoffset="-6.128"/>
+            </g>
+            <g class="fills">
+              <circle class="seg-fill" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.411 7" stroke-dashoffset="-0.128"/>
+              <circle class="seg-fill" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.509 7" stroke-dashoffset="-1.128"/>
+              <circle class="seg-fill" cx="360" cy="360" r="250" pathLength="7" stroke-dasharray="0.235 7" stroke-dashoffset="-2.128"/>
+            </g>
+          </g>
+          <g text-anchor="middle" aria-hidden="true">
+            <g><text class="dn" x="434.6" y="196">Mon</text><text class="df" x="434.6" y="234">7:45</text></g>
+            <g><text class="dn" x="527.7" y="312">Tue</text><text class="df" x="527.7" y="350">9:00</text></g>
+            <g class="today"><text class="dn" x="494.5" y="458">Today</text><text class="df" x="494.5" y="496">5:30</text></g>
+            <g><text class="dn" x="360" y="523">Thu</text><text class="df empty" x="360" y="561">–</text></g>
+            <g><text class="dn" x="225.5" y="458">Fri</text><text class="df empty" x="225.5" y="496">–</text></g>
+            <g><text class="dn" x="192.3" y="312">Sat</text><text class="df empty" x="192.3" y="350">–</text></g>
+            <g><text class="dn" x="285.4" y="196">Sun</text><text class="df empty" x="285.4" y="234">–</text></g>
+          </g>
+          <g class="hands" fill="none" stroke-linecap="round" stroke-width="20" aria-hidden="true">
+            <path d="M360 360V268"/>
+            <g class="sweep-hand" transform="rotate(121 360 360)"><path d="M360 360V248"/></g>
+          </g>
+          <circle cx="360" cy="360" r="20" fill="var(--ink)" aria-hidden="true"/>
+        </svg>
+        <figcaption>
+          <span>Oct 26 – Nov 1, 2026</span>
+          <span>Week <b class="wk-total">22:15</b></span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap face" id="pricing" aria-label="What you get">
+      <svg class="face-ring" viewBox="-100 -100 200 200" aria-hidden="true">
+        <circle class="rim" r="100" fill="none" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+        <circle class="hour" cx="0" cy="-100" r="0.9"/>
+        <circle class="hour" cx="-50" cy="86.6" r="0.9"/>
+        <circle class="hour" cx="0" cy="100" r="0.9"/>
+        <circle class="hour" cx="-86.6" cy="50" r="0.9"/>
+        <circle class="hour" cx="-100" cy="0" r="0.9"/>
+        <circle class="hour" cx="-86.6" cy="-50" r="0.9"/>
+        <circle class="hour" cx="-50" cy="-86.6" r="0.9"/>
+      </svg>
+
+      <ul class="points">
+        <li>
+          <h3>One timesheet, two densities</h3>
+          <p>Fill a day or a whole week on the same surface, from the keyboard. A timer sits in the bar on every screen.</p>
+        </li>
+        <li>
+          <h3>Approvals that show what changed</h3>
+          <p>People submit a week and can still fix it; approvers see exactly what changed since, then close the period.</p>
+        </li>
+        <li>
+          <h3>Rates that stay true</h3>
+          <p>Billable and cost rates by person, task and project, with history. A past entry keeps the price it was recorded at.</p>
+        </li>
+        <li>
+          <h3>Reports you can export</h3>
+          <p>Time, budgets, utilization and profitability, by any column you choose, as CSV whenever you want.</p>
+        </li>
+        <li>
+          <h3>Bring your history</h3>
+          <p>Import a Harvest account with your own token. You read a reconciliation of every month before anything is committed.</p>
+        </li>
+      </ul>
+
+      <div class="plan">
+        <h2>One plan. Everything included.</h2>
+        <p class="price">$7.00 per person per month</p>
+        <p class="fine">Free for teams of fewer than 3 people, for as long as you like.</p>
+        <a class="pill pill-primary" href="time.html">
+          <span class="knob"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          Start your 30-day trial
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap site-foot">
+    <svg class="mark" viewBox="8 8 84 84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M75.7 32.67A31 31 0 1 0 76.85 65.5" stroke-width="14"/><path d="M50 50V35M50 50l16.3 9.8" stroke-width="6.6"/><circle cx="50" cy="50" r="6" fill="currentColor" stroke="none"/></svg>
+    <ul>
+      <li><a href="#terms">Terms</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+  </footer>
+
+  <script src="lens.js"></script>
+  <script src="../../assets/review.js" data-candidate="11" data-lens="animate" data-page="landing" defer></script>
+</body>
+</html>

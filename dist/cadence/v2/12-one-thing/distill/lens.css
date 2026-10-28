@@ -1,0 +1,64 @@
+/* 12 One Thing · Distill: no rules or outlines, fewer words; the today slab and the one action carry the page (2026-10-28). */
+
+/* Landing */
+.hero { grid-template-areas: "h1 lede" "go go"; }
+.lede { max-width: 26ch; }
+.frag thead th { border-bottom: 0; padding-bottom: 26px; }
+.frag thead .now { border-bottom-color: transparent; }
+.frag tbody th, .frag tbody td { border-bottom: 0; height: 60px; }
+.frag .proj { display: block; }
+.frag .proj b, .frag .proj span { display: block; }
+.points ul { gap: 48px; }
+.facts { row-gap: 18px; margin-top: 56px; }
+.facts li, .facts li.big { border-top: 0; padding: 0; }
+.facts li.big { margin-bottom: 14px; }
+.site-foot { border-top: 0; }
+
+/* Timesheet */
+.app-bar, .peer-tabs { border-bottom: 0; }
+.peer-tabs a[aria-current="page"]::after, .dest a[aria-current="page"]::after { bottom: 6px; }
+.timer { border: 0; background: var(--fill); }
+.timer .stop { background: var(--paper); }
+.timer .stop:hover { background: var(--fill-2); }
+.range { gap: 2px; }
+.range > * { border: 0; background: var(--fill); }
+.range > *:hover { background: var(--fill-2); }
+.density { border: 0; background: var(--fill); }
+.strip li { border-bottom: 0; }
+.sheet th, .sheet td { border-bottom: 0; height: 64px; }
+.proj { display: block; }
+.proj b, .proj span { display: block; }
+.cell { border-bottom: 0; border-radius: 8px; }
+.cell:hover { background: var(--fill); }
+.sheet .now .cell:hover { background: var(--now-hover); }
+.ghost { border: 0; background: var(--fill); }
+.ghost:hover { background: var(--fill-2); }
+.submit { border-top: 0; padding-top: 0; }
+.submit .send { border: 0; background: var(--fill); }
+.submit .send:hover { background: var(--fill-2); }
+
+@media (max-width: 1100px) {
+  .hero { grid-template-areas: "h1" "lede" "go"; }
+}
+
+/* The strip already names each day above its column, so the grid's own header row folds away. */
+@media (min-width: 1101px) {
+  .sheet thead th { height: 0; padding: 0; font-size: 0; line-height: 0; overflow: hidden; }
+  .strip { padding-bottom: 0; }
+  .strip li { padding-bottom: 18px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .del { opacity: 0; transition: opacity 140ms var(--ease-out), background-color 140ms var(--ease-out); }
+  .sheet tbody tr:hover .del, .sheet tbody tr:focus-within .del { opacity: 1; }
+}
+
+@media (max-width: 760px) {
+  .timer { border: 0; }
+  .strip { border-top: 0; row-gap: 4px; }
+  .strip li { border-bottom: 0; }
+  .strip .now { border-radius: 12px; }
+  .strip .wk { border-radius: 12px; }
+  .sheet tbody th, .sheet thead th:first-child { box-shadow: none; }
+  .submit p { width: 100%; }
+}

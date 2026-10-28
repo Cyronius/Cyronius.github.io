@@ -1,0 +1,100 @@
+/* Animate: the mark draws itself and keeps the visitor's time; the week fills; totals advance with the timer. */
+
+html { scrollbar-color: var(--edge) var(--canvas); }
+input { caret-color: var(--ink); }
+
+/* ---------- Landing ---------- */
+
+/* Shorter hero so the week's tiles are on screen when they fill. */
+@media (min-width: 761px) {
+  .hero { min-height: max(540px, calc(64vh - 10px)); }
+  .hero-mark { height: 60vh; right: calc(60vh * -0.2); }
+  .hero-body { padding-block: 24px 40px; }
+}
+
+.hero-mark .hand-hr, .hero-mark .hand-min { transform-box: view-box; transform-origin: 50px 50px; }
+.hero-mark .hand-min { rotate: var(--min-rot, 0deg); }
+.hero-mark .hand-hr { rotate: var(--hr-rot, 0deg); }
+.hero-mark .hub { transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-mark .hand-min { animation: none; }
+  .hero-mark.settled .hand-min, .hero-mark.settled .hand-hr { animation: none; transition: rotate 900ms var(--ease-out); }
+
+  .motion .hero-mark .ring { stroke-dasharray: 1 1; animation: draw 1050ms cubic-bezier(0.33, 1, 0.68, 1) both; }
+  .motion .hero-mark .hub { animation: hub 520ms var(--ease-out) 380ms both; }
+  .motion .hero-mark:not(.settled) .hand-min { animation: wind-min 1500ms var(--ease-out) 520ms both; }
+  .motion .hero-mark:not(.settled) .hand-hr { animation: wind-hr 1500ms var(--ease-out) 520ms both; }
+
+  .btn-signal .i { transition: translate 200ms var(--ease-out); }
+  .btn-signal:hover .i { translate: 3px 0; }
+}
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; opacity: 0; }
+  6% { opacity: 1; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes hub { from { scale: 0; } to { scale: 1; } }
+@keyframes wind-min {
+  from { rotate: var(--min-from, 0deg); scale: 0; }
+  14% { scale: 1; }
+  to { rotate: var(--min-rot, 0deg); scale: 1; }
+}
+@keyframes wind-hr {
+  from { rotate: var(--hr-from, 0deg); scale: 0; }
+  14% { scale: 1; }
+  to { rotate: var(--hr-rot, 0deg); scale: 1; }
+}
+
+/* The demo week is empty until the mark is drawn and the week is on screen. */
+.motion .frag .grid tbody .cell { transition: opacity 420ms var(--ease-out), translate 560ms var(--ease-out); }
+.motion .frag:not(.is-filled) .grid tbody .cell:not(.is-empty),
+.motion .frag .grid tbody .cell.pre { opacity: 0; translate: 0 12px; }
+.motion .frag:not(.is-filled) .tile:not(.is-empty) .tile-hours,
+.motion .frag:not(.is-filled) .grid td.rt,
+.motion .frag:not(.is-filled) .grid tfoot td.d:not(.is-blank),
+.motion .frag:not(.is-filled) .run-dot,
+.motion .frag .cellwrap:has(.pre) .run-dot { opacity: 0; }
+.frag .run-dot { transition: opacity 300ms var(--ease-out); }
+
+/* ---------- Timesheet ---------- */
+
+.roll { display: inline-grid; clip-path: inset(0 -0.25em); }
+.roll > span { grid-area: 1 / 1; }
+
+.cell-roll {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  font: 600 1rem/1 var(--text); font-variant-numeric: tabular-nums;
+  color: var(--ink); pointer-events: none;
+}
+.grid td.is-today .cell-roll { color: #fff; }
+input.cell.is-rolling { color: transparent; }
+
+.min-bar {
+  position: absolute; z-index: 1; left: 10px; right: 10px; bottom: 6px; height: 2px;
+  border-radius: 2px; background: rgb(255 255 255 / 0.62);
+  transform: scaleX(0); transform-origin: left center; pointer-events: none;
+  transition: transform 1000ms linear, opacity 240ms var(--ease-out);
+}
+td.is-stopped .min-bar, td.is-stopped .run-dot { opacity: 0; }
+.run-dot { transition: opacity 240ms var(--ease-out); }
+.timer.is-stopped .timer-dot { animation: none; background: var(--faint); }
+.timer-dot { transition: background-color 240ms var(--ease-out); }
+
+@media (prefers-reduced-motion: reduce) {
+  .min-bar { display: none; }
+}
+
+/* v1's app bar overflows between phone and desktop widths: drop the timer label, then the nav labels. */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .timer-label { display: none; }
+  .dest a { padding-inline: 10px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .dest a > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@container week (min-width: 640px) and (max-width: 1079.98px) {
+  .tile-week .tile-hours { font-size: 1.75rem; }
+}
